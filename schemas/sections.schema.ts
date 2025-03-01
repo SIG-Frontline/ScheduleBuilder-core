@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-export type CatDocument = HydratedDocument<BulkSection>;
+export type SectionDocument = HydratedDocument<Section>;
 
-@Schema()
-export class Section extends Document {
+@Schema({ collection: 'Sections' })
+export class Section {
   @Prop()
   ROW_NUMBER: number;
 
@@ -57,10 +57,4 @@ export class Section extends Document {
   INFO_LINK: string;
 }
 
-@Schema()
-export class BulkSection extends Document {
-  @Prop({ type: [Section], default: [] })
-  result: Section[];
-}
-
-export const CatSchema = SchemaFactory.createForClass(BulkSection);
+export const SectionSchema = SchemaFactory.createForClass(Section);
