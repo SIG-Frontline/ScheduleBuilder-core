@@ -40,3 +40,5 @@ export interface SectionResponse {
   courses: Course[];
   totalNumCourses: number;
 }
+
+export type TreeType = (string | null | TreeType[])[];

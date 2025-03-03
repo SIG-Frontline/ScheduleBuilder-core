@@ -3,10 +3,14 @@ import { Section, SectionSchema } from '../../schemas/sections.schema';
 import { Module } from '@nestjs/common';
 import { SectionService } from './sections.service';
 import { SectionsController } from './sections.controller';
+import { CourseStatic, CourseStaticSchema } from 'schemas/courseStatic.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Section.name, schema: SectionSchema }]),
+    MongooseModule.forFeature([
+      { name: Section.name, schema: SectionSchema },
+      { name: CourseStatic.name, schema: CourseStaticSchema },
+    ]),
   ],
   controllers: [SectionsController],
   providers: [SectionService],
