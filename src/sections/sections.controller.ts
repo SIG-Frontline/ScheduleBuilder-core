@@ -5,7 +5,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { SectionService } from './sections.service';
-import { queryFilters } from 'src/utils/types.util';
+import { sectionQueryFilters } from 'src/utils/types.util';
 @Controller('sections')
 export class SectionsController {
   constructor(private readonly sectionService: SectionService) {}
@@ -27,7 +27,7 @@ export class SectionsController {
     @Query('sectionsPerPage') sectionsPerPage = 20, // Default limit
   ) {
     try {
-      const filters: queryFilters = {
+      const filters: sectionQueryFilters = {
         ...(term ? { TERM: term } : {}),
         ...(course ? { COURSE: course } : {}),
         ...(title ? { TITLE: title } : {}),

@@ -1,0 +1,34 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
+import { sanitizeFilters } from 'src/utils/functions.utils';
+import { queryFiltersBase } from 'src/utils/types.util';
+
+@Injectable()
+export class CurriculaService {
+  constructor(
+    @InjectModel(Curricula.name)
+    private curriculaModel: Model<CurriculaDocument>,
+  ) {}
+
+  async findCurricula(
+    filters: queryFiltersBase,
+    page: number,
+    sectionsPerPage: number,
+  ) {
+    try {
+      const query = sanitizeFilters(filters);
+      const curricula = await this.curriculaModel
+        .find(query)
+        .limit(sectionsPerPage)
+        .skip(sectionsPerPage * page)
+        .lean()
+        .exec();
+      return curricula;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Database query failed');
+    }
+  }
+}

@@ -7,6 +7,7 @@ import {
   CourseStatic,
   CourseStaticDocument,
 } from 'schemas/courseStatic.schema';
+import { sectionQueryFilters } from 'src/utils/types.util';
 
 @Injectable()
 export class SectionService {
@@ -17,7 +18,7 @@ export class SectionService {
   ) {}
 
   async findSections(
-    filters: Record<string, any>,
+    filters: sectionQueryFilters,
     page: number,
     sectionsPerPage: number,
   ) {

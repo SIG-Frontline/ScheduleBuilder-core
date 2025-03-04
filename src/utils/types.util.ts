@@ -1,4 +1,8 @@
-export interface queryFilters {
+export interface queryFiltersBase {
+  [key: string]: string | number | boolean | undefined;
+}
+
+export interface sectionQueryFilters extends queryFiltersBase {
   TERM?: string;
   COURSE?: string;
   TITLE?: string;
@@ -10,6 +14,12 @@ export interface queryFilters {
   COURSE_LEVEL?: string;
   SUMMER_PERIOD?: string;
   INSTRUCTION_METHOD?: string;
+}
+
+export interface curriculaFilters extends queryFiltersBase {
+  YEAR: string;
+  MAJOR: string;
+  DEGREE: string;
 }
 
 export interface Days {
@@ -42,3 +52,5 @@ export interface SectionResponse {
 }
 
 export type TreeType = (string | null | TreeType[])[];
+
+export type CurriculaClasses = (string | undefined | TreeType[])[];
