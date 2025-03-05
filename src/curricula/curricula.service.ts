@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
@@ -26,6 +26,12 @@ export class CurriculaService {
         .lean()
         .exec();
 
+      if (!curricula) {
+        throw new BadRequestException(
+          'No sections found given the query parameters',
+        );
+      }
+
       const formattedCurricula = {
         _id: curricula?._id,
         school: curricula?.SCHOOL,
@@ -38,7 +44,10 @@ export class CurriculaService {
       return formattedCurricula;
     } catch (error) {
       console.error(error);
-      throw new Error('Database query failed');
+      if (!(error instanceof BadRequestException)) {
+        throw new Error('Database query failed');
+      }
+      throw error;
     }
   }
 }

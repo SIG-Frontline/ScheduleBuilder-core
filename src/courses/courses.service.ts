@@ -88,7 +88,7 @@ export class CourseService {
 
       if (sections.length === 0) {
         throw new NotFoundException(
-          'No sections found given the query paramters',
+          'No sections found given the query parameters',
         );
       }
 

@@ -17,7 +17,8 @@
     "test:watch": "playwright test --watch",
     "test:debug": "playwright test --debug",
     "test:e2e": "playwright test tests/",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
