@@ -1,12 +1,12 @@
 export interface queryFiltersBase {
-  [key: string]: string | number | boolean | undefined;
+  [key: string]: string | number | boolean | undefined | { $regex: RegExp };
 }
 
-export interface sectionQueryFilters extends queryFiltersBase {
+export interface courseQueryFilters extends queryFiltersBase {
   TERM?: string;
   COURSE?: string;
-  TITLE?: string;
-  SUBJECT?: string;
+  TITLE?: string | { $regex: RegExp };
+  SUBJECT?: string | { $regex: RegExp };
   INSTRUCTOR?: string;
   IS_HONORS?: string;
   IS_ASYNC?: string;
@@ -32,25 +32,72 @@ export interface Days {
   U: boolean;
 }
 
-export interface Course {
+export interface MeetingTime {
+  day: string;
+  start: string;
+  end: string;
+  building: string | null;
+  room: string | null;
+}
+
+export interface Section {
   _id: string;
+  TERM: string;
   COURSE: string;
   TITLE: string;
   SECTION: string;
   CRN: string;
+  INSTRUCTION_METHOD: string;
   DAYS: Days;
-  INSTRUCTOR: string;
+  TIMES: MeetingTime[];
+  MAX: number;
+  NOW: number;
+  STATUS: string;
+  INSTRUCTOR: string | null;
+  COMMENTS: string | null;
   CREDITS: number;
+  INFO_LINK: string;
+  IS_HONORS: boolean;
   IS_ASYNC: boolean;
   SUBJECT: string;
-  TERM: string;
+  COURSE_LEVEL: number;
+  SUMMER_PERIOD: string | null;
 }
 
+export interface Course {
+  _id: string;
+  title: string;
+  credits: number;
+  description: string;
+  sections: Section[];
+}
+
+export type CourseStaticNode = (string | null | CourseStaticNode)[];
+
 export interface SectionResponse {
-  courses: Course[];
+  course: Course;
   totalNumCourses: number;
 }
 
-export type TreeType = (string | null | TreeType[])[];
+export interface CourseResponse {
+  courses: { _id: string; title: string; subject: string }[];
+  totalNumCourses: number;
+}
 
-export type CurriculaClasses = (string | undefined | TreeType[])[];
+export interface CurriculaResponse {
+  _id: string;
+  school: string;
+  degree: string;
+  major: string;
+  year: string;
+  classes: TreeNode[];
+}
+
+export type CourseSearchDBResult = { _id: string; title: string };
+
+export interface CurriculaCourseNode {
+  name: string;
+  course: string;
+}
+
+export type TreeNode = string | string[] | CurriculaCourseNode;

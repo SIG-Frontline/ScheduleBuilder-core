@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
-export type SectionDocument = HydratedDocument<Section>;
+export type CourseDocument = HydratedDocument<Course>;
 
 @Schema({ collection: 'Sections' })
-export class Section {
+export class Course {
   @Prop()
   ROW_NUMBER: number;
 
@@ -55,6 +55,21 @@ export class Section {
 
   @Prop()
   INFO_LINK: string;
+
+  @Prop()
+  IS_HONORS: boolean;
+
+  @Prop()
+  IS_ASYNC: boolean;
+
+  @Prop()
+  SUBJECT: string;
+
+  @Prop()
+  COURSE_LEVEL: number;
+
+  @Prop()
+  SUMMER_PERIOD: boolean;
 }
 
-export const SectionSchema = SchemaFactory.createForClass(Section);
+export const CourseSchema = SchemaFactory.createForClass(Course);

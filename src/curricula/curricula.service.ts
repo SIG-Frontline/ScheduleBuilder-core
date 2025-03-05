@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
 import { sanitizeFilters } from 'src/utils/functions.utils';
-import { queryFiltersBase } from 'src/utils/types.util';
+import { queryFiltersBase, TreeNode } from 'src/utils/types.util';
 
 @Injectable()
 export class CurriculaService {
@@ -20,12 +20,22 @@ export class CurriculaService {
     try {
       const query = sanitizeFilters(filters);
       const curricula = await this.curriculaModel
-        .find(query)
+        .findOne(query)
         .limit(sectionsPerPage)
         .skip(sectionsPerPage * page)
         .lean()
         .exec();
-      return curricula;
+
+      const formattedCurricula = {
+        _id: curricula?._id,
+        school: curricula?.SCHOOL,
+        degree: curricula?.DEGREE,
+        major: curricula?.MAJOR,
+        year: curricula?.YEAR,
+        classes: curricula?.CLASSES as TreeNode[],
+      };
+
+      return formattedCurricula;
     } catch (error) {
       console.error(error);
       throw new Error('Database query failed');

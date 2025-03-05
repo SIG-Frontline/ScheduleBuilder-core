@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { TreeType } from 'src/utils/types.util';
+import { CourseStaticNode } from 'src/utils/types.util';
 
 export type CourseStaticDocument = HydratedDocument<CourseStatic>;
 
@@ -22,7 +22,7 @@ export class CourseStatic {
   course_number: string;
 
   @Prop()
-  tree: TreeType;
+  tree: CourseStaticNode;
 }
 
 export const CourseStaticSchema = SchemaFactory.createForClass(CourseStatic);

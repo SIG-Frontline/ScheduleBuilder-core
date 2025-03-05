@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { CurriculaClasses } from 'src/utils/types.util';
+import { TreeNode } from 'src/utils/types.util';
 
 export type CurriculaDocument = HydratedDocument<Curricula>;
 
@@ -22,7 +22,7 @@ export class Curricula {
   YEAR: string;
 
   @Prop()
-  Classes: CurriculaClasses;
+  CLASSES: TreeNode[];
 }
 
 export const CurriculaSchema = SchemaFactory.createForClass(Curricula);

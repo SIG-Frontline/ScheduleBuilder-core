@@ -12,7 +12,6 @@ export class CurriculaController {
     @Param('major') major: string,
     @Param('degree') degree: string,
   ) {
-    console.log('maybe');
     const filters: curriculaFilters = {
       YEAR: year,
       MAJOR: major,

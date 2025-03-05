@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import 'dotenv/config';
-import { SectionsModule } from './sections/sections.module';
+import { CourseModule } from './courses/courses.module';
 import { CurriculaModule } from './curricula/curricula.module';
 
 @Module({
@@ -11,7 +11,7 @@ import { CurriculaModule } from './curricula/curricula.module';
     MongooseModule.forRoot(process.env.SCHEDULEBUILDER_DB_URI || '', {
       dbName: 'Schedule_Builder',
     }),
-    SectionsModule,
+    CourseModule,
     CurriculaModule,
   ],
   controllers: [AppController],
