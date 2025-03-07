@@ -1,6 +1,7 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { CourseService } from './courses.service';
 import { courseQueryFilters } from 'src/utils/types.util';
+import { addRegexSearch } from 'src/utils/functions.utils';
 @Controller('')
 export class CourseController {
   constructor(private readonly CourseService: CourseService) {}
@@ -22,11 +23,18 @@ export class CourseController {
     @Query('sectionsPerPage') sectionsPerPage = 20, // Default limit
   ) {
     try {
+      const query: courseQueryFilters = {};
+      if (!term) {
+        throw new BadRequestException('No term was received');
+      }
+
+      if (title) addRegexSearch(query, 'TITLE', title);
+      if (subject) addRegexSearch(query, 'SUBJECT', subject);
+
       const filters: courseQueryFilters = {
+        ...query,
         ...(term ? { TERM: term } : {}),
         ...(course ? { COURSE: course } : {}),
-        ...(title ? { TITLE: { $regex: new RegExp(title, 'i') } } : {}),
-        ...(subject ? { SUBJECT: { $regex: new RegExp(subject, 'i') } } : {}),
         ...(instructor ? { INSTRUCTOR: instructor } : {}),
         ...(honors ? { IS_HONORS: honors } : {}),
         ...(isAsync ? { IS_ASYNC: isAsync } : {}),

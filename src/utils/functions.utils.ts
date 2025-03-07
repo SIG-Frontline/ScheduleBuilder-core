@@ -12,3 +12,17 @@ export function sanitizeFilters(
   }
   return query;
 }
+
+export function escapeRegex(input: string): string {
+  return input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+export function addRegexSearch(
+  query: Record<string, any>,
+  key: string,
+  value: string,
+) {
+  if (value) {
+    query[key] = { $regex: escapeRegex(value), $options: 'i' };
+  }
+}
