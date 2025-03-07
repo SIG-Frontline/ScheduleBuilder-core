@@ -1,10 +1,4 @@
-import {
-  BadRequestException,
-  Controller,
-  Get,
-  InternalServerErrorException,
-  Query,
-} from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { CourseService } from './courses.service';
 import { courseQueryFilters } from 'src/utils/types.util';
 @Controller('')
@@ -49,7 +43,7 @@ export class CourseController {
       );
     } catch (error) {
       console.error(error);
-      throw new InternalServerErrorException('Error querying database');
+      throw error;
     }
   }
 

@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
@@ -12,6 +12,12 @@ export class CurriculaService {
     private curriculaModel: Model<CurriculaDocument>,
   ) {}
 
+  /**
+   * Retrieves the curricula courses for a given year, degree, and major
+   *
+   * @param filters - The filters include the query parameters year (e.g. '2025'), degree (e.g. 'BS'), and major (e.g. 'CS')
+   * @returns An object that contains the curricula data for a given degree
+   */
   async findCurricula(
     filters: queryFiltersBase,
     page: number,
@@ -27,8 +33,8 @@ export class CurriculaService {
         .exec();
 
       if (!curricula) {
-        throw new BadRequestException(
-          'No sections found given the query parameters',
+        throw new NotFoundException(
+          'No curricula found given the query parameters',
         );
       }
 
@@ -44,9 +50,6 @@ export class CurriculaService {
       return formattedCurricula;
     } catch (error) {
       console.error(error);
-      if (!(error instanceof BadRequestException)) {
-        throw new Error('Database query failed');
-      }
       throw error;
     }
   }

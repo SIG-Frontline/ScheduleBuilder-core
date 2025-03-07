@@ -24,8 +24,7 @@ export class CourseService {
   /**
    * Retrieves matching courses for a given term and search query .
    *
-   * @param term - The academic term (e.g., "202510").
-   * @param filters - The filters include subject, title,
+   * @param filters - The filters include subject, title, and the academic term (e.g., "202510").
    * @returns An object that contains an array of courses along with the total number of courses returned
    */
   async findCourses(
@@ -60,15 +59,14 @@ export class CourseService {
       return { courses: formattedCourses, totalNumCourses: numCourses };
     } catch (error) {
       console.error(error);
-      throw new Error('Database query failed');
+      throw error;
     }
   }
 
   /**
    * Retrieves section data for a given term and course.
    *
-   * @param term - The academic term (e.g., "202510").
-   * @param course - The course code (e.g., "CS332").
+   * @param filters - Filters include the course code (e.g., "CS332") and the academic term (e.g., "202510").
    * @returns A course object that contains an array of sections for the specified term.
    */
   async findSections(
@@ -109,9 +107,6 @@ export class CourseService {
       return { course: course, totalNumCourses };
     } catch (error) {
       console.error(error);
-      if (!(error instanceof NotFoundException)) {
-        throw new Error('Database query failed');
-      }
       throw error;
     }
   }

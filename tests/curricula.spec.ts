@@ -1,13 +1,11 @@
 import { test, expect } from '@playwright/test';
 import { CurriculaResponse } from 'src/utils/types.util';
 
-let endpoint = '/curricula';
-
 test.describe('Curricula Endpoint', () => {
   test('GET /curricula should return status code 200 when given year, degree & major', async ({
     request,
   }) => {
-    endpoint = `${endpoint}/2025/BS/CS`;
+    const endpoint = '/curricula/2025/BS/CS';
     const response = await request.get(endpoint);
     expect(response.status()).toBe(200);
 
@@ -19,18 +17,18 @@ test.describe('Curricula Endpoint', () => {
     expect(Array.isArray(body.classes)).toBeTruthy();
   });
 
-  test('GET /curricula should return status code 400 with a bad request message', async ({
+  test('GET /curricula should return status code 404 with a bad request message', async ({
     request,
   }) => {
-    endpoint = `${endpoint}/1999/BS/RANDOMSTUFF`;
+    const endpoint = '/curricula/1999/BS/RANDOMSTUFF';
     const response = await request.get(endpoint);
-    expect(response.status()).toBe(400);
+    expect(response.status()).toBe(404);
 
     const body = (await response.json()) as CurriculaResponse;
     expect(body).toHaveProperty(
       'message',
-      'No sections found given the query parameters',
+      'No curricula found given the query parameters',
     );
-    expect(body).toHaveProperty('error', 'Bad Request');
+    expect(body).toHaveProperty('error', 'Not Found');
   });
 });

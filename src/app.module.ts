@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import 'dotenv/config';
 import { CourseModule } from './courses/courses.module';
 import { CurriculaModule } from './curricula/curricula.module';
+import { SubjectsModule } from './subjects/subjects.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { CurriculaModule } from './curricula/curricula.module';
     }),
     CourseModule,
     CurriculaModule,
+    SubjectsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
