@@ -9,4 +9,10 @@ export class SubjectsController {
     const subjects = await this.subjectsService.findSubjects(term, 0, 20);
     return subjects;
   }
+
+  @Get('/terms')
+  async getTerms() {
+    const terms = await this.subjectsService.findTerms(0, 20);
+    return terms;
+  }
 }

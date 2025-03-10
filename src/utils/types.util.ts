@@ -99,6 +99,10 @@ export interface SubjectsResponse {
   subjects: string[];
 }
 
+export interface TermsResponse {
+  terms: string[];
+}
+
 export type CourseSearchDBResult = { _id: string; title: string };
 
 export interface CurriculaCourseNode {

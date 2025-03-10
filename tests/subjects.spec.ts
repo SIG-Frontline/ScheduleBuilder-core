@@ -15,6 +15,7 @@ test.describe('Subjects Endpoint', () => {
     expect(Array.isArray(body.subjects)).toBeTruthy();
     expect(body.subjects.length).toBeGreaterThan(0);
   });
+
   test('GET /subjects should return status code 404 with a bad request message', async ({
     request,
   }) => {

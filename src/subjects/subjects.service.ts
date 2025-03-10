@@ -6,7 +6,7 @@ import {
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Subjects } from 'schemas/subjects.schema';
-import { SubjectsResponse } from 'src/utils/types.util';
+import { SubjectsResponse, TermsResponse } from 'src/utils/types.util';
 
 @Injectable()
 export class SubjectsService {
@@ -43,6 +43,32 @@ export class SubjectsService {
       };
 
       return formattedSubjects;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  async findTerms(
+    sectionsPerPage: number,
+    page: number,
+  ): Promise<TermsResponse> {
+    try {
+      const query = { TERM: { $exists: true } };
+      const terms = await this.subjectsModel
+        .find(query)
+        .limit(sectionsPerPage)
+        .skip(sectionsPerPage * page)
+        .lean()
+        .exec();
+
+      if (!terms) {
+        throw new NotFoundException('No terms were found');
+      }
+
+      let formattedTerms = [...new Set(terms.map((term) => term.TERM))];
+      formattedTerms = formattedTerms.sort((a, b) => Number(b) - Number(a));
+      return { terms: formattedTerms };
     } catch (error) {
       console.error(error);
       throw error;
