@@ -93,6 +93,12 @@ export interface CurriculaResponse {
   classes: TreeNode[];
 }
 
+export interface SubjectsResponse {
+  _id: string;
+  term: string;
+  subjects: string[];
+}
+
 export type CourseSearchDBResult = { _id: string; title: string };
 
 export interface CurriculaCourseNode {
