@@ -103,11 +103,46 @@ export interface TermsResponse {
   terms: string[];
 }
 
+export interface UserPlanResponse {
+  userId: string;
+  uuid: string;
+  planData: PlanData;
+}
+
 export type CourseSearchDBResult = { _id: string; title: string };
 
 export interface CurriculaCourseNode {
   name: string;
   course: string;
+  legacy: boolean;
 }
 
 export type TreeNode = string | string[] | CurriculaCourseNode;
+
+export interface PlanData {
+  uuid: string;
+  name: string;
+  description: string;
+  term: number;
+  selected: boolean;
+  courses: PlanDataCourses[];
+  events: Events[];
+}
+
+export interface PlanDataCourses {
+  title: string;
+  credits: number;
+  sections: Section[];
+  description: string;
+  code: string;
+  color: string;
+}
+
+export interface Events {
+  title: string;
+  description: string;
+  startTime: string;
+  endTime: string;
+  daysOfWeek: number[];
+  color: string;
+}
