@@ -7,6 +7,7 @@ import { CourseModule } from './courses/courses.module';
 import { CurriculaModule } from './curricula/curricula.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { UserPlansModule } from './userPlans/userPlans.module';
+import { CourseStaticModule } from './courseStatic/courseStatic.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { UserPlansModule } from './userPlans/userPlans.module';
     CurriculaModule,
     SubjectsModule,
     UserPlansModule,
+    CourseStaticModule,
   ],
   controllers: [AppController],
   providers: [AppService],

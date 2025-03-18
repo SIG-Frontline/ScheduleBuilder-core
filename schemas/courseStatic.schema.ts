@@ -10,19 +10,22 @@ export class CourseStatic {
   _id: string;
 
   @Prop()
-  prereq_str: string;
+  course_number: string;
 
   @Prop()
   description: string;
 
   @Prop()
+  prereq_str: string;
+
+  @Prop()
   subject: string;
 
   @Prop()
-  course_number: string;
+  tree: CourseStaticNode;
 
   @Prop()
-  tree: CourseStaticNode;
+  updated: number;
 }
 
 export const CourseStaticSchema = SchemaFactory.createForClass(CourseStatic);

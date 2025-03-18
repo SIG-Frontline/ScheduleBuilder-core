@@ -22,6 +22,9 @@ export class Curricula {
   YEAR: string;
 
   @Prop()
+  UPDATED: number;
+
+  @Prop()
   CLASSES: TreeNode[];
 }
 

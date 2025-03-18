@@ -44,6 +44,7 @@ export class CurriculaService {
         degree: curricula?.DEGREE,
         major: curricula?.MAJOR,
         year: curricula?.YEAR,
+        updated: curricula?.UPDATED,
         classes: curricula?.CLASSES as TreeNode[],
       };
 
