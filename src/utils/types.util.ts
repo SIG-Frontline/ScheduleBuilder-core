@@ -112,12 +112,16 @@ export interface UserPlanResponse {
 export type CourseSearchDBResult = { _id: string; title: string };
 
 export interface CurriculaCourseNode {
-  name: string;
+  name?: string;
   course: string;
-  legacy: boolean;
+  legacy?: boolean;
 }
 
-export type TreeNode = string | string[] | CurriculaCourseNode;
+export type TreeNode =
+  | CurriculaCourseNode
+  | string[]
+  | CurriculaCourseNode[]
+  | TreeNode[];
 
 export interface PlanData {
   uuid: string;
@@ -145,4 +149,38 @@ export interface Events {
   endTime: string;
   daysOfWeek: number[];
   color: string;
+}
+
+// Recommender
+export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
+
+export type ClassRec = {
+  name?: string;
+  type: ClassRecType.CLASS;
+  course: string;
+  legacy?: boolean;
+};
+
+export type ClassWild = {
+  name?: string;
+  type: ClassRecType.WILDCARD;
+  course: string;
+  legacy?: boolean;
+  credits: number;
+  courses: number;
+};
+
+export type ClassBranch = {
+  name: string;
+  type: ClassRecType.BRANCH;
+  numCredits?: number;
+  numClasses?: number;
+  operator: '&' | '|';
+  classes: ClassRecommendation[];
+};
+
+export enum ClassRecType {
+  BRANCH = 'branch',
+  CLASS = 'class',
+  WILDCARD = 'wildcard',
 }

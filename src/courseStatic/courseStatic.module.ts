@@ -12,5 +12,6 @@ import { CourseStaticService } from './courseStatic.service';
   ],
   controllers: [CourseStaticController],
   providers: [CourseStaticService],
+  exports: [CourseStaticService],
 })
 export class CourseStaticModule {}
