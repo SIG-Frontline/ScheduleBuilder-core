@@ -1,5 +1,11 @@
 export interface queryFiltersBase {
-  [key: string]: string | number | boolean | undefined | { $regex: RegExp };
+  [key: string]:
+    | string
+    | number
+    | boolean
+    | undefined
+    | { $regex: RegExp }
+    | { $in: number[] };
 }
 
 export interface courseQueryFilters extends queryFiltersBase {
@@ -8,10 +14,10 @@ export interface courseQueryFilters extends queryFiltersBase {
   TITLE?: string | { $regex: RegExp };
   SUBJECT?: string | { $regex: RegExp };
   INSTRUCTOR?: string;
-  IS_HONORS?: string;
-  IS_ASYNC?: string;
-  CREDITS?: string;
-  COURSE_LEVEL?: string;
+  IS_HONORS?: boolean;
+  IS_ASYNC?: boolean;
+  CREDITS?: number;
+  COURSE_LEVEL?: number | { $in: number[] };
   SUMMER_PERIOD?: string;
   INSTRUCTION_METHOD?: string;
 }

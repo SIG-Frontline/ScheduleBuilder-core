@@ -36,10 +36,18 @@ export class CourseController {
         ...(term ? { TERM: term } : {}),
         ...(course ? { COURSE: course } : {}),
         ...(instructor ? { INSTRUCTOR: instructor } : {}),
-        ...(honors ? { IS_HONORS: honors } : {}),
-        ...(isAsync ? { IS_ASYNC: isAsync } : {}),
-        ...(credits ? { CREDITS: credits } : {}),
-        ...(level ? { COURSE_LEVEL: level } : {}),
+        ...(honors ? { IS_HONORS: honors === 'true' } : {}),
+        ...(isAsync ? { IS_ASYNC: isAsync === 'true' } : {}),
+        ...(credits && !isNaN(Number(credits))
+          ? { CREDITS: Number(credits) }
+          : {}),
+        ...(level
+          ? level.toLowerCase() === 'u'
+            ? { COURSE_LEVEL: { $in: [1, 2, 3, 4] } }
+            : level.toLowerCase() === 'g'
+              ? { COURSE_LEVEL: { $in: [5, 6, 7] } }
+              : {}
+          : {}),
         ...(summer ? { SUMMER_PERIOD: summer } : {}),
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
@@ -83,10 +91,18 @@ export class CourseController {
         ...(title ? { TITLE: title } : {}),
         ...(subject ? { SUBJECT: subject } : {}),
         ...(instructor ? { INSTRUCTOR: instructor } : {}),
-        ...(honors ? { IS_HONORS: honors } : {}),
-        ...(isAsync ? { IS_ASYNC: isAsync } : {}),
-        ...(credits ? { CREDITS: credits } : {}),
-        ...(level ? { COURSE_LEVEL: level } : {}),
+        ...(honors ? { IS_HONORS: honors === 'true' } : {}),
+        ...(isAsync ? { IS_ASYNC: isAsync === 'true' } : {}),
+        ...(credits && !isNaN(Number(credits))
+          ? { CREDITS: Number(credits) }
+          : {}),
+        ...(level
+          ? level.toLowerCase() === 'u'
+            ? { COURSE_LEVEL: { $in: [1, 2, 3, 4] } }
+            : level.toLowerCase() === 'g'
+              ? { COURSE_LEVEL: { $in: [5, 6, 7] } }
+              : {}
+          : {}),
         ...(summer ? { SUMMER_PERIOD: summer } : {}),
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
