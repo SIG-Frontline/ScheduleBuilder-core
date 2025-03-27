@@ -4,7 +4,7 @@ import { PlanData } from 'src/utils/types.util';
 
 export type UserPlansDocument = HydratedDocument<UserPlans>;
 
-@Schema({ collection: 'User_Plans' })
+@Schema({ collection: 'User_Plans', versionKey: false })
 export class UserPlans {
   @Prop()
   userId: string;

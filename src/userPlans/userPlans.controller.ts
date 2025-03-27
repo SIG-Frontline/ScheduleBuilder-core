@@ -16,11 +16,21 @@ export class UserPlansController {
   @Get('userPlans/:userId')
   async getUserPlan(@Param('userId') userId: string) {
     const decodedUserId = decodeURIComponent(userId);
-    const userPlan = await this.userPlansService.findPlans(
+    const userPlans = await this.userPlansService.findPlans(
       decodedUserId,
       0,
       20,
     );
+    return userPlans;
+  }
+
+  @Get('userPlans/:userId/:uuid')
+  async getSingleUserPlan(
+    @Param('userId') userId: string,
+    @Param('uuid') uuid: string,
+  ) {
+    const decodedUserId = decodeURIComponent(userId);
+    const userPlan = await this.userPlansService.findPlan(decodedUserId, uuid);
     return userPlan;
   }
 

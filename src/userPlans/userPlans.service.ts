@@ -52,6 +52,31 @@ export class UserPlansService {
     }
   }
 
+  async findPlan(userId: string, uuid: string): Promise<UserPlanResponse> {
+    try {
+      if (!userId) {
+        throw new BadRequestException('No userID was received');
+      }
+      const query = { userId: userId, uuid: uuid };
+      const plan = await this.userPlansModel.findOne(query).lean().exec();
+
+      if (!plan) {
+        throw new NotFoundException('No plan found for that given the user id');
+      }
+
+      const formattedUserPlan: UserPlanResponse = {
+        userId: plan.userId,
+        uuid: plan.uuid,
+        planData: plan.plandata,
+      };
+
+      return formattedUserPlan;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   async createPlans(
     userId: string,
     uuid: string,

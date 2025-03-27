@@ -1,10 +1,10 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
-import { CourseService } from './courses.service';
+import { SectionService } from './section.service';
 import { courseQueryFilters } from 'src/utils/types.util';
 import { addRegexSearch } from 'src/utils/functions.utils';
 @Controller('')
-export class CourseController {
-  constructor(private readonly CourseService: CourseService) {}
+export class SectionController {
+  constructor(private readonly SectionService: SectionService) {}
 
   @Get('courseSearch')
   async getCourses(
@@ -52,7 +52,7 @@ export class CourseController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
-      return await this.CourseService.findCourses(
+      return await this.SectionService.findCourses(
         filters,
         Number(page),
         Number(sectionsPerPage),
@@ -107,7 +107,7 @@ export class CourseController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
-      return await this.CourseService.findSections(
+      return await this.SectionService.findSections(
         filters,
         Number(page),
         Number(sectionsPerPage),

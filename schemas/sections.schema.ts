@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
+import { Days, MeetingTime } from 'src/utils/types.util';
 
-export type CourseDocument = HydratedDocument<Course>;
+export type SectionDocument = HydratedDocument<Section>;
 
 @Schema({ collection: 'Sections' })
-export class Course {
+export class Section {
   @Prop()
   ROW_NUMBER: number;
 
@@ -26,11 +27,11 @@ export class Course {
   @Prop()
   INSTRUCTION_METHOD: string;
 
-  @Prop()
-  DAYS: string;
+  @Prop({ type: Object })
+  DAYS: Days;
 
-  @Prop()
-  TIMES: string;
+  @Prop({ type: [Object] })
+  TIMES: MeetingTime[];
 
   @Prop()
   LOCATION: string;
@@ -72,4 +73,4 @@ export class Course {
   SUMMER_PERIOD: boolean;
 }
 
-export const CourseSchema = SchemaFactory.createForClass(Course);
+export const SectionSchema = SchemaFactory.createForClass(Section);

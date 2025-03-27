@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Course, CourseDocument } from '../../schemas/courses.schema';
+import { Section, SectionDocument } from '../../schemas/sections.schema';
 import { sanitizeFilters } from 'src/utils/functions.utils';
 import {
   CourseStatic,
@@ -14,9 +14,9 @@ import {
 } from 'src/utils/types.util';
 
 @Injectable()
-export class CourseService {
+export class SectionService {
   constructor(
-    @InjectModel(Course.name) private courseModel: Model<CourseDocument>,
+    @InjectModel(Section.name) private courseModel: Model<SectionDocument>,
     @InjectModel(CourseStatic.name)
     private courseStaticModel: Model<CourseStaticDocument>,
   ) {}
