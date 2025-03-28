@@ -19,8 +19,6 @@ export class SectionController {
     @Query('level') level?: string,
     @Query('summer') summer?: string,
     @Query('method') method?: string,
-    @Query('page') page = 0, // Default to first page
-    @Query('sectionsPerPage') sectionsPerPage = 20, // Default limit
   ) {
     try {
       const query: courseQueryFilters = {};
@@ -52,11 +50,7 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
-      return await this.SectionService.findCourses(
-        filters,
-        Number(page),
-        Number(sectionsPerPage),
-      );
+      return await this.SectionService.findCourses(filters);
     } catch (error) {
       console.error(error);
       throw error;
@@ -76,8 +70,6 @@ export class SectionController {
     @Query('level') level?: string,
     @Query('summer') summer?: string,
     @Query('method') method?: string,
-    @Query('page') page = 0, // Default to first page
-    @Query('sectionsPerPage') sectionsPerPage = 20, // Default limit
   ) {
     if (!term || !course) {
       throw new BadRequestException(
@@ -107,11 +99,7 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
-      return await this.SectionService.findSections(
-        filters,
-        Number(page),
-        Number(sectionsPerPage),
-      );
+      return await this.SectionService.findSections(filters);
     } catch (error) {
       console.error(error);
       throw error;

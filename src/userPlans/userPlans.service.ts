@@ -61,7 +61,9 @@ export class UserPlansService {
       const plan = await this.userPlansModel.findOne(query).lean().exec();
 
       if (!plan) {
-        throw new NotFoundException('No plan found for that given the user id');
+        throw new NotFoundException(
+          'No plan found for that given the user id and uuid',
+        );
       }
 
       const formattedUserPlan: UserPlanResponse = {

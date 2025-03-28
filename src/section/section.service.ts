@@ -27,11 +27,7 @@ export class SectionService {
    * @param filters - The filters include subject, title, and the academic term (e.g., "202510").
    * @returns An object that contains an array of courses along with the total number of courses returned
    */
-  async findCourses(
-    filters: courseQueryFilters,
-    page: number,
-    sectionsPerPage: number,
-  ): Promise<CourseResponse> {
+  async findCourses(filters: courseQueryFilters): Promise<CourseResponse> {
     try {
       const query = sanitizeFilters(filters);
 
@@ -40,8 +36,6 @@ export class SectionService {
           { $match: query },
           { $group: { _id: '$COURSE', title: { $first: '$TITLE' } } },
           { $sort: { _id: 1 } },
-          { $skip: sectionsPerPage * page },
-          { $limit: sectionsPerPage },
         ])
         .exec();
 
@@ -69,20 +63,11 @@ export class SectionService {
    * @param filters - Filters include the course code (e.g., "CS332") and the academic term (e.g., "202510").
    * @returns A course object that contains an array of sections for the specified term.
    */
-  async findSections(
-    filters: courseQueryFilters,
-    page: number,
-    sectionsPerPage: number,
-  ) {
+  async findSections(filters: courseQueryFilters) {
     try {
       const query = sanitizeFilters(filters);
 
-      const sections = await this.courseModel
-        .find(query)
-        .limit(sectionsPerPage)
-        .skip(sectionsPerPage * page)
-        .lean()
-        .exec();
+      const sections = await this.courseModel.find(query).lean().exec();
 
       if (sections.length === 0) {
         throw new NotFoundException(
