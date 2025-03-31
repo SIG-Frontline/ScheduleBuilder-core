@@ -8,6 +8,7 @@ import { CurriculaModule } from './curricula/curricula.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { UserPlansModule } from './userPlans/userPlans.module';
 import { CourseStaticModule } from './courseStatic/courseStatic.module';
+import { AuthzModule } from './authz/authz.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CourseStaticModule } from './courseStatic/courseStatic.module';
     SubjectsModule,
     UserPlansModule,
     CourseStaticModule,
+    AuthzModule,
   ],
   controllers: [AppController],
   providers: [AppService],
