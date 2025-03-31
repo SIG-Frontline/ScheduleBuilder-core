@@ -51,7 +51,7 @@ export class RecommenderService {
 
     // Filters out courses that the user has already taken
     const recommendations = this.filterTree(curriculaTree, takenCourses);
-    console.log('unused classes', takenCourses);
+    //console.log('unused classes', takenCourses);
 
     return recommendations;
   }
@@ -163,7 +163,7 @@ export class RecommenderService {
     if (node.type == ClassRecType.CLASS) {
       // Remove the course if it has already been taken
       if (takenCourses.includes(node.course)) {
-        console.log(node.course, 'satisfied');
+        //console.log(node.course, 'satisfied');
         takenCourses.splice(takenCourses.indexOf(node.course), 1); // Prevent double dipping
         return [];
       }
@@ -174,7 +174,7 @@ export class RecommenderService {
       const c = this.validateWildcard(node.course, takenCourses);
       if (c != '') {
         // A course can be satisfied by this wildcard
-        console.log(node.course, 'satisfied by', c);
+        //console.log(node.course, 'satisfied by', c);
         takenCourses.splice(takenCourses.indexOf(c), 1); // Prevent double dipping
         node.courses += 1;
         node.credits += 3; // FIX: defaulting to 3 credits per course
