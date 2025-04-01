@@ -45,7 +45,7 @@ export class CourseStaticService {
 
   async findCourseStatic(id: string) {
     const courses = await this.getCachedData();
-    const course = courses.filter((item) => item._id == id)[0];
+    const course = courses.filter((item) => item._id === id)[0];
 
     // Can be null
     return course;

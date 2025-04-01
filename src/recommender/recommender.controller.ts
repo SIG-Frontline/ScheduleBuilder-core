@@ -6,7 +6,7 @@ export class RecommenderController {
   constructor(private readonly recommenderService: RecommenderService) {}
 
   @Post('recommender/')
-  async createUserPlan(
+  async getRecommendation(
     @Body()
     params: {
       degree: string;

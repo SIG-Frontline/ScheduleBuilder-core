@@ -112,9 +112,9 @@ export interface UserPlanResponse {
 export type CourseSearchDBResult = { _id: string; title: string };
 
 export interface CurriculaCourseNode {
-  name?: string;
+  name: string;
   course: string;
-  legacy?: boolean;
+  legacy: boolean;
 }
 
 export type TreeNode =
@@ -155,17 +155,17 @@ export interface Events {
 export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
 
 export type ClassRec = {
-  name?: string;
+  name: string;
   type: ClassRecType.CLASS;
   course: string;
-  legacy?: boolean;
+  legacy: boolean;
 };
 
 export type ClassWild = {
-  name?: string;
+  name: string;
   type: ClassRecType.WILDCARD;
   course: string;
-  legacy?: boolean;
+  legacy: boolean;
   credits: number;
   courses: number;
 };
