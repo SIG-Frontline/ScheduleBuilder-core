@@ -68,6 +68,7 @@ export interface Section {
   SUBJECT: string;
   COURSE_LEVEL: number;
   SUMMER_PERIOD: string | null;
+  selected: boolean;
 }
 
 export interface Course {
@@ -133,6 +134,7 @@ export interface PlanData {
   selected: boolean;
   courses: PlanDataCourses[];
   events: Events[];
+  organizerSettings: organizerSettings;
 }
 
 export interface PlanDataCourses {
@@ -151,4 +153,26 @@ export interface Events {
   endTime: string;
   daysOfWeek: number[];
   color: string;
+}
+
+// Organizer
+export interface organizerSettings {
+  isCommuter: boolean;
+  commuteTimeHours: number;
+  compactPlan: boolean;
+  courseFilters: courseFilter[];
+}
+
+export interface courseFilter {
+  courseCode: string;
+  instructor?: string;
+  honors?: boolean;
+  online?: instructionType;
+  section?: string;
+}
+export enum instructionType {
+  ONLINE = 'online',
+  HYBRID = 'hybrid',
+  INPERSON = 'face-to-face',
+  ANY = 'any',
 }
