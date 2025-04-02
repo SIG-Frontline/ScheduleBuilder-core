@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Schedule Builder')
-    .setDescription('The Schedule Builder API description')
+    .setDescription('The Schedule Builder API Description')
     .setVersion('1.0')
     .build();
 
