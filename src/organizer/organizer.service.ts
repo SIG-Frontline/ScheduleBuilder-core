@@ -3,7 +3,11 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { MeetingTime, PlanData, Section } from 'src/utils/types.util';
+import {
+  PlanDataMeetingTime,
+  PlanData,
+  PlanDataSection,
+} from 'src/utils/types.util';
 
 @Injectable()
 export class OrganizerService {
@@ -59,19 +63,11 @@ export class OrganizerService {
 
         course.sections = course.sections.filter(
           (s) =>
-            ((filter.instructor == null || s.INSTRUCTOR == filter.instructor) &&
-              (filter.honors == null || s.IS_HONORS == filter.honors) &&
-              // Do some weird conditionals because we don't know if the sections are in sync with the new schema
-              (filter.online == null ||
-                (s['INSTURCTION_METHOD']
-                  ? s['INSTRUCTION_METHOD']
-                      .toLowerCase()
-                      .includes(filter.online)
-                  : s.INSTRUCTION_METHOD.toLowerCase().includes(
-                      filter.online,
-                    ))) &&
-              filter.section == null) ||
-            s.SECTION == filter.section,
+            (filter.instructor == null || s.instructor == filter.instructor) &&
+            (filter.honors == null || s.is_honors == filter.honors) &&
+            (filter.online == null ||
+              s.instruction_type.toLowerCase().includes(filter.online)) &&
+            (filter.section == null || s.sectionNumber == filter.section),
         );
       });
     }
@@ -79,13 +75,15 @@ export class OrganizerService {
     // Modify all meeting time strings to be minutes from midnight for much easier math (and avoid multiple conversions with Date)
     plan.courses?.forEach((c) =>
       c.sections.forEach((s) =>
-        s.TIMES.forEach((m) => {
+        s.meetingTimes.forEach((m) => {
           // @ts-expect-error Changing ISO string to a number
-          m.start =
-            new Date(m.start).getHours() * 60 + new Date(m.start).getMinutes();
+          m.startTime =
+            new Date(m.startTime).getHours() * 60 +
+            new Date(m.startTime).getMinutes();
           // @ts-expect-error Changing ISO string to a number
-          m.end =
-            new Date(m.end).getHours() * 60 + new Date(m.end).getMinutes();
+          m.endTime =
+            new Date(m.endTime).getHours() * 60 +
+            new Date(m.endTime).getMinutes();
         }),
       ),
     );
@@ -99,7 +97,7 @@ export class OrganizerService {
       for (let i = 0; i < course.sections.length; i++) {
         const s = course.sections[i];
 
-        if (s.TIMES.length == 0) {
+        if (s.meetingTimes.length == 0) {
           if (!hasOnline[course.code]) {
             hasOnline[course.code] = true;
           } else {
@@ -137,7 +135,7 @@ export class OrganizerService {
       // Creates a section map of "class code": "section number" based on the current indexes
       const selectedSections = {} as { [key: string]: string };
 
-      const meetings = [] as MeetingTime[];
+      const meetings = [] as PlanDataMeetingTime[];
 
       let v = 0;
       for (const course of courses) {
@@ -145,8 +143,9 @@ export class OrganizerService {
         const index =
           Math.floor(i / rollingProduct[v]) % course.sections.length;
 
-        course.sections[index].TIMES.forEach((m) => meetings.push(m));
-        selectedSections[courses[v].code] = course.sections[index].SECTION;
+        course.sections[index].meetingTimes.forEach((m) => meetings.push(m));
+        selectedSections[courses[v].code] =
+          course.sections[index].sectionNumber;
         v++;
       }
 
@@ -160,7 +159,7 @@ export class OrganizerService {
   }
 
   // Verifies if a list of MeetingTimes do not conflict with each other
-  private verifyMeetings(meetings: MeetingTime[]): boolean {
+  private verifyMeetings(meetings: PlanDataMeetingTime[]): boolean {
     // Compares every MeetingTime to every other MeetingTime
     for (let i = 0; i < meetings.length - 1; i++) {
       const meeting1 = meetings[i];
@@ -169,10 +168,10 @@ export class OrganizerService {
 
         if (meeting1.day != meeting2.day) continue;
 
-        const start1 = meeting1.start;
-        const start2 = meeting2.start;
-        const end1 = meeting1.end;
-        const end2 = meeting2.end;
+        const start1 = meeting1.startTime;
+        const start2 = meeting2.startTime;
+        const end1 = meeting1.endTime;
+        const end2 = meeting2.endTime;
 
         if (start1 < end2 && end1 > start2) return false;
       }
@@ -192,7 +191,9 @@ export class OrganizerService {
     // Selects the sections as given in sectionList
     for (const [courseCode, section] of Object.entries(sectionList)) {
       const course = newPlan.courses?.find((c) => c.code == courseCode);
-      course?.sections.forEach((s) => (s.selected = s.SECTION == section));
+      course?.sections.forEach(
+        (s) => (s.selected = s.sectionNumber == section),
+      );
     }
 
     return newPlan;
@@ -262,19 +263,19 @@ export class OrganizerService {
     if (!plan.courses || plan.courses.length == 0) return -1;
 
     for (const course of plan.courses) {
-      let section: Section = {} as Section;
+      let section: PlanDataSection = {} as PlanDataSection;
 
       // Gets the selected section for that course
       for (const s of course.sections) {
-        if (sectionList[course.code] == s.SECTION) section = s;
+        if (sectionList[course.code] == s.sectionNumber) section = s;
       }
       if (!section) continue;
 
       // Loops through each meeting of that day
-      for (const meeting of section.TIMES) {
+      for (const meeting of section.meetingTimes) {
         // Gets the start and end time and sees if it earlier/later than our currently stored start/end time for that day
-        const start = meeting.start;
-        const end = meeting.end;
+        const start = meeting.startTime;
+        const end = meeting.endTime;
 
         const index = this.convertDayToIndex(meeting.day);
 

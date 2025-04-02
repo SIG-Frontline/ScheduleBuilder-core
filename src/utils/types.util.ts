@@ -140,11 +140,34 @@ export interface PlanData {
 export interface PlanDataCourses {
   title: string;
   credits: number;
-  sections: Section[];
+  sections: PlanDataSection[];
   description: string;
   code: string;
   color: string;
 }
+
+export interface PlanDataSection {
+  meetingTimes: PlanDataMeetingTime[];
+  instructor: string;
+  crn: string;
+  currentEnrollment: number;
+  maxEnrollment: number;
+  status: string;
+  is_honors: boolean;
+  is_async: boolean;
+  instruction_type: string;
+  sectionNumber: string;
+  comments: string;
+  selected: boolean;
+}
+
+export type PlanDataMeetingTime = {
+  day: string;
+  startTime: string;
+  endTime: string;
+  building: string;
+  room: string;
+};
 
 export interface Events {
   title: string;
