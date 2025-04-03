@@ -8,7 +8,7 @@ export class OrganizerController {
 
   @Post('organizer/')
   async organizePlan(@Body() plan: PlanData) {
-    if (!plan) throw new BadRequestException('No plan provided!');
+    if (!plan) throw new BadRequestException('No plan provided');
 
     return await this.organizerService.organizePlan(plan);
   }

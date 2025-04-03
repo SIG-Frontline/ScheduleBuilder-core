@@ -54,22 +54,25 @@ export class OrganizerService {
     // TODO: filter sections that interfere with events
     // TODO: filter sections that have a full seat count
 
-    const courseFilters = plan.organizerSettings.courseFilters;
+    const courseFilters = plan.organizerSettings?.courseFilters;
 
     // Perform all the filters for the courses
-    for (const filter of courseFilters) {
-      plan.courses?.forEach((course) => {
-        if (course.code !== filter.courseCode) return;
+    if (courseFilters) {
+      for (const filter of courseFilters) {
+        plan.courses?.forEach((course) => {
+          if (course.code !== filter.courseCode) return;
 
-        course.sections = course.sections.filter(
-          (s) =>
-            (filter.instructor == null || s.instructor == filter.instructor) &&
-            (filter.honors == null || s.is_honors == filter.honors) &&
-            (filter.online == null ||
-              s.instruction_type.toLowerCase().includes(filter.online)) &&
-            (filter.section == null || s.sectionNumber == filter.section),
-        );
-      });
+          course.sections = course.sections.filter(
+            (s) =>
+              (filter.instructor == null ||
+                s.instructor == filter.instructor) &&
+              (filter.honors == null || s.is_honors == filter.honors) &&
+              (filter.online == null ||
+                s.instruction_type.toLowerCase().includes(filter.online)) &&
+              (filter.section == null || s.sectionNumber == filter.section),
+          );
+        });
+      }
     }
 
     // Modify all meeting time strings to be minutes from midnight for much easier math (and avoid multiple conversions with Date)
@@ -300,12 +303,12 @@ export class OrganizerService {
       score += totalTimeOnCampus;
 
       // Compensate for commute time (which can reduce amount of days on campus)
-      if (settings.isCommuter) score += settings.commuteTimeHours * 60;
+      if (settings?.isCommuter) score += settings.commuteTimeHours * 60;
 
       // Penalize schedules that spend more than 70% of their time on campus in class (to promote breaks), only if compactPlan is off
       // Penalizes schedules in proportion to how much they take up the on campus time
       if (
-        !settings.compactPlan &&
+        !settings?.compactPlan &&
         totalClassTime[i] > 3 * 60 &&
         totalTimeOnCampus * 0.7 < totalClassTime[i]
       )
