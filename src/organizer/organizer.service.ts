@@ -282,22 +282,20 @@ export class OrganizerService {
 
         const index = this.convertDayToIndex(meeting.day);
 
-        // @ts-expect-error String was changed to a number earlier
-        earliestStart[index] = Math.min(earliestStart[index], start);
-        // @ts-expect-error String was changed to a number earlier
-        latestEnd[index] = Math.max(latestEnd[index], end);
-        // @ts-expect-error String was changed to a number earlier
-        totalClassTime[index] += end - start;
+        earliestStart[index] = Math.min(earliestStart[index], Number(start));
+        latestEnd[index] = Math.max(latestEnd[index], Number(end));
+        totalClassTime[index] += Number(end) - Number(start);
       }
     }
 
     // Calculate different metrics to rate the schedule
     let score = 0;
 
-    for (let i = 0; i < 7; i++) {
-      if (totalClassTime[i] == 0) continue; // No classes on this day
+    for (let dayOfWeekIndex = 0; dayOfWeekIndex < 7; dayOfWeekIndex++) {
+      if (totalClassTime[dayOfWeekIndex] == 0) continue; // No classes on this day
 
-      const totalTimeOnCampus = latestEnd[i] - earliestStart[i];
+      const totalTimeOnCampus =
+        latestEnd[dayOfWeekIndex] - earliestStart[dayOfWeekIndex];
 
       // Penalize schedules which spend more time on campus
       score += totalTimeOnCampus;
@@ -309,10 +307,10 @@ export class OrganizerService {
       // Penalizes schedules in proportion to how much they take up the on campus time
       if (
         !settings?.compactPlan &&
-        totalClassTime[i] > 3 * 60 &&
-        totalTimeOnCampus * 0.7 < totalClassTime[i]
+        totalClassTime[dayOfWeekIndex] > 3 * 60 &&
+        totalTimeOnCampus * 0.7 < totalClassTime[dayOfWeekIndex]
       )
-        score += (1000 * totalClassTime[i]) / totalTimeOnCampus;
+        score += (1000 * totalClassTime[dayOfWeekIndex]) / totalTimeOnCampus;
     }
 
     return score;
