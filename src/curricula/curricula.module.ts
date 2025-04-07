@@ -12,5 +12,6 @@ import { CurriculaService } from './curricula.service';
   ],
   controllers: [CurriculaController],
   providers: [CurriculaService],
+  exports: [CurriculaService],
 })
 export class CurriculaModule {}
