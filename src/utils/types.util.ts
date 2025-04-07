@@ -201,6 +201,7 @@ export enum instructionType {
   HYBRID = 'hybrid',
   INPERSON = 'face-to-face',
   ANY = 'any',
+}
 
 export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
 
