@@ -163,7 +163,7 @@ export class DataNotFoundException extends HttpException {
   constructor(message: string) {
     super(message, HttpStatus.NOT_FOUND);
   }
-
+}
 // Recommender
 export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
 
