@@ -14,7 +14,7 @@ export class CourseStaticController {
   })
   @ApiResponse({
     status: 404,
-    description: 'No course static found the given courseCode.',
+    description: 'No course static found for the given courseCode.',
   })
   async getCourseStatic(@Param('courseCode') courseCode: string) {
     const decodedCourseCode = decodeURIComponent(courseCode);
