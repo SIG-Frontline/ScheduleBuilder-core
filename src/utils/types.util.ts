@@ -124,7 +124,11 @@ export interface CurriculaCourseNode {
   legacy: boolean;
 }
 
-export type TreeNode = string | string[] | CurriculaCourseNode;
+export type TreeNode =
+  | CurriculaCourseNode
+  | string[]
+  | CurriculaCourseNode[]
+  | TreeNode[];
 
 export interface PlanData {
   uuid: string;
@@ -178,7 +182,6 @@ export interface Events {
   color: string;
 }
 
-// Organizer
 export interface organizerSettings {
   isCommuter: boolean;
   commuteTimeHours: number;
@@ -198,4 +201,36 @@ export enum instructionType {
   HYBRID = 'hybrid',
   INPERSON = 'face-to-face',
   ANY = 'any',
+
+export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
+
+export type ClassRec = {
+  name: string;
+  type: ClassRecType.CLASS;
+  course: string;
+  legacy: boolean;
+};
+
+export type ClassWild = {
+  name: string;
+  type: ClassRecType.WILDCARD;
+  course: string;
+  legacy: boolean;
+  credits: number;
+  courses: number;
+};
+
+export type ClassBranch = {
+  name: string;
+  type: ClassRecType.BRANCH;
+  numCredits?: number;
+  numClasses?: number;
+  operator: '&' | '|';
+  classes: ClassRecommendation[];
+};
+
+export enum ClassRecType {
+  BRANCH = 'branch',
+  CLASS = 'class',
+  WILDCARD = 'wildcard',
 }
