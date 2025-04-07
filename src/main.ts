@@ -11,13 +11,13 @@ async function bootstrap() {
   });
 
   const config = new DocumentBuilder()
-    .setTitle('Schedule Builder')
+    .setTitle('Schedule Builder Core')
     .setDescription('The Schedule Builder API Description')
     .setVersion('1.0')
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  SwaggerModule.setup('/', app, documentFactory);
 
   await app.listen(process.env.PORT ?? 4000);
 }

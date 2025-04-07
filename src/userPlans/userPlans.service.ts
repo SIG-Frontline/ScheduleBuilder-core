@@ -1,12 +1,12 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { UserPlans, UserPlansDocument } from 'schemas/userPlans.schema';
-import { PlanData, UserPlanResponse } from 'src/utils/types.util';
+import {
+  DataNotFoundException,
+  PlanData,
+  UserPlanResponse,
+} from 'src/utils/types.util';
 
 @Injectable()
 export class UserPlansService {
@@ -32,7 +32,7 @@ export class UserPlansService {
         .exec();
 
       if (!plans) {
-        throw new NotFoundException(
+        throw new DataNotFoundException(
           'No plans found for that given the user id',
         );
       }
@@ -61,8 +61,8 @@ export class UserPlansService {
       const plan = await this.userPlansModel.findOne(query).lean().exec();
 
       if (!plan) {
-        throw new NotFoundException(
-          'No plan found for that given the user id and uuid',
+        throw new DataNotFoundException(
+          'No plan found for that given the user id and plan uuid',
         );
       }
 
@@ -120,6 +120,12 @@ export class UserPlansService {
         )
         .exec();
 
+      if (!updatedPlan) {
+        throw new DataNotFoundException(
+          'No plans could be found & updated for that given user id and plan uuid',
+        );
+      }
+
       return updatedPlan;
     } catch (error) {
       console.error(error);
@@ -137,8 +143,8 @@ export class UserPlansService {
         .exec();
 
       if (!deletedPlan) {
-        throw new NotFoundException(
-          `No plan found for userId: ${userId} and uuid: ${uuid}`,
+        throw new DataNotFoundException(
+          'No plan found for that given userId and plan uuid',
         );
       }
 

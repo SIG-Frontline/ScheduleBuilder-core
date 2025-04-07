@@ -1,10 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
   CourseStatic,
   CourseStaticDocument,
 } from 'schemas/courseStatic.schema';
+import { DataNotFoundException } from 'src/utils/types.util';
 
 @Injectable()
 export class CourseStaticService {
@@ -20,7 +21,9 @@ export class CourseStaticService {
         .lean()
         .exec();
       if (!courseStatic) {
-        throw new NotFoundException('No course static found given the id');
+        throw new DataNotFoundException(
+          'No course static found for the given course code',
+        );
       }
       return courseStatic;
     } catch (error) {

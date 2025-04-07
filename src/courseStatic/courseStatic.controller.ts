@@ -1,13 +1,23 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
+import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('courseStatic')
 export class CourseStaticController {
   constructor(private readonly courseStaticService: CourseStaticService) {}
 
-  @Get(':id')
-  async getCourseStatic(@Param('id') id: string) {
-    const decodedID = decodeURIComponent(id);
-    return this.courseStaticService.findCourseStatic(decodedID);
+  @Get(':courseCode')
+  @ApiOkResponse({ description: 'Course static was returned successfully' })
+  @ApiOperation({
+    summary: 'Used to return the prerequistes for a given course',
+    description: `Returns static information for a given course, most importantly its prerequisites. This endpoint is heavily used in the schedule builder course recommender feature.<br>Example courseCodes: (CS 100, Math 111)`,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No course static found the given courseCode.',
+  })
+  async getCourseStatic(@Param('courseCode') courseCode: string) {
+    const decodedCourseCode = decodeURIComponent(courseCode);
+    return this.courseStaticService.findCourseStatic(decodedCourseCode);
   }
 }
