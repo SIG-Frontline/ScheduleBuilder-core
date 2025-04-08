@@ -9,6 +9,7 @@ import { SubjectsModule } from './subjects/subjects.module';
 import { UserPlansModule } from './userPlans/userPlans.module';
 import { CourseStaticModule } from './courseStatic/courseStatic.module';
 import { RecommenderModule } from './recommender/recommender.module';
+import { UserSettingsModule } from './userSettings/userSettings.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RecommenderModule } from './recommender/recommender.module';
     UserPlansModule,
     CourseStaticModule,
     RecommenderModule,
+    UserSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
