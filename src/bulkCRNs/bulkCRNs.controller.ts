@@ -1,5 +1,5 @@
 import { Body, Controller, Param, Post } from '@nestjs/common';
-import { BulkCrnsService } from './bulk-crns.service';
+import { BulkCrnsService } from './bulkCRNs.service';
 
 @Controller('bulk-crns')
 export class BulkCrnsController {

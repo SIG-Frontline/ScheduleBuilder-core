@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { BulkCrnsService } from './bulk-crns.service';
-import { BulkCrnsController } from './bulk-crns.controller';
+import { BulkCrnsService } from './bulkCRNs.service';
+import { BulkCrnsController } from './bulkCRNs.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Section, SectionSchema } from 'schemas/sections.schema';
 
