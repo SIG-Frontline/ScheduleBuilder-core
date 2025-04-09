@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Post } from '@nestjs/common';
 import { BulkCrnsService } from './bulkCRNs.service';
-
+// import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 @Controller('bulk-crns')
 export class BulkCrnsController {
   constructor(private readonly BulkCrnsService: BulkCrnsService) {}
