@@ -1,5 +1,13 @@
-import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { SectionService } from './section.service';
+import { Section } from 'schemas/sections.schema';
 import { courseQueryFilters } from 'src/utils/types.util';
 import { addRegexSearch } from 'src/utils/functions.utils';
 @Controller('')
@@ -104,5 +112,10 @@ export class SectionController {
       console.error(error);
       throw error;
     }
+  }
+
+  @Post('/sections')
+  async postSections(@Body() sections: Section) {
+    return await this.SectionService.createSections(sections);
   }
 }

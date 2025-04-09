@@ -1,7 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Section, SectionDocument } from '../../schemas/sections.schema';
+import { Section, SectionDocument } from 'schemas/sections.schema';
 import { sanitizeFilters } from 'src/utils/functions.utils';
 import {
   CourseStatic,
@@ -16,7 +20,7 @@ import {
 @Injectable()
 export class SectionService {
   constructor(
-    @InjectModel(Section.name) private courseModel: Model<SectionDocument>,
+    @InjectModel(Section.name) private sectionModel: Model<SectionDocument>,
     @InjectModel(CourseStatic.name)
     private courseStaticModel: Model<CourseStaticDocument>,
   ) {}
@@ -31,7 +35,7 @@ export class SectionService {
     try {
       const query = sanitizeFilters(filters);
 
-      const courses: CourseSearchDBResult[] = await this.courseModel
+      const courses: CourseSearchDBResult[] = await this.sectionModel
         .aggregate<CourseSearchDBResult>([
           { $match: query },
           { $group: { _id: '$COURSE', title: { $first: '$TITLE' } } },
@@ -48,7 +52,7 @@ export class SectionService {
         };
       });
 
-      const numCourses = await this.courseModel.countDocuments(query);
+      const numCourses = await this.sectionModel.countDocuments(query);
 
       return { courses: formattedCourses, totalNumCourses: numCourses };
     } catch (error) {
@@ -67,7 +71,7 @@ export class SectionService {
     try {
       const query = sanitizeFilters(filters);
 
-      const sections = await this.courseModel.find(query).lean().exec();
+      const sections = await this.sectionModel.find(query).lean().exec();
 
       if (sections.length === 0) {
         throw new NotFoundException(
@@ -88,11 +92,19 @@ export class SectionService {
         description: courseStatic?.description || null,
         sections: sections,
       };
-      const totalNumCourses = await this.courseModel.countDocuments(query);
+      const totalNumCourses = await this.sectionModel.countDocuments(query);
       return { course: course, totalNumCourses };
     } catch (error) {
       console.error(error);
       throw error;
     }
+  }
+
+  async createSections(sections: Section) {
+    if (!sections) {
+      throw new BadRequestException('No sections were received');
+    }
+    const sectionsCreated = new this.sectionModel(sections);
+    return await sectionsCreated.save();
   }
 }

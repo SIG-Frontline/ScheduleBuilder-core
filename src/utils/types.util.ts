@@ -106,6 +106,11 @@ export interface SubjectsResponse {
   subjects: string[];
 }
 
+export interface SubjectInput {
+  TERM: string;
+  SUBJECTS: string[];
+}
+
 export interface TermsResponse {
   terms: string[];
 }

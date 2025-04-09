@@ -1,5 +1,7 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
+import { SubjectInput } from 'src/utils/types.util';
+
 @Controller('')
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
@@ -14,5 +16,10 @@ export class SubjectsController {
   async getTerms() {
     const terms = await this.subjectsService.findTerms(0, 20);
     return terms;
+  }
+
+  @Post('/subjects')
+  async postSubjects(@Body() subjects: SubjectInput) {
+    return this.subjectsService.createSubjects(subjects);
   }
 }

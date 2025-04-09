@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
@@ -49,6 +53,14 @@ export class CourseStaticService {
 
     // Can be null
     return course;
+  }
+
+  async createCourseStatic(courseStatic: CourseStatic) {
+    if (!courseStatic) {
+      throw new BadRequestException('No course static were received');
+    }
+    const courseStaticCreated = new this.courseStaticModel(courseStatic);
+    return await courseStaticCreated.save();
   }
 
   async validatePrereqs(course: string, requisites: string[]) {

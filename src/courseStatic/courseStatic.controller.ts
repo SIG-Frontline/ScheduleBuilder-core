@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
+import { CourseStatic } from 'schemas/courseStatic.schema';
 
 @Controller('courseStatic')
 export class CourseStaticController {

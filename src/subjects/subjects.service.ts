@@ -4,9 +4,13 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Subjects } from 'schemas/subjects.schema';
-import { SubjectsResponse, TermsResponse } from 'src/utils/types.util';
+import {
+  SubjectInput,
+  SubjectsResponse,
+  TermsResponse,
+} from 'src/utils/types.util';
 
 @Injectable()
 export class SubjectsService {
@@ -73,5 +77,14 @@ export class SubjectsService {
       console.error(error);
       throw error;
     }
+  }
+
+  async createSubjects(subjects: SubjectInput) {
+    if (!subjects) {
+      throw new BadRequestException('No subjects were received');
+    }
+    const _id = new Types.ObjectId();
+    const subjectsCreated = new this.subjectsModel({ _id, ...subjects });
+    return await subjectsCreated.save();
   }
 }

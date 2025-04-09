@@ -7,7 +7,7 @@ export type SectionDocument = HydratedDocument<Section>;
 @Schema({ collection: 'Sections' })
 export class Section {
   @Prop()
-  ROW_NUMBER: number;
+  _id: number;
 
   @Prop()
   TERM: string;
