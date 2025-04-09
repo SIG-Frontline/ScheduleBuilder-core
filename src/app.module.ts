@@ -8,6 +8,7 @@ import { CurriculaModule } from './curricula/curricula.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { UserPlansModule } from './userPlans/userPlans.module';
 import { CourseStaticModule } from './courseStatic/courseStatic.module';
+import { OrganizerModule } from './organizer/organizer.module';
 import { RecommenderModule } from './recommender/recommender.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { RecommenderModule } from './recommender/recommender.module';
     SubjectsModule,
     UserPlansModule,
     CourseStaticModule,
+    OrganizerModule,
     RecommenderModule,
   ],
   controllers: [AppController],

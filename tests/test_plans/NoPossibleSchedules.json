@@ -1,0 +1,135 @@
+{
+  "uuid": "136ec77e-fcd2-446c-ab88-d9c359854e05",
+  "name": "Invalid Schedule",
+  "description": "This is a test plan used for automated testing",
+  "term": 202510,
+  "selected": true,
+  "courses": [
+    {
+      "title": "PHYSICAL CHEM FOR CHEM ENGRS",
+      "credits": 4,
+      "sections": [
+        {
+          "_id": "202510-11440",
+          "TERM": "202510",
+          "COURSE": "CHEM 236",
+          "TITLE": "PHYSICAL CHEM FOR CHEM ENGRS",
+          "INSTRUCTION_METHOD": "Face-to-Face",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 4,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11440",
+          "SUBJECT": "CHEM",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Peels, Mieke",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 31,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "crn": "11440",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "R",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:55:00.000Z",
+              "building": "KUPF",
+              "room": "205"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T15:00:00.000Z",
+              "endTime": "1900-01-01T16:00:00.000Z",
+              "building": "FMH",
+              "room": "408"
+            },
+            {
+              "day": "T",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:55:00.000Z",
+              "building": "KUPF",
+              "room": "205"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: (CHEM 122 or CHEM 126) and CHEM 125A and (CHE 230 or CHE 232) with a grade C or better. This course will introduce the chemical engineering students to the concepts of order, disorder, chemical equilibrium and phase equilibrium. Credit for this course will not be given if credit for CHEM 235 has been given.",
+      "code": "CHEM 236",
+      "color": "rgba(\n                  17,\n                  195,\n                  174,0.9)"
+    },
+    {
+      "title": "INTRO PRINC OF MATERIAL ENGR",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-14611",
+          "TERM": "202510",
+          "COURSE": "MTEN 201",
+          "TITLE": "INTRO PRINC OF MATERIAL ENGR",
+          "INSTRUCTION_METHOD": "Face-to-Face",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=14611",
+          "SUBJECT": "MTEN",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "McEnnis, Kathleen",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 57,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "crn": "14611",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "FMH",
+              "room": "408"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "FMH",
+              "room": "408"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: CHEM 126, PHYS 121 or PHYS 122, MATH 112. This course introduces the basic concepts of Materials Engineering, with introductory topics including structure, property, performance, and processing of materials. This course focuses on conventional materials including metallic materials and their alloys, ceramics, polymers, and composites. Relationship between structure and material properties, such as mechanical, electronic, thermal, optical, magnetic, and electrochemical, are investigated.",
+      "code": "MTEN 201",
+      "color": "rgba(\n                  110,\n                  15,\n                  155,0.9)"
+    }
+  ],
+  "organizerSettings": {
+    "isCommuter": false,
+    "commuteTimeHours": 2,
+    "compactPlan": false,
+    "courseFilters": []
+  }
+}
+
