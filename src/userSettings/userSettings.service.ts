@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { UserSettings } from 'schemas/userSettings.schema';
+import { decryptArr, encryptArr } from 'src/utils/functions.utils';
 
 @Injectable()
 export class UserSettingsService {
@@ -10,7 +11,7 @@ export class UserSettingsService {
     private userSettingsModel: Model<UserSettings>,
   ) {}
 
-  async getTakenCourses(userId: string): Promise<string[]> {
+  async getTakenCourses(userId: string): Promise<string> {
     try {
       const settings = await this.userSettingsModel
         .findOne({ userId })
@@ -33,27 +34,33 @@ export class UserSettingsService {
 
   async addTakenCourse(userId: string, course: string) {
     try {
-      let settings = await this.userSettingsModel
+      const settings = await this.userSettingsModel
         .findOne({ userId })
         .lean()
         .exec();
 
-      // Creates a new document if one does not exist
       if (!settings) {
+        // Creates a new document if one does not exist
         const newSettings = {
           _id: new Types.ObjectId(),
           userId,
-          takenCourses: [],
+          takenCourses: encryptArr([course]),
         };
-        settings = new this.userSettingsModel(newSettings);
+
+        await new this.userSettingsModel(newSettings).save();
+      } else {
+        // Decrypts the courses
+        const takenCourses = decryptArr(settings.takenCourses) as string[];
+
+        // Adds the course
+        if (!takenCourses.includes(course)) takenCourses.push(course);
+
+        // Encrypts the courses again
+        settings.takenCourses = encryptArr(takenCourses);
+
+        // Saves the updated value
+        await this.userSettingsModel.findOneAndReplace({ userId }, settings);
       }
-
-      // Adds the course
-      if (!settings.takenCourses.includes(course))
-        settings.takenCourses.push(course);
-
-      // Saves the updated value
-      await this.userSettingsModel.findOneAndReplace({ userId }, settings);
     } catch (error) {
       console.error(error);
       throw error;
@@ -69,9 +76,14 @@ export class UserSettingsService {
 
       // Remove if there is a matching query, ignoring if there isn't
       if (!settings) return;
-      settings.takenCourses = settings.takenCourses.filter(
-        (item) => item !== course,
-      );
+
+      // Decrypts the courses
+      let takenCourses = decryptArr(settings.takenCourses) as string[];
+
+      takenCourses = takenCourses.filter((item) => item !== course);
+
+      // Encrypts the courses again
+      settings.takenCourses = encryptArr(takenCourses);
 
       // Saves the updated value
       await this.userSettingsModel.findOneAndReplace({ userId }, settings);

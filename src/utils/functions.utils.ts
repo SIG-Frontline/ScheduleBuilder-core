@@ -1,4 +1,7 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import { queryFiltersBase } from './types.util';
+import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
+import { Prop } from '@nestjs/mongoose';
 
 export function sanitizeFilters(
   filters: queryFiltersBase,
@@ -25,4 +28,46 @@ export function addRegexSearch(
   if (value) {
     query[key] = { $regex: escapeRegex(value), $options: 'i' };
   }
+}
+
+export function encryptArr(arr: any[]) {
+  return encrypt(JSON.stringify(arr));
+}
+
+export function decryptArr(cipherText: string): any[] {
+  return JSON.parse(decrypt(cipherText)) as any[];
+}
+
+// Encrypts a string using aes-256-gcm
+export function encrypt(text: string) {
+  const key = process.env.ENCRYPT_KEY;
+  if (!key) throw new InternalServerErrorException('Invalid encryption');
+
+  const iv = randomBytes(16);
+  const cipher = createCipheriv('aes-256-gcm', Buffer.from(key, 'base64'), iv);
+
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+
+  return iv.toString('base64') + '.' + encrypted.toString('base64');
+}
+
+// Decrypts a string using aes-256-gcm
+export function decrypt(text: string) {
+  const [ivRaw, encryptedRaw] = text.split('.');
+
+  const iv = Buffer.from(ivRaw, 'base64');
+  const encryptedText = Buffer.from(encryptedRaw, 'base64');
+
+  const key = process.env.ENCRYPT_KEY;
+  if (!key) throw new InternalServerErrorException('Invalid encryption');
+
+  const decipher = createDecipheriv(
+    'aes-256-gcm',
+    Buffer.from(key, 'base64'),
+    iv,
+  );
+  const decrypted = decipher.update(encryptedText);
+
+  return decrypted.toString();
 }

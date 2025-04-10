@@ -9,7 +9,7 @@ export class UserSettings {
   userId: string;
 
   @Prop()
-  takenCourses: string[];
+  takenCourses: string; // Encrypted string array
 }
 
 export const UserSettingsSchema = SchemaFactory.createForClass(UserSettings);
