@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Section, SectionDocument } from 'schemas/sections.schema';
@@ -15,6 +11,7 @@ import {
   courseQueryFilters,
   CourseResponse,
   CourseSearchDBResult,
+  DataNotFoundException,
 } from 'src/utils/types.util';
 
 @Injectable()
@@ -74,7 +71,7 @@ export class SectionService {
       const sections = await this.sectionModel.find(query).lean().exec();
 
       if (sections.length === 0) {
-        throw new NotFoundException(
+        throw new DataNotFoundException(
           'No sections found given the query parameters',
         );
       }

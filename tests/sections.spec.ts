@@ -45,6 +45,9 @@ test.describe('Sections Endpoint', () => {
       'message',
       'No sections found given the query parameters',
     );
-    expect(body).toHaveProperty('error', 'Not Found');
+    expect(body).toHaveProperty(
+      'message',
+      'No sections found given the query parameters',
+    );
   });
 });

@@ -1,13 +1,10 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { Subjects } from 'schemas/subjects.schema';
 import {
   SubjectInput,
+  DataNotFoundException,
   SubjectsResponse,
   TermsResponse,
 } from 'src/utils/types.util';
@@ -36,7 +33,7 @@ export class SubjectsService {
         .exec();
 
       if (!subjects) {
-        throw new NotFoundException(
+        throw new DataNotFoundException(
           'No subjects found given the query parameters',
         );
       }
@@ -67,7 +64,9 @@ export class SubjectsService {
         .exec();
 
       if (!terms) {
-        throw new NotFoundException('No terms were found');
+        throw new DataNotFoundException(
+          'No terms were found given the query parameters',
+        );
       }
 
       let formattedTerms = [...new Set(terms.map((term) => term.TERM))];
