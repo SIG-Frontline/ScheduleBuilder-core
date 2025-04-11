@@ -4,7 +4,7 @@ import { Days, MeetingTime } from 'src/utils/types.util';
 
 export type SectionDocument = HydratedDocument<Section>;
 
-@Schema({ collection: 'Sections' })
+@Schema({ collection: 'Sections', versionKey: false })
 export class Section {
   @Prop()
   _id: number;

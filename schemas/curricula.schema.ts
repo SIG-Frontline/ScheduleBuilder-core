@@ -4,7 +4,7 @@ import { TreeNode } from 'src/utils/types.util';
 
 export type CurriculaDocument = HydratedDocument<Curricula>;
 
-@Schema({ collection: 'Curricula' })
+@Schema({ collection: 'Curricula', versionKey: false })
 export class Curricula {
   @Prop()
   _id: string;
