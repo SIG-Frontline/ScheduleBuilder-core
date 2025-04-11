@@ -1,3 +1,5 @@
+import { HttpException, HttpStatus } from '@nestjs/common';
+
 export interface queryFiltersBase {
   [key: string]:
     | string
@@ -182,6 +184,13 @@ export interface Events {
   color: string;
 }
 
+export class DataNotFoundException extends HttpException {
+  constructor(message: string) {
+    super(message, HttpStatus.NOT_FOUND);
+  }
+}
+
+// Recommender
 export interface organizerSettings {
   isCommuter: boolean;
   commuteTimeHours: number;

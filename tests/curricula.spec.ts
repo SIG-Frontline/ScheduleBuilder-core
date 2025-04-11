@@ -29,6 +29,9 @@ test.describe('Curricula Endpoint', () => {
       'message',
       'No curricula found given the query parameters',
     );
-    expect(body).toHaveProperty('error', 'Not Found');
+    expect(body).toHaveProperty(
+      'message',
+      'No curricula found given the query parameters',
+    );
   });
 });

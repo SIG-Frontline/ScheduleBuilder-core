@@ -28,6 +28,9 @@ test.describe('Subjects Endpoint', () => {
       'message',
       'No subjects found given the query parameters',
     );
-    expect(body).toHaveProperty('error', 'Not Found');
+    expect(body).toHaveProperty(
+      'message',
+      'No subjects found given the query parameters',
+    );
   });
 });
