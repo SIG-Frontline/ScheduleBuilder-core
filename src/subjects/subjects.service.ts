@@ -78,12 +78,38 @@ export class SubjectsService {
     }
   }
 
-  async createSubjects(subjects: SubjectInput) {
+  async createSubjects(subjects: SubjectInput): Promise<SubjectsResponse> {
     if (!subjects) {
       throw new BadRequestException('No subjects were received');
     }
     const _id = new Types.ObjectId();
     const subjectsCreated = new this.subjectsModel({ _id, ...subjects });
-    return await subjectsCreated.save();
+    const savedDoc = await subjectsCreated.save();
+    const response: SubjectsResponse = {
+      _id: savedDoc._id,
+      term: savedDoc.TERM,
+      subjects: savedDoc.SUBJECTS,
+    };
+    return response;
+  }
+
+  async deleteSubjects(
+    id: Types.ObjectId,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!id) {
+      throw new BadRequestException('No subject document id was received');
+    }
+
+    const result = await this.subjectsModel.findByIdAndDelete(id);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a subjects document with the given id',
+      );
+    }
+    return {
+      deleted: true,
+      message: `Subject docuent has been deleted successfully`,
+    };
   }
 }

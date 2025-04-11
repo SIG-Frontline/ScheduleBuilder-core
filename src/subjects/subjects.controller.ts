@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import { SubjectInput } from 'src/utils/types.util';
 import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Types } from 'mongoose';
 @Controller('')
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
@@ -41,5 +42,10 @@ export class SubjectsController {
   @Post('/subjects')
   async postSubjects(@Body() subjects: SubjectInput) {
     return this.subjectsService.createSubjects(subjects);
+  }
+
+  @Delete('/subjects/:id')
+  async deleteSubjectsById(@Param('id') id: Types.ObjectId) {
+    return this.subjectsService.deleteSubjects(id);
   }
 }

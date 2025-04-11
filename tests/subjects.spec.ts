@@ -33,4 +33,36 @@ test.describe('Subjects Endpoint', () => {
       'No subjects found given the query parameters',
     );
   });
+  let subjectID: string;
+  test('POST /subjects should return status code 200 when given request body', async ({
+    request,
+  }) => {
+    const endpoint = '/subjects';
+    const mockSubject = {
+      TERM: 'TEST TERM',
+      SUBJECTS: ['MATH', 'CS', 'PHYS'],
+    };
+    const response = await request.post(endpoint, { data: mockSubject });
+    const json = (await response.json()) as SubjectsResponse;
+    expect(response.status()).toBe(201);
+    expect(json).toHaveProperty('_id');
+    expect(json.term).toBe('TEST TERM');
+    subjectID = json._id;
+  });
+  test('DELETE /subjects/id should return status code 200 when given valid id', async ({
+    request,
+  }) => {
+    const endpoint = `/subjects/${subjectID}`;
+    const response = await request.delete(endpoint);
+    const json = (await response.json()) as {
+      deleted: boolean;
+      message: string;
+    };
+    expect(response.status()).toBe(200);
+    expect(json).toHaveProperty(
+      'message',
+      'Subject docuent has been deleted successfully',
+    );
+    expect(json).toHaveProperty('deleted', true);
+  });
 });
