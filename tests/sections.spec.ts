@@ -118,7 +118,7 @@ test.describe('Sections Endpoint', () => {
     expect(response.status()).toBe(200);
     expect(json).toHaveProperty(
       'message',
-      'Sections document has been deleted successfully',
+      'Section document has been deleted successfully',
     );
     expect(json).toHaveProperty('deleted', true);
   });

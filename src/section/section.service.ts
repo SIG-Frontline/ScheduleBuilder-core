@@ -121,7 +121,7 @@ export class SectionService {
     }
     return {
       deleted: true,
-      message: 'Sections document has been deleted successfully',
+      message: 'Section document has been deleted successfully',
     };
   }
 }

@@ -23,11 +23,32 @@ export class CourseStaticController {
   }
 
   @Post('/')
+  @ApiOkResponse({
+    description: 'CourseStatic document was created successfully',
+  })
+  @ApiResponse({ status: 400, description: 'No courseStatic was received' })
+  @ApiOperation({
+    summary: 'Used to create a course static document',
+    description:
+      'Creates a new course static document in the table for a specified course.',
+  })
   async postCourseStatic(@Body() courseStatic: CourseStatic) {
     return await this.courseStaticService.createCourseStatic(courseStatic);
   }
 
   @Delete('/:id')
+  @ApiOkResponse({
+    description: 'CourseStatic document has been deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Could not find a courseStatic document with the given id',
+  })
+  @ApiOperation({
+    summary: 'Used to delete a course static document',
+    description:
+      'Deletes a course static document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+  })
   async deleteCourseStaticByID(@Param('id') courseStaticID: string) {
     return await this.courseStaticService.deleteCourseStatic(courseStaticID);
   }

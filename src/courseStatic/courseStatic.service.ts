@@ -55,7 +55,7 @@ export class CourseStaticService {
 
   async createCourseStatic(courseStatic: CourseStatic) {
     if (!courseStatic) {
-      throw new BadRequestException('No course static were received');
+      throw new BadRequestException('No course static was received');
     }
     const courseStaticCreated = new this.courseStaticModel(courseStatic);
     return await courseStaticCreated.save();
@@ -74,7 +74,7 @@ export class CourseStaticService {
     courseStaticID: string,
   ): Promise<{ deleted: boolean; message: string }> {
     if (!courseStaticID) {
-      throw new BadRequestException('NO course static id was received');
+      throw new BadRequestException('No course static id was received');
     }
 
     const result =

@@ -40,11 +40,30 @@ export class SubjectsController {
   }
 
   @Post('/subjects')
+  @ApiOkResponse({ description: 'Subjects document was created successfully' })
+  @ApiResponse({ status: 400, description: 'No subjects were received' })
+  @ApiOperation({
+    summary: 'Used to create a subjects document for a given term',
+    description:
+      'Creates a new subjects document in the database for the specified term. This is used to store all available course subjects for a given term.',
+  })
   async postSubjects(@Body() subjects: SubjectInput) {
     return this.subjectsService.createSubjects(subjects);
   }
 
   @Delete('/subjects/:id')
+  @ApiOkResponse({
+    description: 'Subject document has been deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Could not find a subjects document with the given id',
+  })
+  @ApiOperation({
+    summary: 'Used to delete a subjects document given a specific id',
+    description:
+      'Deletes a subjects document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+  })
   async deleteSubjectsById(@Param('id') id: Types.ObjectId) {
     return this.subjectsService.deleteSubjects(id);
   }

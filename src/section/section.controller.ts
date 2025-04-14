@@ -146,11 +146,30 @@ export class SectionController {
   }
 
   @Post('/sections')
+  @ApiOkResponse({ description: 'Section document was created successfully' })
+  @ApiResponse({ status: 400, description: 'No sections were received' })
+  @ApiOperation({
+    summary: 'Used to create a section document.',
+    description:
+      'Creates a new section document in the database for the specified section, storing all available information for that section.',
+  })
   async postSections(@Body() sections: Section) {
     return await this.SectionService.createSections(sections);
   }
 
   @Delete('/sections/:id')
+  @ApiOkResponse({
+    description: 'Subject document has been deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Could not find a sections document with the given id',
+  })
+  @ApiOperation({
+    summary: 'Used to delete a section document given a specific id',
+    description:
+      'Deletes a section document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+  })
   async deleteSectionByID(@Param('id') sectionID: string) {
     return await this.SectionService.deleteSection(sectionID);
   }
