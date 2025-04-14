@@ -66,4 +66,25 @@ export class CurriculaService {
     const curriculaCreated = new this.curriculaModel(curricula);
     return await curriculaCreated.save();
   }
+
+  async deleteCurricula(
+    curriculaID: string,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!curriculaID) {
+      throw new BadRequestException('No curricula id was received');
+    }
+
+    const result = await this.curriculaModel.findByIdAndDelete(curriculaID);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a curricula document with the given id',
+      );
+    }
+
+    return {
+      deleted: true,
+      message: 'Curricula document has been deleted successfully',
+    };
+  }
 }

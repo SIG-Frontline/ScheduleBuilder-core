@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import { curriculaFilters } from 'src/utils/types.util';
 import { CurriculaService } from './curricula.service';
 import { Curricula } from 'schemas/curricula.schema';
@@ -37,5 +37,10 @@ export class CurriculaController {
   @Post('/')
   async postCurricula(@Body() curricula: Curricula) {
     return this.curriculaService.createCurricula(curricula);
+  }
+
+  @Delete('/:id')
+  async deleteCurricula(@Param('id') curriculaID: string) {
+    return this.curriculaService.deleteCurricula(curriculaID);
   }
 }
