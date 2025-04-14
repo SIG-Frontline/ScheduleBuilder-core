@@ -1,7 +1,12 @@
 import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
 import { CourseStatic } from 'schemas/courseStatic.schema';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('courseStatic')
 export class CourseStaticController {
@@ -32,6 +37,7 @@ export class CourseStaticController {
     description:
       'Creates a new course static document in the table for a specified course.',
   })
+  @ApiBody({ type: CourseStatic })
   async postCourseStatic(@Body() courseStatic: CourseStatic) {
     return await this.courseStaticService.createCourseStatic(courseStatic);
   }

@@ -9,7 +9,13 @@ import {
 } from '@nestjs/common';
 import { UserPlansService } from './userPlans.service';
 import { PlanData } from 'src/utils/types.util';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
+import { UserPlans } from 'schemas/userPlans.schema';
 @Controller('')
 export class UserPlansController {
   constructor(private readonly userPlansService: UserPlansService) {}
@@ -64,17 +70,18 @@ export class UserPlansController {
     summary: `Used to save a user's plan.`,
     description: `Creates a new user plan that is associated with a userID, and identified by the plan's uuid. <br>The plan data must be passed in the body of the request.`,
   })
+  @ApiBody({ type: UserPlans })
   @Post('userPlans/:userId/:uuid')
   async createUserPlan(
     @Param('userId') userId: string,
     @Param('uuid') uuid: string,
-    @Body() planData: PlanData,
+    @Body() planData: UserPlans,
   ) {
     const decodedUserId = decodeURIComponent(userId);
     const userPlan = await this.userPlansService.createPlans(
       decodedUserId,
       uuid,
-      planData,
+      planData.plandata,
     );
     console.log(userPlan);
     return userPlan;

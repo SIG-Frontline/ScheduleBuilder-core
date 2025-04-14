@@ -1,8 +1,14 @@
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
-import { SubjectInput } from 'src/utils/types.util';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+} from '@nestjs/swagger';
 import { Types } from 'mongoose';
+import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
@@ -47,7 +53,8 @@ export class SubjectsController {
     description:
       'Creates a new subjects document in the database for the specified term. This is used to store all available course subjects for a given term.',
   })
-  async postSubjects(@Body() subjects: SubjectInput) {
+  @ApiBody({ type: Subjects })
+  async postSubjects(@Body() subjects: SubjectsInput) {
     return this.subjectsService.createSubjects(subjects);
   }
 
@@ -64,6 +71,7 @@ export class SubjectsController {
     description:
       'Deletes a subjects document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
+  @ApiParam({ name: 'id', type: 'ObjectId' })
   async deleteSubjectsById(@Param('id') id: Types.ObjectId) {
     return this.subjectsService.deleteSubjects(id);
   }

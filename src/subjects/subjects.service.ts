@@ -1,9 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { Subjects } from 'schemas/subjects.schema';
+import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
 import {
-  SubjectInput,
   DataNotFoundException,
   SubjectsResponse,
   TermsResponse,
@@ -78,7 +77,7 @@ export class SubjectsService {
     }
   }
 
-  async createSubjects(subjects: SubjectInput): Promise<SubjectsResponse> {
+  async createSubjects(subjects: SubjectsInput): Promise<SubjectsResponse> {
     if (!subjects) {
       throw new BadRequestException('No subjects were received');
     }

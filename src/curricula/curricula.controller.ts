@@ -2,7 +2,12 @@ import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import { curriculaFilters } from 'src/utils/types.util';
 import { CurriculaService } from './curricula.service';
 import { Curricula } from 'schemas/curricula.schema';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('curricula')
 export class CurriculaController {
@@ -42,6 +47,7 @@ export class CurriculaController {
     description:
       'Creates a new curricula document in the database for the specified degree, storing all available course requirements and structure for that degree.',
   })
+  @ApiBody({ type: Curricula })
   async postCurricula(@Body() curricula: Curricula) {
     return this.curriculaService.createCurricula(curricula);
   }

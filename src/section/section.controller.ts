@@ -14,6 +14,7 @@ import { courseQueryFilters } from 'src/utils/types.util';
 import { addRegexSearch } from 'src/utils/functions.utils';
 import {
   ApiBadRequestResponse,
+  ApiBody,
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
@@ -153,6 +154,7 @@ export class SectionController {
     description:
       'Creates a new section document in the database for the specified section, storing all available information for that section.',
   })
+  @ApiBody({ type: Section })
   async postSections(@Body() sections: Section) {
     return await this.SectionService.createSections(sections);
   }
