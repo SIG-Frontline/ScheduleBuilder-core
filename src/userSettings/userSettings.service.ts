@@ -40,6 +40,9 @@ export class UserSettingsService {
         .lean()
         .exec();
 
+      // Decrypts the incoming course
+      course = decrypt(course);
+
       if (!settings) {
         // Creates a new document if one does not exist
         const newSettings = {
@@ -50,9 +53,6 @@ export class UserSettingsService {
 
         await new this.userSettingsModel(newSettings).save();
       } else {
-        // Decrypts the incoming course
-        course = decrypt(course);
-
         // Decrypts the courses
         const takenCourses = decryptArr(settings.takenCourses) as string[];
 
