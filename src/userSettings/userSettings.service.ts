@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { UserSettings } from 'schemas/userSettings.schema';
 import { decrypt, decryptArr, encryptArr } from 'src/utils/functions.utils';
+import { DataNotFoundException } from 'src/utils/types.util';
 
 @Injectable()
 export class UserSettingsService {
@@ -19,11 +20,11 @@ export class UserSettingsService {
         .exec();
 
       if (!settings)
-        throw new NotFoundException('No settings for the given user id');
+        throw new DataNotFoundException('No settings for the given user id');
 
       const takenCourses = settings.takenCourses;
       if (!takenCourses)
-        throw new NotFoundException('No prereqs for the given user id');
+        throw new DataNotFoundException('No prereqs for the given user id');
 
       return takenCourses;
     } catch (error) {
