@@ -1,0 +1,14 @@
+{
+  "uuid": "c5da623a-561a-4f40-8c5f-99825a9f9633",
+  "name": "CS Spring Test",
+  "description": "This is a test plan used for automated testing",
+  "term": 202510,
+  "selected": true,
+  "courses": [],
+  "organizerSettings": {
+    "isCommuter": false,
+    "commuteTimeHours": 2,
+    "compactPlan": false,
+    "courseFilters": []
+  }
+}
