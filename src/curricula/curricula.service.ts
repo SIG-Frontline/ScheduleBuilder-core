@@ -1,10 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
 import { sanitizeFilters } from 'src/utils/functions.utils';
-import { queryFiltersBase, TreeNode } from 'src/utils/types.util';
-
+import {
+  queryFiltersBase,
+  TreeNode,
+  DataNotFoundException,
+} from 'src/utils/types.util';
 @Injectable()
 export class CurriculaService {
   constructor(
@@ -33,7 +36,7 @@ export class CurriculaService {
         .exec();
 
       if (!curricula) {
-        throw new NotFoundException(
+        throw new DataNotFoundException(
           'No curricula found given the query parameters',
         );
       }
@@ -45,6 +48,7 @@ export class CurriculaService {
         major: curricula?.MAJOR,
         year: curricula?.YEAR,
         updated: curricula?.UPDATED,
+        // @ts-expect-error Typescript thinks this type is infinitly recursive, so ignore as we know it's not
         classes: curricula?.CLASSES as TreeNode[],
       };
 

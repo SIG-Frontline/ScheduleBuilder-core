@@ -9,6 +9,8 @@ import { SubjectsModule } from './subjects/subjects.module';
 import { UserPlansModule } from './userPlans/userPlans.module';
 import { CourseStaticModule } from './courseStatic/courseStatic.module';
 import { AuthzModule } from './authz/authz.module';
+import { OrganizerModule } from './organizer/organizer.module';
+import { RecommenderModule } from './recommender/recommender.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { AuthzModule } from './authz/authz.module';
     UserPlansModule,
     CourseStaticModule,
     AuthzModule,
+    OrganizerModule,
+    RecommenderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

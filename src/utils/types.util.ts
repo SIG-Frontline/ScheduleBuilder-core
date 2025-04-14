@@ -1,3 +1,5 @@
+import { HttpException, HttpStatus } from '@nestjs/common';
+
 export interface queryFiltersBase {
   [key: string]:
     | string
@@ -68,6 +70,7 @@ export interface Section {
   SUBJECT: string;
   COURSE_LEVEL: number;
   SUMMER_PERIOD: string | null;
+  selected: boolean;
 }
 
 export interface Course {
@@ -123,7 +126,11 @@ export interface CurriculaCourseNode {
   legacy: boolean;
 }
 
-export type TreeNode = string | string[] | CurriculaCourseNode;
+export type TreeNode =
+  | CurriculaCourseNode
+  | string[]
+  | CurriculaCourseNode[]
+  | TreeNode[];
 
 export interface PlanData {
   uuid: string;
@@ -133,16 +140,40 @@ export interface PlanData {
   selected: boolean;
   courses: PlanDataCourses[];
   events: Events[];
+  organizerSettings?: organizerSettings;
 }
 
 export interface PlanDataCourses {
   title: string;
   credits: number;
-  sections: Section[];
+  sections: PlanDataSection[];
   description: string;
   code: string;
   color: string;
 }
+
+export interface PlanDataSection {
+  meetingTimes: PlanDataMeetingTime[];
+  instructor: string;
+  crn: string;
+  currentEnrollment: number;
+  maxEnrollment: number;
+  status: string;
+  is_honors: boolean;
+  is_async: boolean;
+  instruction_type: string;
+  sectionNumber: string;
+  comments: string;
+  selected: boolean;
+}
+
+export type PlanDataMeetingTime = {
+  day: string;
+  startTime: string;
+  endTime: string;
+  building: string;
+  room: string;
+};
 
 export interface Events {
   title: string;
@@ -151,4 +182,65 @@ export interface Events {
   endTime: string;
   daysOfWeek: number[];
   color: string;
+}
+
+export class DataNotFoundException extends HttpException {
+  constructor(message: string) {
+    super(message, HttpStatus.NOT_FOUND);
+  }
+}
+
+// Recommender
+export interface organizerSettings {
+  isCommuter: boolean;
+  commuteTimeHours: number;
+  compactPlan: boolean;
+  courseFilters: courseFilter[];
+}
+
+export interface courseFilter {
+  courseCode: string;
+  instructor?: string;
+  honors?: boolean;
+  online?: instructionType;
+  section?: string;
+}
+export enum instructionType {
+  ONLINE = 'online',
+  HYBRID = 'hybrid',
+  INPERSON = 'face-to-face',
+  ANY = 'any',
+}
+
+export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
+
+export type ClassRec = {
+  name: string;
+  type: ClassRecType.CLASS;
+  course: string;
+  legacy: boolean;
+};
+
+export type ClassWild = {
+  name: string;
+  type: ClassRecType.WILDCARD;
+  course: string;
+  legacy: boolean;
+  credits: number;
+  courses: number;
+};
+
+export type ClassBranch = {
+  name: string;
+  type: ClassRecType.BRANCH;
+  numCredits?: number;
+  numClasses?: number;
+  operator: '&' | '|';
+  classes: ClassRecommendation[];
+};
+
+export enum ClassRecType {
+  BRANCH = 'branch',
+  CLASS = 'class',
+  WILDCARD = 'wildcard',
 }
