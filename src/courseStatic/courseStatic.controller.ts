@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
 import { CourseStatic } from 'schemas/courseStatic.schema';
 import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -20,5 +20,15 @@ export class CourseStaticController {
   async getCourseStatic(@Param('courseCode') courseCode: string) {
     const decodedCourseCode = decodeURIComponent(courseCode);
     return this.courseStaticService.findCourseStatic(decodedCourseCode);
+  }
+
+  @Post('/')
+  async postCourseStatic(@Body() courseStatic: CourseStatic) {
+    return await this.courseStaticService.createCourseStatic(courseStatic);
+  }
+
+  @Delete('/:id')
+  async deleteCourseStaticByID(@Param('id') courseStaticID: string) {
+    return await this.courseStaticService.deleteCourseStatic(courseStaticID);
   }
 }

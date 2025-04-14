@@ -53,7 +53,6 @@ test.describe('Sections Endpoint', () => {
   test('POST /sections should return status code 201 when given request body', async ({
     request,
   }) => {
-    const endpoint = '/sections';
     const mockSection = {
       _id: 'TESTING',
       TERM: '202410',
@@ -111,8 +110,7 @@ test.describe('Sections Endpoint', () => {
   test('DELETE /sections/id should return status code 200 when given valid id', async ({
     request,
   }) => {
-    const endpoint = '/sections/TESTING';
-    const response = await request.delete(endpoint);
+    const response = await request.delete(`${endpoint}/TESTING`);
     const json = (await response.json()) as {
       deleted: boolean;
       message: string;

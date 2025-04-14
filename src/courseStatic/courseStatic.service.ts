@@ -69,6 +69,28 @@ export class CourseStaticService {
 
     return checkPrereqTree(staticData.tree, requisites);
   }
+
+  async deleteCourseStatic(
+    courseStaticID: string,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!courseStaticID) {
+      throw new BadRequestException('NO course static id was received');
+    }
+
+    const result =
+      await this.courseStaticModel.findByIdAndDelete(courseStaticID);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a course static document with the given id',
+      );
+    }
+
+    return {
+      deleted: true,
+      message: 'Course static document has been deleted successfully',
+    };
+  }
 }
 
 function checkPrereqTree(tree: CourseStaticNode, requisites: string[]) {
