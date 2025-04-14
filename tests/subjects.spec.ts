@@ -34,7 +34,7 @@ test.describe('Subjects Endpoint', () => {
     );
   });
   let subjectID: string;
-  test('POST /subjects should return status code 200 when given request body', async ({
+  test('POST /subjects should return status code 201 when given request body', async ({
     request,
   }) => {
     const endpoint = '/subjects';
@@ -61,7 +61,7 @@ test.describe('Subjects Endpoint', () => {
     expect(response.status()).toBe(200);
     expect(json).toHaveProperty(
       'message',
-      'Subject docuent has been deleted successfully',
+      'Subject document has been deleted successfully',
     );
     expect(json).toHaveProperty('deleted', true);
   });

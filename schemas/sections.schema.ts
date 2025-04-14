@@ -6,8 +6,8 @@ export type SectionDocument = HydratedDocument<Section>;
 
 @Schema({ collection: 'Sections', versionKey: false })
 export class Section {
-  @Prop()
-  _id: number;
+  @Prop({ type: String })
+  _id: string;
 
   @Prop()
   TERM: string;

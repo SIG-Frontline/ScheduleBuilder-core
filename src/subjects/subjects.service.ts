@@ -109,7 +109,7 @@ export class SubjectsService {
     }
     return {
       deleted: true,
-      message: `Subject docuent has been deleted successfully`,
+      message: 'Subject document has been deleted successfully',
     };
   }
 }

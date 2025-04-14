@@ -104,4 +104,24 @@ export class SectionService {
     const sectionsCreated = new this.sectionModel(sections);
     return await sectionsCreated.save();
   }
+
+  async deleteSection(
+    sectionID: string,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!sectionID) {
+      throw new BadRequestException('No section id was received');
+    }
+
+    const result = await this.sectionModel.findByIdAndDelete(sectionID);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a sections document with the given id',
+      );
+    }
+    return {
+      deleted: true,
+      message: 'Sections document has been deleted successfully',
+    };
+  }
 }

@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   Query,
 } from '@nestjs/common';
@@ -146,5 +148,10 @@ export class SectionController {
   @Post('/sections')
   async postSections(@Body() sections: Section) {
     return await this.SectionService.createSections(sections);
+  }
+
+  @Delete('/sections/:id')
+  async deleteSectionByID(@Param('id') sectionID: string) {
+    return await this.SectionService.deleteSection(sectionID);
   }
 }
