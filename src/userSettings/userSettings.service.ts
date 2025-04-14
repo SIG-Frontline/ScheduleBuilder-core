@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 import { UserSettings } from 'schemas/userSettings.schema';
-import { decryptArr, encryptArr } from 'src/utils/functions.utils';
+import { decrypt, decryptArr, encryptArr } from 'src/utils/functions.utils';
 
 @Injectable()
 export class UserSettingsService {
@@ -49,6 +49,9 @@ export class UserSettingsService {
 
         await new this.userSettingsModel(newSettings).save();
       } else {
+        // Decrypts the incoming course
+        course = decrypt(course);
+
         // Decrypts the courses
         const takenCourses = decryptArr(settings.takenCourses) as string[];
 
@@ -76,6 +79,9 @@ export class UserSettingsService {
 
       // Remove if there is a matching query, ignoring if there isn't
       if (!settings) return;
+
+      // Decrypts the incoming course
+      course = decrypt(course);
 
       // Decrypts the courses
       let takenCourses = decryptArr(settings.takenCourses) as string[];

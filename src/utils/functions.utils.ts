@@ -1,7 +1,9 @@
-import { InternalServerErrorException } from '@nestjs/common';
+import {
+  BadRequestException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { queryFiltersBase } from './types.util';
 import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
-import { Prop } from '@nestjs/mongoose';
 
 export function sanitizeFilters(
   filters: queryFiltersBase,
@@ -40,34 +42,46 @@ export function decryptArr(cipherText: string): any[] {
 
 // Encrypts a string using aes-256-gcm
 export function encrypt(text: string) {
-  const key = process.env.ENCRYPT_KEY;
-  if (!key) throw new InternalServerErrorException('Invalid encryption');
+  try {
+    const key = process.env.ENCRYPT_KEY;
+    if (!key) throw new InternalServerErrorException('Invalid encryption');
 
-  const iv = randomBytes(16);
-  const cipher = createCipheriv('aes-256-gcm', Buffer.from(key, 'base64'), iv);
+    const iv = randomBytes(16);
+    const cipher = createCipheriv(
+      'aes-256-gcm',
+      Buffer.from(key, 'base64'),
+      iv,
+    );
 
-  let encrypted = cipher.update(text);
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
 
-  return iv.toString('base64') + '.' + encrypted.toString('base64');
+    return iv.toString('base64') + '.' + encrypted.toString('base64');
+  } catch {
+    throw new BadRequestException('Invalid input');
+  }
 }
 
 // Decrypts a string using aes-256-gcm
 export function decrypt(text: string) {
-  const [ivRaw, encryptedRaw] = text.split('.');
+  try {
+    const [ivRaw, encryptedRaw] = text.split('.');
 
-  const iv = Buffer.from(ivRaw, 'base64');
-  const encryptedText = Buffer.from(encryptedRaw, 'base64');
+    const iv = Buffer.from(ivRaw, 'base64');
+    const encryptedText = Buffer.from(encryptedRaw, 'base64');
 
-  const key = process.env.ENCRYPT_KEY;
-  if (!key) throw new InternalServerErrorException('Invalid encryption');
+    const key = process.env.ENCRYPT_KEY;
+    if (!key) throw new InternalServerErrorException('Invalid encryption');
 
-  const decipher = createDecipheriv(
-    'aes-256-gcm',
-    Buffer.from(key, 'base64'),
-    iv,
-  );
-  const decrypted = decipher.update(encryptedText);
+    const decipher = createDecipheriv(
+      'aes-256-gcm',
+      Buffer.from(key, 'base64'),
+      iv,
+    );
+    const decrypted = decipher.update(encryptedText);
 
-  return decrypted.toString();
+    return decrypted.toString();
+  } catch {
+    throw new BadRequestException('Invalid input');
+  }
 }
