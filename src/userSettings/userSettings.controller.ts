@@ -1,7 +1,6 @@
 import {
   BadRequestException,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
@@ -17,7 +16,6 @@ export class UserSettingsController {
     description: 'Encrypted list of takenCourses was returned scucessfully',
   })
   @ApiResponse({ status: 400, description: 'Missing/invalid userId or course' })
-  @ApiResponse({ status: 500, description: 'Invalid server encryption key' })
   @ApiResponse({
     status: 404,
     description: 'No settings/takenCourses found for that userId',
@@ -34,49 +32,36 @@ export class UserSettingsController {
     return await this.userSettingsService.getTakenCourses(decodedUserId);
   }
 
-  @Post('courses/:userId/:course')
   @ApiOkResponse({
-    description: 'Course was successfully added',
+    description: 'TakenCourses was successfully set',
   })
   @ApiResponse({ status: 400, description: 'Missing/invalid userId or course' })
-  @ApiResponse({ status: 500, description: 'Invalid server encryption key' })
   @ApiOperation({
-    summary: 'Used to add a prereq course to a user',
+    summary:
+      'Used to set the takenCourses encrypted string for a specific user.',
     description:
-      'Adds an encrypted prereq course to the specified user. This should be encrypted with the same key before it is sent here',
+      'Sets the takenCourses value for for a specific value. This should already be an encrypted array before being sent here.',
   })
-  async addPrereq(
+  @Post('courses/:userId/:encryptedString')
+  async setTakenCourses(
     @Param('userId') userId: string,
-    @Param('course') course: string,
+    @Param('encryptedString') encryptedString: string,
   ) {
     const decodedUserId = decodeURIComponent(userId);
     if (!decodedUserId) throw new BadRequestException('Missing userId!');
-    if (!course)
-      throw new BadRequestException('Missing course to add to prereq');
+    if (!encryptedString)
+      throw new BadRequestException('Missing encrypted string');
 
-    await this.userSettingsService.addTakenCourse(decodedUserId, course);
+    await this.userSettingsService.setTakenCourses(
+      decodedUserId,
+      encryptedString,
+    );
   }
 
-  @Delete('courses/:userId/:course')
-  @ApiOkResponse({
-    description: 'Course was successfully removed',
-  })
-  @ApiResponse({ status: 400, description: 'Missing/invalid userId or course' })
-  @ApiResponse({ status: 500, description: 'Invalid server encryption key' })
-  @ApiOperation({
-    summary: 'Used to remove a prereq course from a user',
-    description:
-      'Removes an encrypted prereq course to the specified user. This should be encrypted with the same key before it is sent here',
-  })
-  async removePrereq(
-    @Param('userId') userId: string,
-    @Param('course') course: string,
-  ) {
+  async getTakenCourses(@Param('userId') userId: string) {
     const decodedUserId = decodeURIComponent(userId);
     if (!decodedUserId) throw new BadRequestException('Missing userId!');
-    if (!course)
-      throw new BadRequestException('Missing course to remove from prereq');
 
-    await this.userSettingsService.removeTakenCourse(decodedUserId, course);
+    return await this.userSettingsService.getTakenCourses(decodedUserId);
   }
 }
