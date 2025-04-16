@@ -1,0 +1,1816 @@
+{
+  "uuid": "c5da623a-561a-4f40-8c5f-99825a9f9633",
+  "name": "CS Spring Test",
+  "description": "This is a test plan used for automated testing",
+  "term": 202510,
+  "selected": true,
+  "courses": [
+    {
+      "title": "INTENSIVE PROGRAMMING IN LINUX",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-11791",
+          "TERM": "202510",
+          "COURSE": "CS 288",
+          "TITLE": "INTENSIVE PROGRAMMING IN LINUX",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11791",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Dale, Mohit",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 56,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11791",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "KUPF",
+              "room": "209"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "KUPF",
+              "room": "209"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11792",
+          "TERM": "202510",
+          "COURSE": "CS 288",
+          "TITLE": "INTENSIVE PROGRAMMING IN LINUX",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11792",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Dale, Mohit",
+          "sectionNumber": "004",
+          "status": "Closed",
+          "currentEnrollment": 60,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11792",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11793",
+          "TERM": "202510",
+          "COURSE": "CS 288",
+          "TITLE": "INTENSIVE PROGRAMMING IN LINUX",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11793",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Dale, Mohit",
+          "sectionNumber": "006",
+          "status": "Closed",
+          "currentEnrollment": 60,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11793",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11794",
+          "TERM": "202510",
+          "COURSE": "CS 288",
+          "TITLE": "INTENSIVE PROGRAMMING IN LINUX",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11794",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Dale, Mohit",
+          "sectionNumber": "008",
+          "status": "Closed",
+          "currentEnrollment": 60,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11794",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11795",
+          "TERM": "202510",
+          "COURSE": "CS 288",
+          "TITLE": "INTENSIVE PROGRAMMING IN LINUX",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11795",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Dale, Mohit",
+          "sectionNumber": "102",
+          "status": "Open",
+          "currentEnrollment": 59,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11795",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "GITC",
+              "room": "1400"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: CS 100 and CS 280 with a grade C or better. The course covers Linux programming with Apache Web and MySql database using Php/Python and C as primary languages. It consists of four stages: basic tools such as Bash and C programming; searching trees and matrix computing, end-to-end applications such as one that constantly presents top 100 stocks; and extending the applications to run on multiple machines. The course provides students with hands-on experience for programming relatively large applications.",
+      "code": "CS 288",
+      "color": "rgba(\n                  215,\n                  227,\n                  239,0.9)"
+    },
+    {
+      "title": "INTRO TO COMPUTER NETWORKS",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-11824",
+          "TERM": "202510",
+          "COURSE": "CS 356",
+          "TITLE": "INTRO TO COMPUTER NETWORKS",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11824",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Berenjian, Samaneh",
+          "sectionNumber": "002",
+          "status": "Closed",
+          "currentEnrollment": 43,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11824",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "KUPF",
+              "room": "103"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "KUPF",
+              "room": "103"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11825",
+          "TERM": "202510",
+          "COURSE": "CS 356",
+          "TITLE": "INTRO TO COMPUTER NETWORKS",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11825",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Berenjian, Samaneh",
+          "sectionNumber": "004",
+          "status": "Open",
+          "currentEnrollment": 30,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11825",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "GITC",
+              "room": "1100"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "GITC",
+              "room": "1100"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11826",
+          "TERM": "202510",
+          "COURSE": "CS 356",
+          "TITLE": "INTRO TO COMPUTER NETWORKS",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11826",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Berenjian, Samaneh",
+          "sectionNumber": "006",
+          "status": "Open",
+          "currentEnrollment": 42,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11826",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "KUPF",
+              "room": "108"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "KUPF",
+              "room": "108"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11827",
+          "TERM": "202510",
+          "COURSE": "CS 356",
+          "TITLE": "INTRO TO COMPUTER NETWORKS",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11827",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Mani, Kumar",
+          "sectionNumber": "102",
+          "status": "Open",
+          "currentEnrollment": 6,
+          "maxEnrollment": 34,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11827",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "GITC",
+              "room": "2315C"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11828",
+          "TERM": "202510",
+          "COURSE": "CS 356",
+          "TITLE": "INTRO TO COMPUTER NETWORKS - HONORS",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11828",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": null,
+          "sectionNumber": "H02",
+          "status": "Cancelled",
+          "currentEnrollment": 0,
+          "maxEnrollment": 30,
+          "is_honors": true,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11828",
+          "comments": "Cancelled 11/08/24",
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": null,
+              "room": null
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": null,
+              "room": null
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-16320",
+          "COURSE": "CS 356",
+          "COURSE_LEVEL": 3,
+          "CREDITS": 3,
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=16320",
+          "SUBJECT": "CS",
+          "SUMMER_PERIOD": null,
+          "TERM": "202510",
+          "TITLE": "INTRO TO COMPUTER NETWORKS",
+          "instructor": "Raza, Asad",
+          "sectionNumber": "104",
+          "status": "Open",
+          "currentEnrollment": 42,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "16320",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "KUPF",
+              "room": "103"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-16131",
+          "COURSE": "CS 356",
+          "COURSE_LEVEL": 3,
+          "CREDITS": 3,
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=16131",
+          "SUBJECT": "CS",
+          "SUMMER_PERIOD": null,
+          "TERM": "202510",
+          "TITLE": "INTRO TO COMPUTER NETWORKS - HONORS",
+          "instructor": "Mani, Kumar",
+          "sectionNumber": "H04",
+          "status": "Open",
+          "currentEnrollment": 7,
+          "maxEnrollment": 30,
+          "is_honors": true,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "16131",
+          "comments": "Honors Course",
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "GITC",
+              "room": "2315C"
+            },
+            {
+              "day": "W",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "GITC",
+              "room": "2315C"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisite: CS 280 with a grade C or better. This course provides an introduction to computer networks, with a special focus on Internet architecture and protocols. Topics include layered-network architectures, addressing, naming, forwarding, routing, communication reliability, the client-server model, web and email protocols. Besides the theoretical foundations, students acquire practical experience by programming reduced versions of real Internet protocols.",
+      "code": "CS 356",
+      "color": "rgba(\n                  31,\n                  158,\n                  10,0.9)"
+    },
+    {
+      "title": "INTRODUCTION TO DATA SCIENCE",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-11796",
+          "TERM": "202510",
+          "COURSE": "CS 301",
+          "TITLE": "INTRODUCTION TO DATA SCIENCE",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11796",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Renda, Michael",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 55,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11796",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "CKB",
+              "room": "303"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "CKB",
+              "room": "303"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11797",
+          "TERM": "202510",
+          "COURSE": "CS 301",
+          "TITLE": "INTRODUCTION TO DATA SCIENCE",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11797",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Renda, Michael",
+          "sectionNumber": "006",
+          "status": "Open",
+          "currentEnrollment": 59,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11797",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "CULM",
+              "room": "LECT 1"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11798",
+          "TERM": "202510",
+          "COURSE": "CS 301",
+          "TITLE": "INTRODUCTION TO DATA SCIENCE",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11798",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Islam, Akm",
+          "sectionNumber": "008",
+          "status": "Closed",
+          "currentEnrollment": 60,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11798",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "KUPF",
+              "room": "211"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "KUPF",
+              "room": "211"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11799",
+          "TERM": "202510",
+          "COURSE": "CS 301",
+          "TITLE": "INTRODUCTION TO DATA SCIENCE - HONORS",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11799",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Renda, Michael",
+          "sectionNumber": "H02",
+          "status": "Open",
+          "currentEnrollment": 17,
+          "maxEnrollment": 20,
+          "is_honors": true,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11799",
+          "comments": "Honors Course",
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "CKB",
+              "room": "341"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "CKB",
+              "room": "341"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: CS 114 and (MATH 333 or MATH 341) with a grade C or better. This course is designed for CS BS students to equip them with introductory principles as well as hands-on skills that are required to solve data science problems. The first part of the course focuses on learning models, formalism, and algorithmic techniques that are popular in data science and heavily used in practice. In the second part of the course, students are introduced to data science tools (e.g., Excel, Python).",
+      "code": "CS 301",
+      "color": "rgba(\n                  198,\n                  197,\n                  175,0.9)"
+    },
+    {
+      "title": "PRINCIPLES OF OPER SYS",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-11805",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11805",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Lay, Larry",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 42,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11805",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "KUPF",
+              "room": "204"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "KUPF",
+              "room": "204"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11806",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11806",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Naik, Kamlesh",
+          "sectionNumber": "004",
+          "status": "Closed",
+          "currentEnrollment": 43,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11806",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "KUPF",
+              "room": "206"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "KUPF",
+              "room": "206"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11807",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11807",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Gerbessiotis, Alexandros",
+          "sectionNumber": "006",
+          "status": "Open",
+          "currentEnrollment": 26,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11807",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "KUPF",
+              "room": "108"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "KUPF",
+              "room": "108"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11808",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11808",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Lay, Larry",
+          "sectionNumber": "008",
+          "status": "Open",
+          "currentEnrollment": 36,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11808",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "KUPF",
+              "room": "207"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "KUPF",
+              "room": "207"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11809",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11809",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Lay, Larry",
+          "sectionNumber": "010",
+          "status": "Open",
+          "currentEnrollment": 42,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11809",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T11:30:00.000Z",
+              "endTime": "1900-01-01T12:50:00.000Z",
+              "building": "CKB",
+              "room": "124"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T11:30:00.000Z",
+              "endTime": "1900-01-01T12:50:00.000Z",
+              "building": "CKB",
+              "room": "124"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11810",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11810",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Naik, Kamlesh",
+          "sectionNumber": "102",
+          "status": "Closed",
+          "currentEnrollment": 43,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11810",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "R",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "KUPF",
+              "room": "108"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11811",
+          "TERM": "202510",
+          "COURSE": "CS 332",
+          "TITLE": "PRINCIPLES OF OPER SYS - HONORS",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11811",
+          "SUBJECT": "CS",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Yao, Zhihao",
+          "sectionNumber": "H02",
+          "status": "Open",
+          "currentEnrollment": 14,
+          "maxEnrollment": 25,
+          "is_honors": true,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11811",
+          "comments": "Honors Course",
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "CKB",
+              "room": "303"
+            },
+            {
+              "day": "W",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "CKB",
+              "room": "303"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-16448",
+          "COURSE": "CS 332",
+          "COURSE_LEVEL": 3,
+          "CREDITS": 3,
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": false,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=16448",
+          "SUBJECT": "CS",
+          "SUMMER_PERIOD": null,
+          "TERM": "202510",
+          "TITLE": "PRINCIPLES OF OPER SYS",
+          "instructor": "Naik, Kamlesh",
+          "sectionNumber": "012",
+          "status": "Open",
+          "currentEnrollment": 42,
+          "maxEnrollment": 43,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "16448",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "F",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "KUPF",
+              "room": "208"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: CS 114 or CS 116 or IT 114 or equivalent with a grade C or better. Organization of operating systems covering structure, process management and scheduling; interaction of concurrent processes; interrupts; I/O, device handling; memory and virtual memory management and file management.",
+      "code": "CS 332",
+      "color": "rgba(247,102,235,0.9)"
+    },
+    {
+      "title": "TECHNICAL WRITING",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-11705",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11705",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Hall, Kevin",
+          "sectionNumber": "002",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11705",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "FMH",
+              "room": "307"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "FMH",
+              "room": "307"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11706",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11706",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Crovetto, Christina",
+          "sectionNumber": "004",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11706",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "CKB",
+              "room": "106"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "CKB",
+              "room": "106"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11707",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11707",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Apatoff, Benjamin",
+          "sectionNumber": "006",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11707",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "FMH",
+              "room": "106"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "FMH",
+              "room": "106"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11708",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11708",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Apatoff, Benjamin",
+          "sectionNumber": "008",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11708",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "GITC",
+              "room": "2315A"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T16:00:00.000Z",
+              "endTime": "1900-01-01T17:20:00.000Z",
+              "building": "GITC",
+              "room": "2315A"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11709",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11709",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Crespo Solis, Andres",
+          "sectionNumber": "010",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11709",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "FMH",
+              "room": "307"
+            },
+            {
+              "day": "W",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:20:00.000Z",
+              "building": "FMH",
+              "room": "307"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11710",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11710",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Egan, John",
+          "sectionNumber": "012",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11710",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T11:30:00.000Z",
+              "endTime": "1900-01-01T12:50:00.000Z",
+              "building": "CKB",
+              "room": "314"
+            },
+            {
+              "day": "W",
+              "startTime": "1900-01-01T11:30:00.000Z",
+              "endTime": "1900-01-01T12:50:00.000Z",
+              "building": "CKB",
+              "room": "314"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11711",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11711",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Egan, John",
+          "sectionNumber": "014",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11711",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "FMH",
+              "room": "404"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "FMH",
+              "room": "404"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11712",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11712",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Egan, John",
+          "sectionNumber": "016",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11712",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "CKB",
+              "room": "314"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T08:30:00.000Z",
+              "endTime": "1900-01-01T09:50:00.000Z",
+              "building": "CKB",
+              "room": "314"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11713",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11713",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Hall, Kevin",
+          "sectionNumber": "104",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11713",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "R",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "CKB",
+              "room": "330"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11714",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING - 11714 - COM 313 - 106",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11714",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Chatterjee, Annie",
+          "sectionNumber": "106",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11714",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "R",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "TIER",
+              "room": "113"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11715",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": {
+            "M": true,
+            "T": false,
+            "W": false,
+            "R": false,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11715",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Mednick, Kyle",
+          "sectionNumber": "110",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11715",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "M",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T20:50:00.000Z",
+              "building": "CKB",
+              "room": "214"
+            }
+          ],
+          "selected": false
+        },
+        {
+          "_id": "202510-11716",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": null,
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11716",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Wilson, Gabriella",
+          "sectionNumber": "452",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": true,
+          "instruction_type": "Online Newark",
+          "crn": "11716",
+          "comments": "Online Course",
+          "meetingTimes": [],
+          "selected": false
+        },
+        {
+          "_id": "202510-11717",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": null,
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11717",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Wilson, Gabriella",
+          "sectionNumber": "454",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": true,
+          "instruction_type": "Online Newark",
+          "crn": "11717",
+          "comments": "Online Course",
+          "meetingTimes": [],
+          "selected": false
+        },
+        {
+          "_id": "202510-11718",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": null,
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11718",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Wilson, Gabriella",
+          "sectionNumber": "456",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": true,
+          "instruction_type": "Online Newark",
+          "crn": "11718",
+          "comments": "Online Course",
+          "meetingTimes": [],
+          "selected": false
+        },
+        {
+          "_id": "202510-11719",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": null,
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11719",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Crespo Solis, Andres",
+          "sectionNumber": "458",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": true,
+          "instruction_type": "Online Newark",
+          "crn": "11719",
+          "comments": "Online Course",
+          "meetingTimes": [],
+          "selected": false
+        },
+        {
+          "_id": "202510-11720",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING",
+          "DAYS": null,
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11720",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Crespo Solis, Andres",
+          "sectionNumber": "462",
+          "status": "Closed",
+          "currentEnrollment": 24,
+          "maxEnrollment": 24,
+          "is_honors": false,
+          "is_async": true,
+          "instruction_type": "Online Newark",
+          "crn": "11720",
+          "comments": "Online Course",
+          "meetingTimes": [],
+          "selected": false
+        },
+        {
+          "_id": "202510-11721",
+          "TERM": "202510",
+          "COURSE": "COM 313",
+          "TITLE": "TECHNICAL WRITING - HONORS",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11721",
+          "SUBJECT": "COM",
+          "COURSE_LEVEL": 3,
+          "SUMMER_PERIOD": null,
+          "instructor": "Laudenbach, Michael",
+          "sectionNumber": "H02",
+          "status": "Open",
+          "currentEnrollment": 18,
+          "maxEnrollment": 24,
+          "is_honors": true,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11721",
+          "comments": "Honors Course",
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "FMH",
+              "room": "307"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T14:30:00.000Z",
+              "endTime": "1900-01-01T15:50:00.000Z",
+              "building": "FMH",
+              "room": "307"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: ENGL 102 with a grade of C or higher, and one History and Humanities GER 200 level course with a grade of C or higher.  An advanced writing course. Combines current theory with actual practice to prepare students as technical writers. Analyze complex communication situations and design appropriate responses through tasks that involve problem solving, rhetorical theory, document design, oral presentations, writing teams, audience awareness, ethical considerations, and gender equity issues. This course satisfies the three credit 300 GER in History and Humanities.",
+      "code": "COM 313",
+      "color": "rgba(\n                  13,\n                  90,\n                  190,0.9)"
+    }
+  ],
+  "organizerSettings": {
+    "isCommuter": false,
+    "commuteTimeHours": 2,
+    "compactPlan": false,
+    "courseFilters": [{ "courseCode": "COM 313", "online": "online" }]
+  }
+}
