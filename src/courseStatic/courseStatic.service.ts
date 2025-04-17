@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
@@ -53,6 +53,14 @@ export class CourseStaticService {
     return course;
   }
 
+  async createCourseStatic(courseStatic: CourseStatic) {
+    if (!courseStatic) {
+      throw new BadRequestException('No course static was received');
+    }
+    const courseStaticCreated = new this.courseStaticModel(courseStatic);
+    return await courseStaticCreated.save();
+  }
+
   async validatePrereqs(course: string, requisites: string[]) {
     const staticData = await this.findCourseStatic(course);
 
@@ -60,6 +68,28 @@ export class CourseStaticService {
     if (staticData === undefined) return true;
 
     return checkPrereqTree(staticData.tree, requisites);
+  }
+
+  async deleteCourseStatic(
+    courseStaticID: string,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!courseStaticID) {
+      throw new BadRequestException('No course static id was received');
+    }
+
+    const result =
+      await this.courseStaticModel.findByIdAndDelete(courseStaticID);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a course static document with the given id',
+      );
+    }
+
+    return {
+      deleted: true,
+      message: 'Course static document has been deleted successfully',
+    };
   }
 }
 

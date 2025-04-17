@@ -1,7 +1,13 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
 import { curriculaFilters } from 'src/utils/types.util';
 import { CurriculaService } from './curricula.service';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Curricula } from 'schemas/curricula.schema';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
 
 @Controller('curricula')
 export class CurriculaController {
@@ -31,5 +37,35 @@ export class CurriculaController {
     };
 
     return await this.curriculaService.findCurricula(filters, 0, 20);
+  }
+
+  @Post('/')
+  @ApiOkResponse({ description: 'Curricula document was created successfully' })
+  @ApiResponse({ status: 400, description: 'No curricula were received' })
+  @ApiOperation({
+    summary: 'Used to create a curricula document for a given degree',
+    description:
+      'Creates a new curricula document in the database for the specified degree, storing all available course requirements and structure for that degree.',
+  })
+  @ApiBody({ type: Curricula })
+  async postCurricula(@Body() curricula: Curricula) {
+    return this.curriculaService.createCurricula(curricula);
+  }
+
+  @Delete('/:id')
+  @ApiOkResponse({
+    description: 'Curricula document has been deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Could not find a curricula document with the given id',
+  })
+  @ApiOperation({
+    summary: 'Used to delete a curricula document given a specific id',
+    description:
+      'Deletes a curricula document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+  })
+  async deleteCurricula(@Param('id') curriculaID: string) {
+    return this.curriculaService.deleteCurricula(curriculaID);
   }
 }

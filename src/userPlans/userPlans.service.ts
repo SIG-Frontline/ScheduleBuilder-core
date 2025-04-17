@@ -133,7 +133,10 @@ export class UserPlansService {
     }
   }
 
-  async deletePlan(userId: string, uuid: string): Promise<{ message: string }> {
+  async deletePlan(
+    userId: string,
+    uuid: string,
+  ): Promise<{ deleted: boolean; message: string }> {
     try {
       if (!userId || !uuid) {
         throw new BadRequestException('UserId and UUID are required');
@@ -149,6 +152,7 @@ export class UserPlansService {
       }
 
       return {
+        deleted: true,
         message: `Plan with uuid: ${uuid} for userId: ${userId} has been deleted successfully`,
       };
     } catch (error) {
