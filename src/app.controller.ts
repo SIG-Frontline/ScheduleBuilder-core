@@ -1,8 +1,5 @@
-import { Controller, Get, HttpStatus, Res, UseGuards } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { JWTAuthGuard } from './authz/local-auth.guard';
-import { Auth0User, User } from './authz/user.decorator';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
 
 @Controller()
@@ -17,11 +14,5 @@ export class AppController {
   })
   getApiStatus(): string {
     return this.appService.apiStatus();
-  }
-
-  @UseGuards(JWTAuthGuard)
-  @Get('test/user')
-  getUser(@User() user: Auth0User, @Res() res: Response): void {
-    res.status(HttpStatus.OK).json({ status: 'success', user: user });
   }
 }
