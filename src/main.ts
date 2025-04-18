@@ -14,6 +14,7 @@ async function bootstrap() {
     .setTitle('Schedule Builder Core')
     .setDescription('The Schedule Builder API Description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);

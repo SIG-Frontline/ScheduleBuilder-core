@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { UserPlansService } from './userPlans.service';
 import { PlanData } from 'src/utils/types.util';
@@ -14,8 +15,11 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { UserPlans } from 'schemas/userPlans.schema';
+import { JWTAuthGuard } from 'src/authz/local-auth.guard';
+import { Auth0User, User } from 'src/authz/user.decorator';
 @Controller('')
 export class UserPlansController {
   constructor(private readonly userPlansService: UserPlansService) {}
@@ -31,14 +35,12 @@ export class UserPlansController {
     summary: 'Used to return all the plans a user has saved',
     description: `Returns information for all of a user's plans. All queries require the user's userId provided by auth0.`,
   })
-  @Get('userPlans/:userId')
-  async getUserPlan(@Param('userId') userId: string) {
-    const decodedUserId = decodeURIComponent(userId);
-    const userPlans = await this.userPlansService.findPlans(
-      decodedUserId,
-      0,
-      20,
-    );
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
+  @Get('userPlans')
+  async getUserPlan(@User() user: Auth0User) {
+    const userId = user.sub;
+    const userPlans = await this.userPlansService.findPlans(userId, 0, 20);
     return userPlans;
   }
 
@@ -53,13 +55,15 @@ export class UserPlansController {
     summary: `Used to return a single plan a user has saved according to the plan's uuid`,
     description: `Returns a single user plan. All queries require the users userId provided by auth0 and the plan's uuid.`,
   })
-  @Get('userPlans/:userId/:uuid')
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
+  @Get('userPlans/:uuid')
   async getSingleUserPlan(
-    @Param('userId') userId: string,
+    @User() user: Auth0User,
     @Param('uuid') uuid: string,
   ) {
-    const decodedUserId = decodeURIComponent(userId);
-    const userPlan = await this.userPlansService.findPlan(decodedUserId, uuid);
+    const userId = user.sub;
+    const userPlan = await this.userPlansService.findPlan(userId, uuid);
     return userPlan;
   }
 
@@ -71,15 +75,17 @@ export class UserPlansController {
     description: `Creates a new user plan that is associated with a userID, and identified by the plan's uuid. <br>The plan data must be passed in the body of the request.`,
   })
   @ApiBody({ type: UserPlans })
-  @Post('userPlans/:userId/:uuid')
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
+  @Post('userPlans/:uuid')
   async createUserPlan(
-    @Param('userId') userId: string,
+    @User() user: Auth0User,
     @Param('uuid') uuid: string,
     @Body() planData: UserPlans,
   ) {
-    const decodedUserId = decodeURIComponent(userId);
+    const userId = user.sub;
     const userPlan = await this.userPlansService.createPlans(
-      decodedUserId,
+      userId,
       uuid,
       planData.plandata,
     );
@@ -99,18 +105,16 @@ export class UserPlansController {
     summary: `Used to update a user's plan.`,
     description: `Updates an existing user plan that is associated with a userID, and identified by the plan's uuid. If the plan does not already exist, it will throw an error.<br>The entire plan data must be passed in the body of the request.`,
   })
-  @Patch('userPlans/:userId/:uuid')
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
+  @Patch('userPlans/:uuid')
   async updateUserPlan(
-    @Param('userId') userId: string,
+    @User() user: Auth0User,
     @Param('uuid') uuid: string,
     @Body() planData: PlanData,
   ) {
-    const decodedUserId = decodeURIComponent(userId);
-    return await this.userPlansService.updatePlan(
-      decodedUserId,
-      uuid,
-      planData,
-    );
+    const userId = user.sub;
+    return await this.userPlansService.updatePlan(userId, uuid, planData);
   }
 
   @ApiOkResponse({
@@ -125,12 +129,11 @@ export class UserPlansController {
     summary: 'Used to delete a given user plan',
     description: `Deletes an exisitng user plan that is associated with a userID and identified by the plan's uuid.`,
   })
-  @Delete('userPlans/:userId/:uuid')
-  async deleteUserPlan(
-    @Param('userId') userId: string,
-    @Param('uuid') uuid: string,
-  ) {
-    const decodedUserId = decodeURIComponent(userId);
-    return await this.userPlansService.deletePlan(decodedUserId, uuid);
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
+  @Delete('userPlans/:uuid')
+  async deleteUserPlan(@User() user: Auth0User, @Param('uuid') uuid: string) {
+    const userId = user.sub;
+    return await this.userPlansService.deletePlan(userId, uuid);
   }
 }
