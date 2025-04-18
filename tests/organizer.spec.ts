@@ -6,7 +6,7 @@ import path from 'path';
 
 // A helper function to read in the test plan files
 function readTestPlan(filePath: string): Promise<PlanData> {
-  filePath = path.join(__dirname, 'test_plans/' + filePath + '.json');
+  filePath = path.join(__dirname, 'testPlansData/' + filePath + '.json');
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, rawData) => {
       if (err)

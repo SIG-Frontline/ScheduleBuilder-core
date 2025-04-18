@@ -17,7 +17,11 @@ async function bootstrap() {
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/', app, documentFactory);
+  SwaggerModule.setup('/', app, documentFactory, {
+    swaggerOptions: {
+      defaultModelsExpandDepth: 2,
+    },
+  });
 
   await app.listen(process.env.PORT ?? 4000);
 }
