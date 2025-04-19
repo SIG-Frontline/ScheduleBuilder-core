@@ -11,13 +11,11 @@ import {
 import { UserPlansService } from './userPlans.service';
 import { PlanData } from 'src/utils/types.util';
 import {
-  ApiBody,
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { UserPlans } from 'schemas/userPlans.schema';
 import { JWTAuthGuard } from 'src/authz/local-auth.guard';
 import { Auth0User, User } from 'src/authz/user.decorator';
 @Controller('')
@@ -74,20 +72,19 @@ export class UserPlansController {
     summary: `Used to save a user's plan.`,
     description: `Creates a new user plan that is associated with a userID, and identified by the plan's uuid. <br>The plan data must be passed in the body of the request.`,
   })
-  @ApiBody({ type: UserPlans })
   @ApiBearerAuth()
   @UseGuards(JWTAuthGuard)
   @Post('userPlans/:uuid')
   async createUserPlan(
     @User() user: Auth0User,
     @Param('uuid') uuid: string,
-    @Body() planData: UserPlans,
+    @Body() planData: PlanData,
   ) {
     const userId = user.sub;
     const userPlan = await this.userPlansService.createPlans(
       userId,
       uuid,
-      planData.plandata,
+      planData,
     );
     console.log(userPlan);
     return userPlan;
