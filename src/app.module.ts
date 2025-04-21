@@ -11,6 +11,7 @@ import { CourseStaticModule } from './courseStatic/courseStatic.module';
 import { AuthzModule } from './authz/authz.module';
 import { OrganizerModule } from './organizer/organizer.module';
 import { RecommenderModule } from './recommender/recommender.module';
+import { UserSettingsModule } from './userSettings/userSettings.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { RecommenderModule } from './recommender/recommender.module';
     AuthzModule,
     OrganizerModule,
     RecommenderModule,
+    UserSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
