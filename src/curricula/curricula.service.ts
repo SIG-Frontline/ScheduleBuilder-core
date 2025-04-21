@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
@@ -57,5 +57,34 @@ export class CurriculaService {
       console.error(error);
       throw error;
     }
+  }
+
+  async createCurricula(curricula: Curricula) {
+    if (!curricula) {
+      throw new BadRequestException('No curricula were received');
+    }
+    const curriculaCreated = new this.curriculaModel(curricula);
+    return await curriculaCreated.save();
+  }
+
+  async deleteCurricula(
+    curriculaID: string,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!curriculaID) {
+      throw new BadRequestException('No curricula id was received');
+    }
+
+    const result = await this.curriculaModel.findByIdAndDelete(curriculaID);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a curricula document with the given id',
+      );
+    }
+
+    return {
+      deleted: true,
+      message: 'Curricula document has been deleted successfully',
+    };
   }
 }

@@ -14,10 +14,15 @@ async function bootstrap() {
     .setTitle('Schedule Builder Core')
     .setDescription('The Schedule Builder API Description')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
 
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/', app, documentFactory);
+  SwaggerModule.setup('/', app, documentFactory, {
+    swaggerOptions: {
+      defaultModelsExpandDepth: 2,
+    },
+  });
 
   await app.listen(process.env.PORT ?? 4000);
 }

@@ -1,0 +1,879 @@
+{
+    "_id": "TESTING",
+    "CLASSES": [
+      [
+        "|",
+        "",
+        "",
+        "COMPUTING SCIENCES GUR",
+        {
+          "name": "",
+          "course": "CS 103",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "CS 100",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "CS 101",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "CS 104",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "CS 113",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "CS 115",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "IS 118",
+          "legacy": true
+        }
+      ],
+      [
+        "&",
+        "",
+        "",
+        "ENGLISH COMPOSITION GUR",
+        [
+          "|",
+          "",
+          "",
+          "English Comp: Writing, Speaking, Thinking I",
+          {
+            "name": "English Comp: Writing, Speaking, Thinking I",
+            "course": "ENGL 101",
+            "legacy": false
+          },
+          [
+            "&",
+            "",
+            "",
+            "English Comp: Writing, Speaking, Thinking I",
+            {
+              "name": "",
+              "course": "ENGL 099",
+              "legacy": false
+            },
+            {
+              "name": "",
+              "course": "ENGL 100",
+              "legacy": false
+            }
+          ],
+          [
+            "&",
+            "",
+            "",
+            "English Comp: Writing, Speaking, Thinking I",
+            {
+              "name": "",
+              "course": "ENGL 096",
+              "legacy": false
+            },
+            {
+              "name": "",
+              "course": "ENGL 100",
+              "legacy": false
+            }
+          ]
+        ],
+        {
+          "name": "English Comp: Writing, Speaking, Thinking II",
+          "course": "ENGL 102",
+          "legacy": false
+        }
+      ],
+      [
+        "|",
+        "",
+        "",
+        "CULTURAL HISTORY GUR",
+        {
+          "name": "",
+          "course": "HIST 213",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "HUM 211",
+          "legacy": true
+        },
+        {
+          "name": "",
+          "course": "HUM 212",
+          "legacy": true
+        },
+        {
+          "name": "",
+          "course": "R510 2@",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R512 2@",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "HIST 2*@",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "HSS 2*@",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "HUM 2*@",
+          "legacy": "Yes"
+        }
+      ],
+      [
+        "&",
+        "",
+        "",
+        "UPPER DIVISION HUMANITIES GUR",
+        [
+          "|",
+          "",
+          "",
+          "LIT/HIST/PHIL/STS GUR",
+          {
+            "name": "",
+            "course": "LIT 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "HIST 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHIL 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "STS 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R350 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R350 4@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R352 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R352 4@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R510 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R510 4@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R512 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R512 4@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R730 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R730 4@",
+            "legacy": false
+          }
+        ],
+        [
+          "|",
+          "",
+          "",
+          "Open Humanities/Social Sciences GUR",
+          {
+            "name": "",
+            "course": "ENG 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "HIST 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "LIT 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHIL 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "STS 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "SS 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "THTR 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R070 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R080 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R082 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R202 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R220 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R350 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R352 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R420 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R510 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R560 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R570 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R700 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R701 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R730 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R790 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R812 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R830 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R860 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R920 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R940 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R975 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R988 3@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "THTR E@",
+            "legacy": "Yes"
+          }
+        ],
+        [
+          "&",
+          "",
+          "",
+          "Capstone Seminar in Humanities & Social Sci GUR",
+          {
+            "name": "",
+            "course": "HSS 4@",
+            "legacy": false
+          }
+        ]
+      ],
+      [
+        "|",
+        "",
+        "",
+        "MANAGEMENT GUR",
+        {
+          "name": "",
+          "course": "MGMT 390",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "HRM 301",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "ENTR 210",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "IE 492",
+          "legacy": "Yes"
+        },
+        {
+          "name": "",
+          "course": "AS 333",
+          "legacy": "Yes"
+        }
+      ],
+      [
+        "&",
+        "",
+        "",
+        "MATHEMATICS GUR",
+        {
+          "name": "Statistics",
+          "course": "MATH 105",
+          "legacy": false
+        },
+        [
+          "|",
+          "",
+          "",
+          "Mathematics",
+          {
+            "name": "",
+            "course": "MATH 101",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "MATH 107",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 108",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 110",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 111",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 112",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 113",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 131",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "MATH 132",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "MATH 133",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "MATH 135",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 138",
+            "legacy": "Yes"
+          },
+          {
+            "name": "",
+            "course": "MATH 139",
+            "legacy": true
+          }
+        ]
+      ],
+      [
+        "&",
+        "",
+        "",
+        "NATURAL SCIENCES GUR",
+        [
+          "|",
+          "2",
+          "",
+          "Natural Science Lectures GUR",
+          {
+            "name": "",
+            "course": "R120 101",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 102",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R216 109",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 235",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 241",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "R120 242",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "R216 205",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 208",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "CHEM 121",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "CHEM 122",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "CHEM 125",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "CHEM 126",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 102",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 103",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 111",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 121",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 202",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 203",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 204",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "R460 101",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "R460 103",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R460 206",
+            "legacy": false
+          }
+        ],
+        [
+          "|",
+          "",
+          "",
+          "Natural Science Lab GUR",
+          {
+            "name": "",
+            "course": "R120 101",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 102",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R216 110",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 207",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "R120 235",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R120 241",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "R120 242",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "CHEM 124",
+            "legacy": true
+          },
+          {
+            "name": "",
+            "course": "CHEM 125A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 102A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 103A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 111A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 121A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 202A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PHYS 203A",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R460 104",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "R460 207",
+            "legacy": false
+          }
+        ]
+      ],
+      [
+        "&",
+        "",
+        "",
+        "PHYSICAL EDUCATION GUR",
+        [
+          "|",
+          "",
+          "",
+          "Physcial Education: 100-level",
+          {
+            "name": "",
+            "course": "PE 1@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PE 2@",
+            "legacy": "Yes"
+          }
+        ],
+        [
+          "|",
+          "",
+          "",
+          "Physical Education: 100 or 200-level",
+          {
+            "name": "",
+            "course": "PE 1@",
+            "legacy": false
+          },
+          {
+            "name": "",
+            "course": "PE 2@",
+            "legacy": false
+          }
+        ]
+      ],
+      [
+        "|",
+        "2",
+        "",
+        "SOCIAL SCIENCES GUR",
+        {
+          "name": "",
+          "course": "ECON 201",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "ECON 265",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "ECON 266",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "EPS 202",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "STS 100",
+          "legacy": true
+        },
+        {
+          "name": "",
+          "course": "STS 201",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "PSY 210",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "STS 221",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "STS 257",
+          "legacy": true
+        },
+        {
+          "name": "",
+          "course": "STS 258",
+          "legacy": true
+        },
+        {
+          "name": "",
+          "course": "R070 203",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R070 204",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R790 201",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R790 202",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R830 101",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R830 102",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R920 201",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R920 202",
+          "legacy": true
+        },
+        {
+          "name": "",
+          "course": "R220 101",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "R220 102",
+          "legacy": false
+        },
+        {
+          "name": "",
+          "course": "SS 2*@",
+          "legacy": "Yes"
+        }
+      ],
+      {
+        "name": "FRESHMAN SEMINAR GUR",
+        "course": "FYS SEM",
+        "legacy": false
+      }
+    ],
+    "DEGREE": "BA",
+    "MAJOR": "COMM",
+    "UPDATED": 1741809852,
+    "YEAR": "2016"
+}

@@ -1,11 +1,24 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { RecommenderService } from './recommender.service';
+import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('')
 export class RecommenderController {
   constructor(private readonly recommenderService: RecommenderService) {}
 
   @Post('recommender/')
+  @ApiOkResponse({
+    description: 'Course recommendations was returned successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Missing/invalid degree, major, year, and/or takenCourses',
+  })
+  @ApiOperation({
+    summary: 'Used to return course recommendations to a user',
+    description:
+      'Returns a tree structure representing course recommendations to a user, baesd on their degree and the courses they have taken.<br>Takes in options to the body of the request, like {degree, major, year, takenCourses}',
+  })
   async getRecommendation(
     @Body()
     params: {

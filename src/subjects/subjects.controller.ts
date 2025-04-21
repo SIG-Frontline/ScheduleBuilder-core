@@ -1,6 +1,14 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiResponse,
+} from '@nestjs/swagger';
+import { Types } from 'mongoose';
+import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
@@ -35,5 +43,36 @@ export class SubjectsController {
   async getTerms() {
     const terms = await this.subjectsService.findTerms(0, 20);
     return terms;
+  }
+
+  @Post('/subjects')
+  @ApiOkResponse({ description: 'Subjects document was created successfully' })
+  @ApiResponse({ status: 400, description: 'No subjects were received' })
+  @ApiOperation({
+    summary: 'Used to create a subjects document for a given term',
+    description:
+      'Creates a new subjects document in the database for the specified term. This is used to store all available course subjects for a given term.',
+  })
+  @ApiBody({ type: Subjects })
+  async postSubjects(@Body() subjects: SubjectsInput) {
+    return this.subjectsService.createSubjects(subjects);
+  }
+
+  @Delete('/subjects/:id')
+  @ApiOkResponse({
+    description: 'Subject document has been deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Could not find a subjects document with the given id',
+  })
+  @ApiOperation({
+    summary: 'Used to delete a subjects document given a specific id',
+    description:
+      'Deletes a subjects document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+  })
+  @ApiParam({ name: 'id', type: 'ObjectId' })
+  async deleteSubjectsById(@Param('id') id: Types.ObjectId) {
+    return this.subjectsService.deleteSubjects(id);
   }
 }
