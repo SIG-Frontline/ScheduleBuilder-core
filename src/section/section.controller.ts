@@ -1,12 +1,39 @@
-import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { SectionService } from './section.service';
+import { Section } from 'schemas/sections.schema';
 import { courseQueryFilters } from 'src/utils/types.util';
 import { addRegexSearch } from 'src/utils/functions.utils';
+import {
+  ApiBadRequestResponse,
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
 @Controller('')
 export class SectionController {
   constructor(private readonly SectionService: SectionService) {}
 
   @Get('courseSearch')
+  @ApiOkResponse({ description: 'List of courses was returned successfuly' })
+  @ApiBadRequestResponse({ description: 'No term was received' })
+  @ApiResponse({
+    status: 404,
+    description: 'No courses found given the query parameters',
+  })
+  @ApiOperation({
+    summary: 'Used to return a list of courses for a given search query',
+    description: `Returns static information for a given course search. This endpoint is critical to the search feature. <br>All queries require the term. Courses can be searched by a subject, course code, or by title. Subject & title searches are regex-based allowing for partial matches.<br>Example: (/courseSearch?term=202510&title=roadmap, /courseSearch?term=202510&subject=MATH)`,
+  })
   async getCourses(
     @Query('term') term?: string,
     @Query('course') course?: string,
@@ -58,6 +85,19 @@ export class SectionController {
   }
 
   @Get('sections')
+  @ApiOkResponse({ description: 'List of sections was returned successfully' })
+  @ApiBadRequestResponse({
+    description: 'Term and course are required query parameter',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No sections found given the query parameters',
+  })
+  @ApiOperation({
+    summary: 'Used to return a list of sections for a given course',
+    description:
+      'Returns static course section information. This endpoint is critical for users to find the sections for a given course. <br>All queries require the term and the courseCode. <br>Example: (/section?term=202510&course=CS 100)',
+  })
   async getSections(
     @Query('term') term?: string,
     @Query('course') course?: string,
@@ -104,5 +144,35 @@ export class SectionController {
       console.error(error);
       throw error;
     }
+  }
+
+  @Post('/sections')
+  @ApiOkResponse({ description: 'Section document was created successfully' })
+  @ApiResponse({ status: 400, description: 'No sections were received' })
+  @ApiOperation({
+    summary: 'Used to create a section document.',
+    description:
+      'Creates a new section document in the database for the specified section, storing all available information for that section.',
+  })
+  @ApiBody({ type: Section })
+  async postSections(@Body() sections: Section) {
+    return await this.SectionService.createSections(sections);
+  }
+
+  @Delete('/sections/:id')
+  @ApiOkResponse({
+    description: 'Subject document has been deleted successfully',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Could not find a sections document with the given id',
+  })
+  @ApiOperation({
+    summary: 'Used to delete a section document given a specific id',
+    description:
+      'Deletes a section document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+  })
+  async deleteSectionByID(@Param('id') sectionID: string) {
+    return await this.SectionService.deleteSection(sectionID);
   }
 }

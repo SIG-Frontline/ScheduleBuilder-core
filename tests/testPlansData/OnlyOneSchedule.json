@@ -1,0 +1,234 @@
+{
+  "uuid": "7b4d4ab0-f6f1-45ac-918c-bf0b65365292",
+  "name": "Mimi :)",
+  "description": "this is a plan",
+  "term": 202510,
+  "selected": true,
+  "courses": [
+    {
+      "title": "FLUID FLOW",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-11107",
+          "TERM": "202510",
+          "COURSE": "CHE 260",
+          "TITLE": "FLUID FLOW",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11107",
+          "SUBJECT": "CHE",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Venerus, David",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 33,
+          "maxEnrollment": 40,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11107",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "T",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T12:05:00.000Z",
+              "building": "KUPF",
+              "room": "106"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T12:05:00.000Z",
+              "building": "KUPF",
+              "room": "106"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: CHE 201 or CHE 210, CHE 230. Corequisite: MATH 222. This course considers the principles of molecular and turbulent transport of momentum, particularly as they apply to pressure drop calculations in piping systems, packed columns, and other flow devices.  Flow around submerged objects is also considered.",
+      "code": "CHE 260",
+      "color": "rgba(\n                  141,\n                  22,\n                  166,0.9)"
+    },
+    {
+      "title": "PHYSICAL CHEM FOR CHEM ENGRS",
+      "credits": 4,
+      "sections": [
+        {
+          "_id": "202510-11440",
+          "TERM": "202510",
+          "COURSE": "CHEM 236",
+          "TITLE": "PHYSICAL CHEM FOR CHEM ENGRS",
+          "DAYS": {
+            "M": false,
+            "T": true,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 4,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=11440",
+          "SUBJECT": "CHEM",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Peels, Mieke",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 31,
+          "maxEnrollment": 60,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "11440",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "R",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:55:00.000Z",
+              "building": "KUPF",
+              "room": "205"
+            },
+            {
+              "day": "R",
+              "startTime": "1900-01-01T15:00:00.000Z",
+              "endTime": "1900-01-01T16:00:00.000Z",
+              "building": "FMH",
+              "room": "408"
+            },
+            {
+              "day": "T",
+              "startTime": "1900-01-01T13:00:00.000Z",
+              "endTime": "1900-01-01T14:55:00.000Z",
+              "building": "KUPF",
+              "room": "205"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisites: (CHEM 122 or CHEM 126) and CHEM 125A and (CHE 230 or CHE 232) with a grade C or better. This course will introduce the chemical engineering students to the concepts of order, disorder, chemical equilibrium and phase equilibrium. Credit for this course will not be given if credit for CHEM 235 has been given.",
+      "code": "CHEM 236",
+      "color": "rgba(\n                  3,\n                  207,\n                  38,0.9)"
+    },
+    {
+      "title": "SURVEY OF PROB AND STATS",
+      "credits": 1,
+      "sections": [
+        {
+          "_id": "202510-14049",
+          "TERM": "202510",
+          "COURSE": "MATH 225",
+          "TITLE": "SURVEY OF PROB AND STATS",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": false,
+            "R": true,
+            "F": false,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 1,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=14049",
+          "SUBJECT": "MATH",
+          "COURSE_LEVEL": 2,
+          "SUMMER_PERIOD": null,
+          "instructor": "Schmidt, Donivyn",
+          "sectionNumber": "102",
+          "status": "Closed",
+          "currentEnrollment": 34,
+          "maxEnrollment": 34,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "14049",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "R",
+              "startTime": "1900-01-01T18:00:00.000Z",
+              "endTime": "1900-01-01T19:00:00.000Z",
+              "building": "CKB",
+              "room": "313"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "Prerequisite: MATH 112 with a grade of C or better. Topics include descriptive statistics, elements of probability, random variables and distributions; mean and variance; introduction to estimation and inference. This course satisfies the Mathematics GUR in probability and statistics. However, degree credit will not be granted for both MATH 225 and any other upper level course in probability and/or statistics.",
+      "code": "MATH 225",
+      "color": "rgba(\n                  66,\n                  8,\n                  236,0.9)"
+    },
+    {
+      "title": "PRINCIPLES OF TOXICOLOGY",
+      "credits": 3,
+      "sections": [
+        {
+          "_id": "202510-12990",
+          "TERM": "202510",
+          "COURSE": "EVSC 416",
+          "TITLE": "PRINCIPLES OF TOXICOLOGY",
+          "DAYS": {
+            "M": false,
+            "T": false,
+            "W": true,
+            "R": false,
+            "F": true,
+            "S": false,
+            "U": false
+          },
+          "CREDITS": 3,
+          "INFO_LINK": "https://www.bkstr.com/webapp/wcs/stores/servlet/booklookServlet?bookstore_id-1=584&term_id-1=2025 Spring&crn-1=12990",
+          "SUBJECT": "EVSC",
+          "COURSE_LEVEL": 4,
+          "SUMMER_PERIOD": null,
+          "instructor": "Warner, Genoa",
+          "sectionNumber": "002",
+          "status": "Open",
+          "currentEnrollment": 19,
+          "maxEnrollment": 30,
+          "is_honors": false,
+          "is_async": false,
+          "instruction_type": "Face-to-Face",
+          "crn": "12990",
+          "comments": null,
+          "meetingTimes": [
+            {
+              "day": "W",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "CKB",
+              "room": "303"
+            },
+            {
+              "day": "F",
+              "startTime": "1900-01-01T10:00:00.000Z",
+              "endTime": "1900-01-01T11:20:00.000Z",
+              "building": "CKB",
+              "room": "303"
+            }
+          ],
+          "selected": false
+        }
+      ],
+      "description": "The course is intended to explore the general principles of toxicology and apply them to the assessment of acute, subacute and chronic effects of hazardous and toxic chemicals. Qualitative and quantitative measures of toxicity and testing protocols are addressed. The role of toxicology in risk assessment and risk management is discussed.",
+      "code": "EVSC 416",
+      "color": "rgba(\n                  238,\n                  138,\n                  206,0.9)"
+    }
+  ]
+}
+

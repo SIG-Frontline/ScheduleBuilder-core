@@ -8,8 +8,11 @@ import { CurriculaModule } from './curricula/curricula.module';
 import { SubjectsModule } from './subjects/subjects.module';
 import { UserPlansModule } from './userPlans/userPlans.module';
 import { CourseStaticModule } from './courseStatic/courseStatic.module';
+import { AuthzModule } from './authz/authz.module';
+import { OrganizerModule } from './organizer/organizer.module';
 import { RecommenderModule } from './recommender/recommender.module';
 import { BulkCrnsModule } from './bulkCRNs/bulkCRNs.module';
+import { UserSettingsModule } from './userSettings/userSettings.module';
 
 @Module({
   imports: [
@@ -21,8 +24,11 @@ import { BulkCrnsModule } from './bulkCRNs/bulkCRNs.module';
     SubjectsModule,
     UserPlansModule,
     CourseStaticModule,
+    AuthzModule,
+    OrganizerModule,
     RecommenderModule,
     BulkCrnsModule,
+    UserSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

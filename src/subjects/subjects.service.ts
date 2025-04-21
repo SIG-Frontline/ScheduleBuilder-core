@@ -1,12 +1,12 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { Subjects } from 'schemas/subjects.schema';
-import { SubjectsResponse, TermsResponse } from 'src/utils/types.util';
+import { Model, Types } from 'mongoose';
+import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
+import {
+  DataNotFoundException,
+  SubjectsResponse,
+  TermsResponse,
+} from 'src/utils/types.util';
 
 @Injectable()
 export class SubjectsService {
@@ -32,7 +32,7 @@ export class SubjectsService {
         .exec();
 
       if (!subjects) {
-        throw new NotFoundException(
+        throw new DataNotFoundException(
           'No subjects found given the query parameters',
         );
       }
@@ -63,7 +63,9 @@ export class SubjectsService {
         .exec();
 
       if (!terms) {
-        throw new NotFoundException('No terms were found');
+        throw new DataNotFoundException(
+          'No terms were found given the query parameters',
+        );
       }
 
       let formattedTerms = [...new Set(terms.map((term) => term.TERM))];
@@ -73,5 +75,40 @@ export class SubjectsService {
       console.error(error);
       throw error;
     }
+  }
+
+  async createSubjects(subjects: SubjectsInput): Promise<SubjectsResponse> {
+    if (!subjects) {
+      throw new BadRequestException('No subjects were received');
+    }
+    const _id = new Types.ObjectId();
+    const subjectsCreated = new this.subjectsModel({ _id, ...subjects });
+    const savedDoc = await subjectsCreated.save();
+    const response: SubjectsResponse = {
+      _id: savedDoc._id,
+      term: savedDoc.TERM,
+      subjects: savedDoc.SUBJECTS,
+    };
+    return response;
+  }
+
+  async deleteSubjects(
+    id: Types.ObjectId,
+  ): Promise<{ deleted: boolean; message: string }> {
+    if (!id) {
+      throw new BadRequestException('No subject document id was received');
+    }
+
+    const result = await this.subjectsModel.findByIdAndDelete(id);
+
+    if (!result) {
+      throw new DataNotFoundException(
+        'Could not find a subjects document with the given id',
+      );
+    }
+    return {
+      deleted: true,
+      message: 'Subject document has been deleted successfully',
+    };
   }
 }
