@@ -63,8 +63,12 @@ export class CurriculaService {
     if (!curricula) {
       throw new BadRequestException('No curricula were received');
     }
-    const curriculaCreated = new this.curriculaModel(curricula);
-    return await curriculaCreated.save();
+
+    return await this.curriculaModel.updateOne(
+      { _id: curricula['_id'] },
+      { $set: { ...curricula } },
+      { upsert: true },
+    );
   }
 
   async deleteCurricula(

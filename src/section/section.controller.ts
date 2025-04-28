@@ -150,13 +150,13 @@ export class SectionController {
   @ApiOkResponse({ description: 'Section document was created successfully' })
   @ApiResponse({ status: 400, description: 'No sections were received' })
   @ApiOperation({
-    summary: 'Used to create a section document.',
+    summary: 'Used to upsert multiple section documents.',
     description:
-      'Creates a new section document in the database for the specified section, storing all available information for that section.',
+      'Creates new section documents based on the array of sections, storing all available information for that section.',
   })
-  @ApiBody({ type: Section })
-  async postSections(@Body() sections: Section) {
-    return await this.SectionService.createSections(sections);
+  @ApiBody({ type: [Section] })
+  async postSections(@Body() sectionsArr: Section[]) {
+    return await this.SectionService.bulkUpsertSections(sectionsArr);
   }
 
   @Delete('/sections/:id')

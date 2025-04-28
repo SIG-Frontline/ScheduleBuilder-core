@@ -53,12 +53,23 @@ export class CourseStaticService {
     return course;
   }
 
-  async createCourseStatic(courseStatic: CourseStatic) {
-    if (!courseStatic) {
+  async bulkUpsertCourseStatic(courseStaticArr: CourseStatic[]) {
+    if (!courseStaticArr)
       throw new BadRequestException('No course static was received');
-    }
-    const courseStaticCreated = new this.courseStaticModel(courseStatic);
-    return await courseStaticCreated.save();
+
+    const bulkOperations = courseStaticArr.map((obj) => ({
+      updateOne: {
+        filter: { _id: obj['_id'] },
+        update: { $set: { ...obj } },
+        upsert: true,
+      },
+    }));
+
+    const response = await this.courseStaticModel.bulkWrite(bulkOperations);
+    return {
+      success: response.isOk(),
+      message: response.getWriteErrors().toString(),
+    };
   }
 
   async validatePrereqs(course: string, requisites: string[]) {

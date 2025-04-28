@@ -17,6 +17,10 @@ export class Subjects {
   @Prop()
   @ApiProperty()
   SUBJECTS: Array<string>;
+
+  @Prop()
+  @ApiProperty()
+  UPDATED: number;
 }
 export type SubjectsInput = Omit<Subjects, '_id'>;
 export const SubjectsSchema = SchemaFactory.createForClass(Subjects);
