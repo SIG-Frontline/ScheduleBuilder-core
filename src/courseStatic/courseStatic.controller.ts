@@ -33,13 +33,16 @@ export class CourseStaticController {
   })
   @ApiResponse({ status: 400, description: 'No courseStatic was received' })
   @ApiOperation({
-    summary: 'Used to create a course static document',
+    summary:
+      'Used to upsert multiple course static documents that are sent to it',
     description:
-      'Creates a new course static document in the table for a specified course.',
+      'Creates new course static documents based on the array of documents it receives.',
   })
-  @ApiBody({ type: CourseStatic })
-  async postCourseStatic(@Body() courseStatic: CourseStatic) {
-    return await this.courseStaticService.createCourseStatic(courseStatic);
+  @ApiBody({ type: [CourseStatic] })
+  async postCourseStatic(@Body() courseStaticArr: CourseStatic[]) {
+    return await this.courseStaticService.bulkUpsertCourseStatic(
+      courseStaticArr,
+    );
   }
 
   @Delete('/:id')

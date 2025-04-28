@@ -50,10 +50,17 @@ test.describe('Curricula Endpoint', () => {
       fs.readFileSync(mockCurriculaPath, 'utf8'),
     );
     const response = await request.post(endpoint, { data: mockCurricula });
-    const json = (await response.json()) as CurriculaResponse;
+    const json = (await response.json()) as {
+      acknowledged: boolean;
+      matchedCount: number;
+      modifiedCount: number;
+      upsertedCount: number;
+      upsertedId: string;
+    };
+
     expect(response.status()).toBe(201);
-    expect(json).toHaveProperty('_id');
-    expect(json._id).toBe('TESTING');
+    expect(json).toHaveProperty('upsertedId');
+    expect(json.upsertedId).toBe('TESTING');
   });
   test('DELETE /curricula/id should return status code 200 when given valid id', async ({
     request,

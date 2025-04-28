@@ -101,11 +101,17 @@ test.describe('Sections Endpoint', () => {
       COURSE_LEVEL: null,
       SUMMER_PERIOD: null,
     };
-    const response = await request.post(endpoint, { data: mockSection });
-    const json = (await response.json()) as Section;
+    const response = await request.post(endpoint, { data: [mockSection] });
+    const json = (await response.json()) as {
+      success: boolean;
+      message: string;
+    };
+
     expect(response.status()).toBe(201);
-    expect(json).toHaveProperty('_id');
-    expect(json._id).toBe('TESTING');
+    expect(json).toHaveProperty('success');
+    expect(json.success).toBe(true);
+    expect(json).toHaveProperty('message');
+    expect(json.message).toBe('');
   });
   test('DELETE /sections/id should return status code 200 when given valid id', async ({
     request,
