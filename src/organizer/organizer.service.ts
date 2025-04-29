@@ -88,14 +88,14 @@ export class OrganizerService {
     plan.courses?.forEach((c) =>
       c.sections.forEach((s) =>
         s.meetingTimes.forEach((m) => {
-          // @ts-expect-error Changing ISO string to a number
+          // @ts-expect-error Changing ISO string to a number (ignoring timezone)
           m.startTime =
-            new Date(m.startTime).getHours() * 60 +
-            new Date(m.startTime).getMinutes();
-          // @ts-expect-error Changing ISO string to a number
+            Number(m.startTime.split(/T|:/)[1]) * 60 +
+            Number(m.startTime.split(/T|:/)[2]);
+          // @ts-expect-error Changing ISO string to a number (ignoring timezone)
           m.endTime =
-            new Date(m.endTime).getHours() * 60 +
-            new Date(m.endTime).getMinutes();
+            Number(m.endTime.split(/T|:/)[1]) * 60 +
+            Number(m.endTime.split(/T|:/)[2]);
         }),
       ),
     );
@@ -129,22 +129,21 @@ export class OrganizerService {
         let keep = true;
 
         section.meetingTimes?.forEach((meeting) => {
-          plan.events.forEach((event) => {
-            const eventStart =
-              (Number(event.startTime.split(':')[0]) - 5) * 60 +
-              Number(event.startTime.split(':')[1]);
-            const eventEnd =
-              (Number(event.endTime.split(':')[0]) - 5) * 60 +
-              Number(event.endTime.split(':')[1]);
+          plan.events.forEach((e) => {
+            const eStart =
+              Number(e.startTime.split(':')[0]) * 60 +
+              Number(e.startTime.split(':')[1]);
+            const eEnd =
+              Number(e.endTime.split(':')[0]) * 60 +
+              Number(e.endTime.split(':')[1]);
 
-            event.daysOfWeek.forEach((day) => {
+            e.daysOfWeek.forEach((day) => {
               if (day != this.convertDayToIndex(meeting.day)) return;
 
-              const meetingStart = Number(meeting.startTime);
-              const meetingEnd = Number(meeting.endTime);
+              const mStart = Number(meeting.startTime);
+              const mEnd = Number(meeting.endTime);
 
-              if (meetingStart < eventEnd && meetingEnd > eventStart)
-                keep = false;
+              if (mStart < eEnd && mEnd > eStart) keep = false;
             });
           });
         });
