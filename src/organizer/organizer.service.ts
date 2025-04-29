@@ -54,6 +54,16 @@ export class OrganizerService {
     // TODO: filter sections that interfere with events
     // TODO: filter sections that have a full seat count
 
+    // Filter out cancelled sections
+    plan.courses?.forEach(
+      (c) =>
+        (c.sections = c.sections.filter(
+          (s) =>
+            s.status.toLowerCase() != 'cancelled' &&
+            !s.comments.toLowerCase().includes('cancelled'),
+        )),
+    );
+
     const courseFilters = plan.organizerSettings?.courseFilters;
 
     // Perform all the filters for the courses
