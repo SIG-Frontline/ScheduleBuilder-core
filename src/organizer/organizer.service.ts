@@ -51,7 +51,6 @@ export class OrganizerService {
 
   // Filters out sections that do not match the specified filters
   private filterSectionsInPlan(plan: PlanData): void {
-    // TODO: filter sections that interfere with events
     // TODO: filter sections that have a full seat count
 
     // Filter out cancelled sections
@@ -120,6 +119,38 @@ export class OrganizerService {
           }
         }
       }
+    });
+
+    // Filter out sections that overlap with events
+    plan.courses?.forEach((course) => {
+      course.sections = course.sections.filter((section) => {
+        if (!section.meetingTimes) return true;
+
+        let keep = true;
+
+        section.meetingTimes?.forEach((meeting) => {
+          plan.events.forEach((event) => {
+            const eventStart =
+              (Number(event.startTime.split(':')[0]) - 5) * 60 +
+              Number(event.startTime.split(':')[1]);
+            const eventEnd =
+              (Number(event.endTime.split(':')[0]) - 5) * 60 +
+              Number(event.endTime.split(':')[1]);
+
+            event.daysOfWeek.forEach((day) => {
+              if (day != this.convertDayToIndex(meeting.day)) return;
+
+              const meetingStart = Number(meeting.startTime);
+              const meetingEnd = Number(meeting.endTime);
+
+              if (meetingStart < eventEnd && meetingEnd > eventStart)
+                keep = false;
+            });
+          });
+        });
+
+        return keep;
+      });
     });
   }
 
