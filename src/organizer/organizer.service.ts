@@ -64,6 +64,7 @@ export class OrganizerService {
     );
 
     const courseFilters = plan.organizerSettings?.courseFilters;
+    const locked = [] as string[];
 
     // Perform all the filters for the courses
     if (courseFilters) {
@@ -81,6 +82,9 @@ export class OrganizerService {
               (filter.section == null || s.sectionNumber == filter.section),
           );
         });
+        // Remember the locked courses
+        if (filter.section != null)
+          locked.push(`${filter.courseCode} ${filter.section}`);
       }
     }
 
@@ -99,6 +103,18 @@ export class OrganizerService {
         }),
       ),
     );
+
+    // TODO: add toggle
+    plan.courses?.forEach((c) => {
+      c.sections = c.sections.filter((s) => {
+        // Bypass for locked sections
+        if (locked.includes(`${c.code} ${s.sectionNumber}`)) return true;
+
+        if (s.currentEnrollment >= s.maxEnrollment)
+          console.log(`${c.code} ${s.sectionNumber}`);
+        return s.currentEnrollment < s.maxEnrollment;
+      });
+    });
 
     // Remove extra online sections while generating
     // If a course has 10 online sections, it might as well only have 1
@@ -124,6 +140,10 @@ export class OrganizerService {
     // Filter out sections that overlap with events
     plan.courses?.forEach((course) => {
       course.sections = course.sections.filter((section) => {
+        // Skip courses that are locked
+        if (locked.includes(`${course.code} ${section.sectionNumber}`))
+          return true;
+        // Skip online courses
         if (!section.meetingTimes) return true;
 
         let keep = true;
