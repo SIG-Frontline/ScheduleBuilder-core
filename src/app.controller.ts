@@ -13,6 +13,7 @@ export class AppController {
     description: 'Returns a status code 200 if the backend is running.',
   })
   getApiStatus(): string {
+    console.log('GET: /status/');
     return this.appService.apiStatus();
   }
 }

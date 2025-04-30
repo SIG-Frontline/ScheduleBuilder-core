@@ -29,6 +29,7 @@ export class UserSettingsController {
     const decodedUserId = decodeURIComponent(userId);
     if (!decodedUserId) throw new BadRequestException('Missing userId!');
 
+    console.log(`(USER_SETTINGS) GET: /course/${userId}`);
     return await this.userSettingsService.getTakenCourses(decodedUserId);
   }
 
@@ -52,6 +53,7 @@ export class UserSettingsController {
     if (!encryptedString)
       throw new BadRequestException('Missing encrypted string');
 
+    console.log(`(USER_SETTINGS) POST: /course/${userId}`);
     await this.userSettingsService.setTakenCourses(
       decodedUserId,
       encryptedString,

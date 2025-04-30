@@ -29,13 +29,18 @@ export class RecommenderController {
     },
   ) {
     const { degree, major, year, takenCourses } = params;
-    const recommendedClasses =
-      await this.recommenderService.getRecommendedClasses(
+    console.log(`(RECOMMENDER) POST: /recommender/${degree}/${major}/${year}`);
+
+    try {
+      return await this.recommenderService.getRecommendedClasses(
         degree,
         major,
         year,
         takenCourses,
       );
-    return recommendedClasses;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

@@ -27,6 +27,7 @@ export class CourseStaticService {
     ) {
       this.lastRetrieved = now;
       try {
+        console.log('(COURSE_STATIC): Updating cache');
         const courseStatic = await this.courseStaticModel.find().lean().exec();
         if (!courseStatic) {
           throw new DataNotFoundException(

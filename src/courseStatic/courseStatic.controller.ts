@@ -40,9 +40,15 @@ export class CourseStaticController {
   })
   @ApiBody({ type: [CourseStatic] })
   async postCourseStatic(@Body() courseStaticArr: CourseStatic[]) {
-    return await this.courseStaticService.bulkUpsertCourseStatic(
-      courseStaticArr,
-    );
+    console.log('(COURSE_STATIC) POST: /courseStatic/');
+    try {
+      return await this.courseStaticService.bulkUpsertCourseStatic(
+        courseStaticArr,
+      );
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
   @Delete('/:id')
@@ -59,6 +65,12 @@ export class CourseStaticController {
       'Deletes a course static document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteCourseStaticByID(@Param('id') courseStaticID: string) {
-    return await this.courseStaticService.deleteCourseStatic(courseStaticID);
+    console.log(`(COURSE_STATIC) DELETE: /courseStatic/${courseStaticID}`);
+    try {
+      return await this.courseStaticService.deleteCourseStatic(courseStaticID);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 }

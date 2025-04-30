@@ -35,6 +35,7 @@ export class CurriculaController {
       MAJOR: major,
       DEGREE: degree,
     };
+    console.log(`(CURRICULA) GET: /curricula/${year}/${degree}/${major}`);
 
     return await this.curriculaService.findCurricula(filters, 0, 20);
   }
@@ -49,7 +50,13 @@ export class CurriculaController {
   })
   @ApiBody({ type: Curricula })
   async postCurricula(@Body() curricula: Curricula) {
-    return this.curriculaService.createCurricula(curricula);
+    console.log('(CURRICULA) POST: /curricula/');
+    try {
+      return this.curriculaService.createCurricula(curricula);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   @Delete('/:id')
@@ -66,6 +73,12 @@ export class CurriculaController {
       'Deletes a curricula document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteCurricula(@Param('id') curriculaID: string) {
-    return this.curriculaService.deleteCurricula(curriculaID);
+    console.log(`(CURRICULA) DELETE: /curricula/${curriculaID}`);
+    try {
+      return this.curriculaService.deleteCurricula(curriculaID);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

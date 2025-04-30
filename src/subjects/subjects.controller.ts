@@ -25,6 +25,7 @@ export class SubjectsController {
       'Returns a list of all the subjects for a given term. This endpoint is used in the search feature.<br>Example: (/subjects/202510)',
   })
   async getSubjects(@Param('term') term: string) {
+    console.log(`(SUBJECTS) GET: /subjects/${term}`);
     const subjects = await this.subjectsService.findSubjects(term, 0, 20);
     return subjects;
   }
@@ -41,6 +42,7 @@ export class SubjectsController {
       'Returns a list of all the terms the app currently supports. This endpoint does not have any query parameters.',
   })
   async getTerms() {
+    console.log(`(SUBJECTS) GET: /terms/`);
     const terms = await this.subjectsService.findTerms(0, 20);
     return terms;
   }
@@ -55,7 +57,13 @@ export class SubjectsController {
   })
   @ApiBody({ type: [Subjects] })
   async postSubjects(@Body() subjectsArr: SubjectsInput[]) {
-    return this.subjectsService.bulkUpsertSubjects(subjectsArr);
+    console.log(`(SUBJECTS) POST: /subjects/`);
+    try {
+      return this.subjectsService.bulkUpsertSubjects(subjectsArr);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   @Delete('/subjects/:term')
@@ -73,6 +81,12 @@ export class SubjectsController {
   })
   @ApiParam({ name: 'term', type: 'string' })
   async deleteSubjectsById(@Param('term') term: string) {
-    return this.subjectsService.deleteSubjects(term);
+    console.log(`(SUBJECTS) DELETE: /subjects/${term}`);
+    try {
+      return this.subjectsService.deleteSubjects(term);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

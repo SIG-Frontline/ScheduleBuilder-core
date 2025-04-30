@@ -27,6 +27,12 @@ export class OrganizerController {
   async organizePlan(@Body() plan: PlanData) {
     if (!plan) throw new BadRequestException('No plan provided');
 
-    return await this.organizerService.organizePlan(plan);
+    console.log('(ORGANIZER) POST: /organizer/');
+    try {
+      return await this.organizerService.organizePlan(plan);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }
