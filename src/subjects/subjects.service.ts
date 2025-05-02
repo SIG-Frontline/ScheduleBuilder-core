@@ -81,12 +81,10 @@ export class SubjectsService {
     try {
       let latestUpdatedDoc: Subjects | null = null;
       if (term) {
-        console.log('wtf');
         latestUpdatedDoc = await this.subjectsModel
           .findOne({ TERM: term })
           .exec();
       } else {
-        console.log('wtf2');
         latestUpdatedDoc = await this.subjectsModel
           .findOne()
           .sort({ UPDATED: -1 })
