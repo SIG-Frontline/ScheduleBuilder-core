@@ -136,4 +136,23 @@ export class SectionService {
       message: 'Section document has been deleted successfully',
     };
   }
+
+  async findBulkSections(filters: courseQueryFilters): Promise<Section[]> {
+    try {
+      const query = sanitizeFilters(filters);
+
+      const sections = await this.sectionModel.find(query).lean().exec();
+
+      if (sections.length === 0) {
+        throw new DataNotFoundException(
+          'No sections found given the query parameters',
+        );
+      }
+
+      return sections;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
