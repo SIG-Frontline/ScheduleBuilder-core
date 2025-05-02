@@ -15,7 +15,6 @@ import {
   ApiParam,
   ApiResponse,
 } from '@nestjs/swagger';
-import { Types } from 'mongoose';
 import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
