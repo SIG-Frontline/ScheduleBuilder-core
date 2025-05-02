@@ -12,6 +12,7 @@ import { AuthzModule } from './authz/authz.module';
 import { OrganizerModule } from './organizer/organizer.module';
 import { RecommenderModule } from './recommender/recommender.module';
 import { UserSettingsModule } from './userSettings/userSettings.module';
+import { WhitelistModule } from './whitelist/whitelist.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { UserSettingsModule } from './userSettings/userSettings.module';
     OrganizerModule,
     RecommenderModule,
     UserSettingsModule,
+    WhitelistModule,
   ],
   controllers: [AppController],
   providers: [AppService],
