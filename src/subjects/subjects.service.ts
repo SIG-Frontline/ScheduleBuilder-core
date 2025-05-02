@@ -77,6 +77,33 @@ export class SubjectsService {
     }
   }
 
+  async findTimeStamp(term?: string) {
+    try {
+      let latestUpdatedDoc: Subjects | null = null;
+      if (term) {
+        console.log('wtf');
+        latestUpdatedDoc = await this.subjectsModel
+          .findOne({ TERM: term })
+          .exec();
+      } else {
+        console.log('wtf2');
+        latestUpdatedDoc = await this.subjectsModel
+          .findOne()
+          .sort({ UPDATED: -1 })
+          .exec();
+      }
+
+      if (!latestUpdatedDoc) {
+        return;
+      }
+
+      return { timestamp: latestUpdatedDoc.UPDATED };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
   async createSubjects(subjects: SubjectsInput): Promise<SubjectsResponse> {
     if (!subjects) {
       throw new BadRequestException('No subjects were received');

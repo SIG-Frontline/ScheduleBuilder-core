@@ -65,4 +65,26 @@ test.describe('Subjects Endpoint', () => {
     );
     expect(json).toHaveProperty('deleted', true);
   });
+  test('TIMESTAMP /timestamp/:term should return status code 200 when given valid term', async ({
+    request,
+  }) => {
+    const endpoint = '/timestamp?term=202510';
+    const response = await request.get(endpoint);
+    const json = (await response.json()) as {
+      timestamp: number;
+    };
+    expect(json).toHaveProperty('timestamp');
+    expect(response.status()).toBe(200);
+  });
+  test('TIMESTAMP /timestamp should return status code 200 when given valid term', async ({
+    request,
+  }) => {
+    const endpoint = '/timestamp';
+    const response = await request.get(endpoint);
+    const json = (await response.json()) as {
+      timestamp: number;
+    };
+    expect(json).toHaveProperty('timestamp');
+    expect(response.status()).toBe(200);
+  });
 });

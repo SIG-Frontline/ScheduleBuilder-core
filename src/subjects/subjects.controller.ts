@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import {
   ApiBody,
@@ -74,5 +82,13 @@ export class SubjectsController {
   @ApiParam({ name: 'id', type: 'ObjectId' })
   async deleteSubjectsById(@Param('id') id: Types.ObjectId) {
     return this.subjectsService.deleteSubjects(id);
+  }
+
+  @Get('/timestamp')
+  async getTimestamp(@Query('term') term?: string) {
+    if (term) {
+      return this.subjectsService.findTimeStamp(term);
+    }
+    return this.subjectsService.findTimeStamp();
   }
 }
