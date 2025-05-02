@@ -35,6 +35,7 @@ export class SectionService {
       const courses: CourseSearchDBResult[] = await this.sectionModel
         .aggregate<CourseSearchDBResult>([
           { $match: query },
+          { $sort: { _id: 1 } },
           { $group: { _id: '$COURSE', title: { $first: '$TITLE' } } },
           { $sort: { _id: 1 } },
         ])
@@ -97,12 +98,23 @@ export class SectionService {
     }
   }
 
-  async createSections(sections: Section) {
-    if (!sections) {
+  async bulkUpsertSections(sectionsArr: Section[]) {
+    if (!sectionsArr)
       throw new BadRequestException('No sections were received');
-    }
-    const sectionsCreated = new this.sectionModel(sections);
-    return await sectionsCreated.save();
+
+    const bulkOperations = sectionsArr.map((obj) => ({
+      updateOne: {
+        filter: { _id: obj['_id'] },
+        update: { $set: { ...obj } },
+        upsert: true,
+      },
+    }));
+
+    const response = await this.sectionModel.bulkWrite(bulkOperations);
+    return {
+      success: response.isOk(),
+      message: response.getWriteErrors().toString(),
+    };
   }
 
   async deleteSection(
@@ -123,5 +135,24 @@ export class SectionService {
       deleted: true,
       message: 'Section document has been deleted successfully',
     };
+  }
+
+  async findBulkSections(filters: courseQueryFilters): Promise<Section[]> {
+    try {
+      const query = sanitizeFilters(filters);
+
+      const sections = await this.sectionModel.find(query).lean().exec();
+
+      if (sections.length === 0) {
+        throw new DataNotFoundException(
+          'No sections found given the query parameters',
+        );
+      }
+
+      return sections;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

@@ -104,29 +104,33 @@ export class SubjectsService {
     }
   }
 
-  async createSubjects(subjects: SubjectsInput): Promise<SubjectsResponse> {
-    if (!subjects) {
+  async bulkUpsertSubjects(subjectsArr: SubjectsInput[]) {
+    if (!subjectsArr)
       throw new BadRequestException('No subjects were received');
-    }
-    const _id = new Types.ObjectId();
-    const subjectsCreated = new this.subjectsModel({ _id, ...subjects });
-    const savedDoc = await subjectsCreated.save();
-    const response: SubjectsResponse = {
-      _id: savedDoc._id,
-      term: savedDoc.TERM,
-      subjects: savedDoc.SUBJECTS,
+
+    const bulkOperations = subjectsArr.map((obj) => ({
+      updateOne: {
+        filter: { TERM: obj.TERM },
+        update: { $set: { ...obj } },
+        upsert: true,
+      },
+    }));
+
+    const response = await this.subjectsModel.bulkWrite(bulkOperations);
+    return {
+      success: response.isOk(),
+      message: response.getWriteErrors().toString(),
     };
-    return response;
   }
 
   async deleteSubjects(
-    id: Types.ObjectId,
+    term: string,
   ): Promise<{ deleted: boolean; message: string }> {
-    if (!id) {
+    if (!term) {
       throw new BadRequestException('No subject document id was received');
     }
 
-    const result = await this.subjectsModel.findByIdAndDelete(id);
+    const result = await this.subjectsModel.findOneAndDelete({ TERM: term });
 
     if (!result) {
       throw new DataNotFoundException(

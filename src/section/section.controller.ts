@@ -150,13 +150,13 @@ export class SectionController {
   @ApiOkResponse({ description: 'Section document was created successfully' })
   @ApiResponse({ status: 400, description: 'No sections were received' })
   @ApiOperation({
-    summary: 'Used to create a section document.',
+    summary: 'Used to upsert multiple section documents.',
     description:
-      'Creates a new section document in the database for the specified section, storing all available information for that section.',
+      'Creates new section documents based on the array of sections, storing all available information for that section.',
   })
-  @ApiBody({ type: Section })
-  async postSections(@Body() sections: Section) {
-    return await this.SectionService.createSections(sections);
+  @ApiBody({ type: [Section] })
+  async postSections(@Body() sectionsArr: Section[]) {
+    return await this.SectionService.bulkUpsertSections(sectionsArr);
   }
 
   @Delete('/sections/:id')
@@ -174,5 +174,43 @@ export class SectionController {
   })
   async deleteSectionByID(@Param('id') sectionID: string) {
     return await this.SectionService.deleteSection(sectionID);
+  }
+
+  @Get('bulkSections')
+  @ApiOkResponse({ description: 'List of sections was returned successfully' })
+  @ApiBadRequestResponse({
+    description: 'Term and crns are required query parameters',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No sections found given the query parameters',
+  })
+  @ApiOperation({
+    summary: 'Used to return a the sections for a given CRN',
+    description:
+      'Returns static course section information. This endpoint is critical for users to find the sections for a given course. <br>All queries require the term and the crns. <br>Example: (/bulkSections?term=202510&crns=12345,67890)',
+  })
+  async getBulkSections(
+    @Query('term') term?: string,
+    @Query('crns') crns?: string,
+  ) {
+    if (!term || !crns) {
+      throw new BadRequestException(
+        'Term and crns are required query parameters',
+      );
+    }
+    try {
+      const filters: courseQueryFilters = {
+        ...(term ? { TERM: term } : {}),
+        ...(crns
+          ? { CRN: { $in: crns.split(',').map((crn) => Number(crn)) } }
+          : {}),
+      };
+
+      return await this.SectionService.findBulkSections(filters);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }
