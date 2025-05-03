@@ -17,6 +17,7 @@ import {
   ApiBody,
   ApiOkResponse,
   ApiOperation,
+  ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
 @Controller('')
@@ -34,6 +35,17 @@ export class SectionController {
     summary: 'Used to return a list of courses for a given search query',
     description: `Returns static information for a given course search. This endpoint is critical to the search feature. <br>All queries require the term. Courses can be searched by a subject, course code, or by title. Subject & title searches are regex-based allowing for partial matches.<br>Example: (/courseSearch?term=202510&title=roadmap, /courseSearch?term=202510&subject=MATH)`,
   })
+  @ApiQuery({ name: 'term', type: 'string', required: true })
+  @ApiQuery({ name: 'course', type: 'string', required: true })
+  @ApiQuery({ name: 'title', type: 'string', required: true })
+  @ApiQuery({ name: 'subject', type: 'string', required: true })
+  @ApiQuery({ name: 'instructor', type: 'string', required: false })
+  @ApiQuery({ name: 'honors', type: 'string', required: false })
+  @ApiQuery({ name: 'async', type: 'string', required: false })
+  @ApiQuery({ name: 'credits', type: 'string', required: false })
+  @ApiQuery({ name: 'level', type: 'string', required: false })
+  @ApiQuery({ name: 'summer', type: 'string', required: false })
+  @ApiQuery({ name: 'method', type: 'string', required: false })
   async getCourses(
     @Query('term') term?: string,
     @Query('course') course?: string,
@@ -98,6 +110,17 @@ export class SectionController {
     description:
       'Returns static course section information. This endpoint is critical for users to find the sections for a given course. <br>All queries require the term and the courseCode. <br>Example: (/section?term=202510&course=CS 100)',
   })
+  @ApiQuery({ name: 'term', type: 'string', required: true })
+  @ApiQuery({ name: 'course', type: 'string', required: true })
+  @ApiQuery({ name: 'title', type: 'string', required: false })
+  @ApiQuery({ name: 'subject', type: 'string', required: false })
+  @ApiQuery({ name: 'instructor', type: 'string', required: false })
+  @ApiQuery({ name: 'honors', type: 'string', required: false })
+  @ApiQuery({ name: 'async', type: 'string', required: false })
+  @ApiQuery({ name: 'credits', type: 'string', required: false })
+  @ApiQuery({ name: 'level', type: 'string', required: false })
+  @ApiQuery({ name: 'summer', type: 'string', required: false })
+  @ApiQuery({ name: 'method', type: 'string', required: false })
   async getSections(
     @Query('term') term?: string,
     @Query('course') course?: string,
