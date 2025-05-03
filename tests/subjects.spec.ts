@@ -33,7 +33,6 @@ test.describe('Subjects Endpoint', () => {
       'No subjects found given the query parameters',
     );
   });
-  let subjectID: string;
   test('POST /subjects should return status code 201 when given request body', async ({
     request,
   }) => {
@@ -42,17 +41,15 @@ test.describe('Subjects Endpoint', () => {
       TERM: 'TEST TERM',
       SUBJECTS: ['MATH', 'CS', 'PHYS'],
     };
-    const response = await request.post(endpoint, { data: mockSubject });
+    const response = await request.post(endpoint, { data: [mockSubject] });
     const json = (await response.json()) as SubjectsResponse;
     expect(response.status()).toBe(201);
-    expect(json).toHaveProperty('_id');
-    expect(json.term).toBe('TEST TERM');
-    subjectID = json._id;
+    expect(json).toHaveProperty('success', true);
   });
-  test('DELETE /subjects/id should return status code 200 when given valid id', async ({
+  test('DELETE /subjects/:term should return status code 200 when given valid term', async ({
     request,
   }) => {
-    const endpoint = `/subjects/${subjectID}`;
+    const endpoint = `/subjects/TEST TERM`;
     const response = await request.delete(endpoint);
     const json = (await response.json()) as {
       deleted: boolean;
