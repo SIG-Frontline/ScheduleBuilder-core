@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Query,
@@ -13,6 +14,7 @@ import {
   ApiOkResponse,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
 import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
@@ -84,7 +86,22 @@ export class SubjectsController {
   }
 
   @Get('/timestamp')
+  @ApiOperation({
+    summary:
+      'Used to get a timestamp which is equivalent to when the sections collection was last ran for a specified term',
+    description:
+      'Returns the most recently updated timestamp, if term is not passed. If term is passed it will find the timestamp for the specified term',
+  })
+  @ApiOkResponse({
+    description: 'Timestamp was returned successfuly',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No timestamp found for ${term}',
+  })
+  @ApiQuery({ name: 'term', type: 'string', required: false })
   async getTimestamp(@Query('term') term?: string) {
+    Logger.log(`Request made to /timestamp/${term}`);
     if (term) {
       return this.subjectsService.findTimeStamp(term);
     }

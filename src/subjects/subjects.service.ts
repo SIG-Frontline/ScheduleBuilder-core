@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
@@ -92,9 +92,9 @@ export class SubjectsService {
       }
 
       if (!latestUpdatedDoc) {
-        return;
+        throw new DataNotFoundException(`No timestamp found for ${term}`);
       }
-
+      Logger.log(`Successful request to /timestamp/${term}`);
       return { timestamp: latestUpdatedDoc.UPDATED };
     } catch (error) {
       console.error(error);
