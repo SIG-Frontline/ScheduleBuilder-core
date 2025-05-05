@@ -11,17 +11,17 @@ export class BulkCrnsController {
   @Get()
   async findSectionsByCrn(
     @Query('term') term: string,
-    @Query() query: Record<string, any>,
-  ): Promise<Section[]>{
+    @Query() query: Record<string, string>,
+  ): Promise<Section[]> {
     const crns: string[] = [];
     for (const key in query) {
       if (key.startsWith('crn')) {
-        crns.push(query[key]);
+        crns.push(query[key]); // expects a string but isn't
       }
     }
     return this.BulkCrnsService.findBulkCrns(crns, term);
   }
-  
+
   // @ApiOkResponse({ description: 'Sections were returned successfully' })
   // @ApiOperation({
   //   summary: 'Get bulk sections by CRN',

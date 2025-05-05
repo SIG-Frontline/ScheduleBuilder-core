@@ -19,23 +19,23 @@ export class BulkCrnsService {
       },
       {
         $lookup: {
-          from: "Sections", // Look in the "Sections" collection
-          localField: "COURSE", // Match the "COURSE" field in the current document
-          foreignField: "COURSE", // With the "COURSE" field in the "Sections" collection
-          as: "relatedCourses", // Store the result in "relatedCourses"
+          from: 'Sections', // Look in the "Sections" collection
+          localField: 'COURSE', // Match the "COURSE" field in the current document
+          foreignField: 'COURSE', // With the "COURSE" field in the "Sections" collection
+          as: 'relatedCourses', // Store the result in "relatedCourses"
         },
       },
       {
-        $unwind: "$relatedCourses",
+        $unwind: '$relatedCourses',
       },
       {
         $match: {
-          "relatedCourses.TERM": term,
+          'relatedCourses.TERM': term,
         },
       },
       {
         $replaceRoot: {
-          newRoot: "$relatedCourses",
+          newRoot: '$relatedCourses',
         },
       },
       {
@@ -43,32 +43,32 @@ export class BulkCrnsService {
       },
       {
         $group: {
-          _id: "$COURSE",
-          title: { $first: "$TITLE" },
-          credits: { $first: "$CREDITS" },
-          sections: { $push: "$$ROOT" },
+          _id: '$COURSE',
+          title: { $first: '$TITLE' },
+          credits: { $first: '$CREDITS' },
+          sections: { $push: '$$ROOT' },
         },
       },
       {
         $lookup: {
-          from: "Course_Static", // Look in the "Course_Static" collection
-          localField: "_id", // Match the "_id" field in the current document
-          foreignField: "_id", // With the "_id" field in the "Course_Static" collection
-          as: "course_static",
+          from: 'Course_Static', // Look in the "Course_Static" collection
+          localField: '_id', // Match the "_id" field in the current document
+          foreignField: '_id', // With the "_id" field in the "Course_Static" collection
+          as: 'course_static',
         },
       },
       {
         $addFields: {
           description: {
-            $arrayElemAt: ["$course_static.description", 0],
+            $arrayElemAt: ['$course_static.description', 0],
           },
         },
       },
       {
-        $unset: "course_static", // Remove the "course_static" field from the result
-      }
+        $unset: 'course_static', // Remove the "course_static" field from the result
+      },
     ];
-    const sections = await this.sectionModel.aggregate(pipeline);
+    const sections: Section[] = await this.sectionModel.aggregate(pipeline);
     const countofSections = sections.length;
     if (countofSections === 0) {
       throw new Error('No sections were found for the given CRNs');
