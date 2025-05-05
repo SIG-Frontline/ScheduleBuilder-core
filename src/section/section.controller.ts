@@ -4,9 +4,11 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Query,
+  Req,
 } from '@nestjs/common';
 import { SectionService } from './section.service';
 import { Section } from 'schemas/sections.schema';
@@ -19,6 +21,7 @@ import {
   ApiOperation,
   ApiResponse,
 } from '@nestjs/swagger';
+import { Request } from 'express';
 @Controller('')
 export class SectionController {
   constructor(private readonly SectionService: SectionService) {}
@@ -35,6 +38,7 @@ export class SectionController {
     description: `Returns static information for a given course search. This endpoint is critical to the search feature. <br>All queries require the term. Courses can be searched by a subject, course code, or by title. Subject & title searches are regex-based allowing for partial matches.<br>Example: (/courseSearch?term=202510&title=roadmap, /courseSearch?term=202510&subject=MATH)`,
   })
   async getCourses(
+    @Req() req: Request,
     @Query('term') term?: string,
     @Query('course') course?: string,
     @Query('title') title?: string,
@@ -77,9 +81,12 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
+      Logger.log(
+        `(SECTIONS) GET: /courseSearch${'?' + req.url.split('?')[1] || ''}`,
+      );
       return await this.SectionService.findCourses(filters);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -99,6 +106,7 @@ export class SectionController {
       'Returns static course section information. This endpoint is critical for users to find the sections for a given course. <br>All queries require the term and the courseCode. <br>Example: (/section?term=202510&course=CS 100)',
   })
   async getSections(
+    @Req() req: Request,
     @Query('term') term?: string,
     @Query('course') course?: string,
     @Query('title') title?: string,
@@ -139,9 +147,12 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
+      Logger.log(
+        `(SECTIONS) GET: /sections${'?' + req.url.split('?')[1] || ''}`,
+      );
       return await this.SectionService.findSections(filters);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -156,7 +167,13 @@ export class SectionController {
   })
   @ApiBody({ type: [Section] })
   async postSections(@Body() sectionsArr: Section[]) {
-    return await this.SectionService.bulkUpsertSections(sectionsArr);
+    Logger.log('(SECTIONS) POST: /sections');
+    try {
+      return await this.SectionService.bulkUpsertSections(sectionsArr);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 
   @Delete('/sections/:id')
@@ -173,7 +190,13 @@ export class SectionController {
       'Deletes a section document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteSectionByID(@Param('id') sectionID: string) {
-    return await this.SectionService.deleteSection(sectionID);
+    Logger.log(`(SECTIONS) DELETE: /sections/${sectionID}`);
+    try {
+      return await this.SectionService.deleteSection(sectionID);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 
   @Get('bulkSections')

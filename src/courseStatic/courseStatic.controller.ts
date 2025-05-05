@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Delete,
+  Logger,
+} from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
 import { CourseStatic } from 'schemas/courseStatic.schema';
 import {
@@ -40,9 +48,15 @@ export class CourseStaticController {
   })
   @ApiBody({ type: [CourseStatic] })
   async postCourseStatic(@Body() courseStaticArr: CourseStatic[]) {
-    return await this.courseStaticService.bulkUpsertCourseStatic(
-      courseStaticArr,
-    );
+    Logger.log('(COURSE_STATIC) POST: /courseStatic/');
+    try {
+      return await this.courseStaticService.bulkUpsertCourseStatic(
+        courseStaticArr,
+      );
+    } catch (error) {
+      Logger.log(error);
+      throw error;
+    }
   }
 
   @Delete('/:id')
@@ -59,6 +73,12 @@ export class CourseStaticController {
       'Deletes a course static document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteCourseStaticByID(@Param('id') courseStaticID: string) {
-    return await this.courseStaticService.deleteCourseStatic(courseStaticID);
+    Logger.log(`(COURSE_STATIC) DELETE: /courseStatic/${courseStaticID}`);
+    try {
+      return await this.courseStaticService.deleteCourseStatic(courseStaticID);
+    } catch (error) {
+      Logger.log(error);
+      throw error;
+    }
   }
 }

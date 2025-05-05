@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Controller,
   Get,
+  Logger,
   Param,
   Post,
 } from '@nestjs/common';
@@ -29,6 +30,7 @@ export class UserSettingsController {
     const decodedUserId = decodeURIComponent(userId);
     if (!decodedUserId) throw new BadRequestException('Missing userId!');
 
+    Logger.log(`(USER_SETTINGS) GET: /course/${userId}`);
     return await this.userSettingsService.getTakenCourses(decodedUserId);
   }
 
@@ -52,6 +54,7 @@ export class UserSettingsController {
     if (!encryptedString)
       throw new BadRequestException('Missing encrypted string');
 
+    Logger.log(`(USER_SETTINGS) POST: /course/${userId}`);
     await this.userSettingsService.setTakenCourses(
       decodedUserId,
       encryptedString,
