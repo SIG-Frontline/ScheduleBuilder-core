@@ -11,6 +11,7 @@ import { CourseStaticModule } from './courseStatic/courseStatic.module';
 import { AuthzModule } from './authz/authz.module';
 import { OrganizerModule } from './organizer/organizer.module';
 import { RecommenderModule } from './recommender/recommender.module';
+import { BulkCrnsModule } from './bulkCRNs/bulkCRNs.module';
 import { UserSettingsModule } from './userSettings/userSettings.module';
 import { WhitelistModule } from './whitelist/whitelist.module';
 
@@ -27,6 +28,7 @@ import { WhitelistModule } from './whitelist/whitelist.module';
     AuthzModule,
     OrganizerModule,
     RecommenderModule,
+    BulkCrnsModule,
     UserSettingsModule,
     WhitelistModule,
   ],
