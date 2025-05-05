@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import {
   ApiBody,
@@ -7,7 +15,6 @@ import {
   ApiParam,
   ApiResponse,
 } from '@nestjs/swagger';
-import { Types } from 'mongoose';
 import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
@@ -25,7 +32,7 @@ export class SubjectsController {
       'Returns a list of all the subjects for a given term. This endpoint is used in the search feature.<br>Example: (/subjects/202510)',
   })
   async getSubjects(@Param('term') term: string) {
-    console.log(`(SUBJECTS) GET: /subjects/${term}`);
+    Logger.log(`(SUBJECTS) GET: /subjects/${term}`);
     const subjects = await this.subjectsService.findSubjects(term, 0, 20);
     return subjects;
   }
@@ -42,7 +49,7 @@ export class SubjectsController {
       'Returns a list of all the terms the app currently supports. This endpoint does not have any query parameters.',
   })
   async getTerms() {
-    console.log(`(SUBJECTS) GET: /terms/`);
+    Logger.log(`(SUBJECTS) GET: /terms/`);
     const terms = await this.subjectsService.findTerms(0, 20);
     return terms;
   }
@@ -57,11 +64,11 @@ export class SubjectsController {
   })
   @ApiBody({ type: [Subjects] })
   async postSubjects(@Body() subjectsArr: SubjectsInput[]) {
-    console.log(`(SUBJECTS) POST: /subjects/`);
+    Logger.log(`(SUBJECTS) POST: /subjects/`);
     try {
       return this.subjectsService.bulkUpsertSubjects(subjectsArr);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -81,11 +88,11 @@ export class SubjectsController {
   })
   @ApiParam({ name: 'term', type: 'string' })
   async deleteSubjectsById(@Param('term') term: string) {
-    console.log(`(SUBJECTS) DELETE: /subjects/${term}`);
+    Logger.log(`(SUBJECTS) DELETE: /subjects/${term}`);
     try {
       return this.subjectsService.deleteSubjects(term);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }

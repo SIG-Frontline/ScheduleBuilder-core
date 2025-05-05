@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Patch,
   Post,
@@ -38,7 +39,7 @@ export class UserPlansController {
   @Get('userPlans')
   async getUserPlan(@User() user: Auth0User) {
     const userId = user.sub;
-    console.log(`(USER_PLANS) GET: /userPlans/ UserID: ${userId}`);
+    Logger.log(`(USER_PLANS) GET: /userPlans/ UserID: ${userId}`);
     const userPlans = await this.userPlansService.findPlans(userId, 0, 20);
     return userPlans;
   }
@@ -62,7 +63,7 @@ export class UserPlansController {
     @Param('uuid') uuid: string,
   ) {
     const userId = user.sub;
-    console.log(`(USER_PLANS) GET: userPlans/${uuid} UserID: ${userId}`);
+    Logger.log(`(USER_PLANS) GET: userPlans/${uuid} UserID: ${userId}`);
     const userPlan = await this.userPlansService.findPlan(userId, uuid);
     return userPlan;
   }
@@ -83,13 +84,13 @@ export class UserPlansController {
     @Body() planData: PlanData,
   ) {
     const userId = user.sub;
-    console.log(`(USER_PLANS) POST: userPlans/${uuid} UserID: ${userId}`);
+    Logger.log(`(USER_PLANS) POST: userPlans/${uuid} UserID: ${userId}`);
     const userPlan = await this.userPlansService.createPlans(
       userId,
       uuid,
       planData,
     );
-    console.log(userPlan);
+    Logger.log(userPlan);
     return userPlan;
   }
 
@@ -114,7 +115,7 @@ export class UserPlansController {
     @Body() planData: PlanData,
   ) {
     const userId = user.sub;
-    console.log(`(USER_PLANS) PATCH: userPlans/${uuid} UserID: ${userId}`);
+    Logger.log(`(USER_PLANS) PATCH: userPlans/${uuid} UserID: ${userId}`);
     return await this.userPlansService.updatePlan(userId, uuid, planData);
   }
 
@@ -135,7 +136,7 @@ export class UserPlansController {
   @Delete('userPlans/:uuid')
   async deleteUserPlan(@User() user: Auth0User, @Param('uuid') uuid: string) {
     const userId = user.sub;
-    console.log(`(USER_PLANS) PATCH: userPlans/${uuid} UserID: ${userId}`);
+    Logger.log(`(USER_PLANS) PATCH: userPlans/${uuid} UserID: ${userId}`);
     return await this.userPlansService.deletePlan(userId, uuid);
   }
 }

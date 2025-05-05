@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { CourseStaticService } from 'src/courseStatic/courseStatic.service';
 import { CurriculaService } from 'src/curricula/curricula.service';
 import {
@@ -55,7 +55,7 @@ export class RecommenderService {
     const recommendations = this.filterTree(curriculaTree, takenCourses);
     //console.log('unused classes', takenCourses);
 
-    console.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
+    Logger.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
 
     return recommendations;
   }

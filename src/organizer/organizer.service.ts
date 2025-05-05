@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import {
@@ -42,7 +43,7 @@ export class OrganizerService {
       copyPlan,
     );
     const bestPlan = this.convertSectionListToPlan(currentPlan, bestSections);
-    console.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
+    Logger.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
 
     // Return most optimal schedule
     return bestPlan;
@@ -130,7 +131,7 @@ export class OrganizerService {
       total *= course.sections.length;
     }
 
-    console.log(`\t - ${total} combinations`);
+    Logger.log(`\t - ${total} combinations`);
 
     // Loops through the total amount of combinations
     for (let i = 0; i < total; i++) {
@@ -225,7 +226,7 @@ export class OrganizerService {
       }
     }
 
-    console.log(`\t - ${count} schedules with the same score`);
+    Logger.log(`\t - ${count} schedules with the same score`);
     return bestSectionList;
   }
 

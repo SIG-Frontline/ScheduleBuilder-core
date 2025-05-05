@@ -4,6 +4,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Query,
@@ -80,12 +81,12 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
-      console.log(
+      Logger.log(
         `(SECTIONS) GET: /courseSearch${'?' + req.url.split('?')[1] || ''}`,
       );
       return await this.SectionService.findCourses(filters);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -146,12 +147,12 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
-      console.log(
+      Logger.log(
         `(SECTIONS) GET: /sections${'?' + req.url.split('?')[1] || ''}`,
       );
       return await this.SectionService.findSections(filters);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -166,11 +167,11 @@ export class SectionController {
   })
   @ApiBody({ type: [Section] })
   async postSections(@Body() sectionsArr: Section[]) {
-    console.log('(SECTIONS) POST: /sections');
+    Logger.log('(SECTIONS) POST: /sections');
     try {
       return await this.SectionService.bulkUpsertSections(sectionsArr);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -189,11 +190,11 @@ export class SectionController {
       'Deletes a section document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteSectionByID(@Param('id') sectionID: string) {
-    console.log(`(SECTIONS) DELETE: /sections/${sectionID}`);
+    Logger.log(`(SECTIONS) DELETE: /sections/${sectionID}`);
     try {
       return await this.SectionService.deleteSection(sectionID);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }

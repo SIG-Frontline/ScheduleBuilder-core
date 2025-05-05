@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import {
@@ -27,7 +27,7 @@ export class CourseStaticService {
     ) {
       this.lastRetrieved = now;
       try {
-        console.log('(COURSE_STATIC): Updating cache');
+        Logger.log('(COURSE_STATIC): Updating cache');
         const courseStatic = await this.courseStaticModel.find().lean().exec();
         if (!courseStatic) {
           throw new DataNotFoundException(
@@ -38,7 +38,7 @@ export class CourseStaticService {
         // @ts-expect-error Typescript thinks this type is infinitly recursive, so ignore as we know it's not
         this.courses = courseStatic;
       } catch (error) {
-        console.error(error);
+        Logger.error(error);
         throw error;
       }
     }
