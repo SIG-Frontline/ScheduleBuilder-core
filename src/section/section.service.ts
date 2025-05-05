@@ -69,7 +69,11 @@ export class SectionService {
     try {
       const query = sanitizeFilters(filters);
 
-      const sections = await this.sectionModel.find(query).lean().exec();
+      const sections = await this.sectionModel
+        .find(query)
+        .sort({ _id: 1 })
+        .lean()
+        .exec();
 
       if (sections.length === 0) {
         throw new DataNotFoundException(
