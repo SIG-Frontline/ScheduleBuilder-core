@@ -4,9 +4,11 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Post,
   Query,
+  Req,
 } from '@nestjs/common';
 import { SectionService } from './section.service';
 import { Section } from 'schemas/sections.schema';
@@ -20,6 +22,7 @@ import {
   ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
+import { Request } from 'express';
 @Controller('')
 export class SectionController {
   constructor(private readonly SectionService: SectionService) {}
@@ -47,6 +50,7 @@ export class SectionController {
   @ApiQuery({ name: 'summer', type: 'string', required: false })
   @ApiQuery({ name: 'method', type: 'string', required: false })
   async getCourses(
+    @Req() req: Request,
     @Query('term') term?: string,
     @Query('course') course?: string,
     @Query('title') title?: string,
@@ -89,9 +93,12 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
+      Logger.log(
+        `(SECTIONS) GET: /courseSearch${'?' + req.url.split('?')[1] || ''}`,
+      );
       return await this.SectionService.findCourses(filters);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -122,6 +129,7 @@ export class SectionController {
   @ApiQuery({ name: 'summer', type: 'string', required: false })
   @ApiQuery({ name: 'method', type: 'string', required: false })
   async getSections(
+    @Req() req: Request,
     @Query('term') term?: string,
     @Query('course') course?: string,
     @Query('title') title?: string,
@@ -162,9 +170,12 @@ export class SectionController {
         ...(method ? { INSTRUCTION_METHOD: method } : {}),
       };
 
+      Logger.log(
+        `(SECTIONS) GET: /sections${'?' + req.url.split('?')[1] || ''}`,
+      );
       return await this.SectionService.findSections(filters);
     } catch (error) {
-      console.error(error);
+      Logger.error(error);
       throw error;
     }
   }
@@ -179,7 +190,13 @@ export class SectionController {
   })
   @ApiBody({ type: [Section] })
   async postSections(@Body() sectionsArr: Section[]) {
-    return await this.SectionService.bulkUpsertSections(sectionsArr);
+    Logger.log('(SECTIONS) POST: /sections');
+    try {
+      return await this.SectionService.bulkUpsertSections(sectionsArr);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 
   @Delete('/sections/:id')
@@ -196,7 +213,13 @@ export class SectionController {
       'Deletes a section document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteSectionByID(@Param('id') sectionID: string) {
-    return await this.SectionService.deleteSection(sectionID);
+    Logger.log(`(SECTIONS) DELETE: /sections/${sectionID}`);
+    try {
+      return await this.SectionService.deleteSection(sectionID);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 
   @Get('bulkSections')

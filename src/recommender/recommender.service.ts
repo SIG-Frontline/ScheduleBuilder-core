@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { CourseStaticService } from 'src/courseStatic/courseStatic.service';
 import { CurriculaService } from 'src/curricula/curricula.service';
 import {
@@ -43,6 +43,8 @@ export class RecommenderService {
     if (!year) throw new BadRequestException('No year provided!');
     if (!takenCourses) throw new BadRequestException('No courses provided!');
 
+    const start = Date.now();
+
     // Queries the database for the degree
     const curricula = await this.curriculaService.findCurricula(filters, 0, 20);
 
@@ -52,6 +54,8 @@ export class RecommenderService {
     // Filters out courses that the user has already taken
     const recommendations = this.filterTree(curriculaTree, takenCourses);
     //console.log('unused classes', takenCourses);
+
+    Logger.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
 
     return recommendations;
   }
