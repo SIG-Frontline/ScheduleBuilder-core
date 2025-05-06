@@ -5,14 +5,22 @@ import {
   Logger,
   Param,
   Post,
+  UseGuards,
 } from '@nestjs/common';
 import { UserSettingsService } from './userSettings.service';
-import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiResponse,
+} from '@nestjs/swagger';
+import { JWTAuthGuard } from 'src/authz/local-auth.guard';
+import { Auth0User, User } from 'src/authz/user.decorator';
 @Controller('settings/')
 export class UserSettingsController {
   constructor(private readonly userSettingsService: UserSettingsService) {}
 
-  @Get('courses/:userId')
+  @Get('courses/')
   @ApiOkResponse({
     description: 'Encrypted list of takenCourses was returned scucessfully',
   })
@@ -26,12 +34,12 @@ export class UserSettingsController {
     description:
       "Returns an encrypted array of the the courses the user has taken. This uses aes-256-gcm encryption, which should be decrypted and JSON.parse()'ed once returned",
   })
-  async getPrereqs(@Param('userId') userId: string) {
-    const decodedUserId = decodeURIComponent(userId);
-    if (!decodedUserId) throw new BadRequestException('Missing userId!');
-
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
+  async getPrereqs(@User() user: Auth0User) {
+    const userId = user.sub;
     Logger.log(`(USER_SETTINGS) GET: /course/${userId}`);
-    return await this.userSettingsService.getTakenCourses(decodedUserId);
+    return await this.userSettingsService.getTakenCourses(userId);
   }
 
   @ApiOkResponse({
@@ -44,27 +52,19 @@ export class UserSettingsController {
     description:
       'Sets the takenCourses value for for a specific value. This should already be an encrypted array before being sent here.',
   })
-  @Post('courses/:userId/:encryptedString')
+  @Post('courses/:encryptedString')
+  @ApiBearerAuth()
+  @UseGuards(JWTAuthGuard)
   async setTakenCourses(
-    @Param('userId') userId: string,
+    @User() user: Auth0User,
     @Param('encryptedString') encryptedString: string,
   ) {
-    const decodedUserId = decodeURIComponent(userId);
-    if (!decodedUserId) throw new BadRequestException('Missing userId!');
-    if (!encryptedString)
+    const decodedString = decodeURI(encryptedString);
+    if (!decodedString)
       throw new BadRequestException('Missing encrypted string');
 
+    const userId = user.sub;
     Logger.log(`(USER_SETTINGS) POST: /course/${userId}`);
-    await this.userSettingsService.setTakenCourses(
-      decodedUserId,
-      encryptedString,
-    );
-  }
-
-  async getTakenCourses(@Param('userId') userId: string) {
-    const decodedUserId = decodeURIComponent(userId);
-    if (!decodedUserId) throw new BadRequestException('Missing userId!');
-
-    return await this.userSettingsService.getTakenCourses(decodedUserId);
+    await this.userSettingsService.setTakenCourses(userId, decodedString);
   }
 }
