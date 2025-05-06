@@ -51,8 +51,6 @@ export class OrganizerService {
 
   // Filters out sections that do not match the specified filters
   private filterSectionsInPlan(plan: PlanData): void {
-    // TODO: filter sections that have a full seat count
-
     // Filter out cancelled sections
     plan.courses?.forEach(
       (c) =>
@@ -78,7 +76,7 @@ export class OrganizerService {
                 s.instructor == filter.instructor) &&
               (filter.honors == null || s.is_honors == filter.honors) &&
               (filter.online == null ||
-                s.instruction_type.toLowerCase().includes(filter.online)) &&
+                s.instructionType.toLowerCase().includes(filter.online)) &&
               (filter.section == null || s.sectionNumber == filter.section),
           );
         });
@@ -105,20 +103,19 @@ export class OrganizerService {
     );
 
     // TODO: add toggle
-    plan.courses?.forEach((c) => {
-      c.sections = c.sections.filter((s) => {
-        // Bypass for locked sections
-        if (locked.includes(`${c.code} ${s.sectionNumber}`)) return true;
+    if (false) {
+      plan.courses?.forEach((c) => {
+        c.sections = c.sections.filter((s) => {
+          // Bypass for locked sections
+          if (locked.includes(`${c.code} ${s.sectionNumber}`)) return true;
 
-        if (s.currentEnrollment >= s.maxEnrollment)
-          console.log(`${c.code} ${s.sectionNumber}`);
-        return s.currentEnrollment < s.maxEnrollment;
+          return s.currentEnrollment < s.maxEnrollment;
+        });
       });
-    });
+    }
 
     // Remove extra online sections while generating
     // If a course has 10 online sections, it might as well only have 1
-    // NOTE: this optimization might be removed later
     const hasOnline: { [key: string]: boolean } = {};
 
     plan.courses?.forEach((course) => {
@@ -138,39 +135,41 @@ export class OrganizerService {
     });
 
     // Filter out sections that overlap with events
-    plan.courses?.forEach((course) => {
-      course.sections = course.sections.filter((section) => {
-        // Skip courses that are locked
-        if (locked.includes(`${course.code} ${section.sectionNumber}`))
-          return true;
-        // Skip online courses
-        if (!section.meetingTimes) return true;
+    if (plan.organizerSettings?.eventPriority) {
+      plan.courses?.forEach((course) => {
+        course.sections = course.sections.filter((section) => {
+          // Skip courses that are locked
+          if (locked.includes(`${course.code} ${section.sectionNumber}`))
+            return true;
+          // Skip online courses
+          if (!section.meetingTimes) return true;
 
-        let keep = true;
+          let keep = true;
 
-        section.meetingTimes?.forEach((meeting) => {
-          plan.events.forEach((e) => {
-            const eStart =
-              Number(e.startTime.split(':')[0]) * 60 +
-              Number(e.startTime.split(':')[1]);
-            const eEnd =
-              Number(e.endTime.split(':')[0]) * 60 +
-              Number(e.endTime.split(':')[1]);
+          section.meetingTimes?.forEach((meeting) => {
+            plan.events.forEach((e) => {
+              const eStart =
+                Number(e.startTime.split(':')[0]) * 60 +
+                Number(e.startTime.split(':')[1]);
+              const eEnd =
+                Number(e.endTime.split(':')[0]) * 60 +
+                Number(e.endTime.split(':')[1]);
 
-            e.daysOfWeek.forEach((day) => {
-              if (day != this.convertDayToIndex(meeting.day)) return;
+              e.daysOfWeek.forEach((day) => {
+                if (day != this.convertDayToIndex(meeting.day)) return;
 
-              const mStart = Number(meeting.startTime);
-              const mEnd = Number(meeting.endTime);
+                const mStart = Number(meeting.startTime);
+                const mEnd = Number(meeting.endTime);
 
-              if (mStart < eEnd && mEnd > eStart) keep = false;
+                if (mStart < eEnd && mEnd > eStart) keep = false;
+              });
             });
           });
-        });
 
-        return keep;
+          return keep;
+        });
       });
-    });
+    }
   }
 
   // Creates every possible combination of plans
@@ -318,6 +317,8 @@ export class OrganizerService {
   ): number {
     const settings = plan.organizerSettings;
 
+    if (!settings) throw new BadRequestException('No settings provided!');
+
     const earliestStart = [1440, 1440, 1440, 1440, 1440, 1440, 1440]; // 60 minutes * 24 hours = 1440 minutes
     const latestEnd = [0, 0, 0, 0, 0, 0, 0];
     const totalClassTime = [0, 0, 0, 0, 0, 0, 0];
@@ -350,9 +351,11 @@ export class OrganizerService {
 
     // Calculate different metrics to rate the schedule
     let score = 0;
+    let days = 0;
 
     for (let dayOfWeekIndex = 0; dayOfWeekIndex < 7; dayOfWeekIndex++) {
       if (totalClassTime[dayOfWeekIndex] == 0) continue; // No classes on this day
+      days++;
 
       const totalTimeOnCampus =
         latestEnd[dayOfWeekIndex] - earliestStart[dayOfWeekIndex];
@@ -360,18 +363,20 @@ export class OrganizerService {
       // Penalize schedules which spend more time on campus
       score += totalTimeOnCampus;
 
-      // Compensate for commute time (which can reduce amount of days on campus)
-      if (settings?.isCommuter) score += settings.commuteTimeHours * 60;
-
       // Penalize schedules that spend more than 70% of their time on campus in class (to promote breaks), only if compactPlan is off
       // Penalizes schedules in proportion to how much they take up the on campus time
       if (
-        !settings?.compactPlan &&
+        !settings.compactPlan &&
         totalClassTime[dayOfWeekIndex] > 3 * 60 &&
         totalTimeOnCampus * 0.7 < totalClassTime[dayOfWeekIndex]
       )
         score += (1000 * totalClassTime[dayOfWeekIndex]) / totalTimeOnCampus;
     }
+
+    // Highly penalize schedules which go over the set amount of days on campus
+    // Scales with the amount of days, so lower days are still prioritized
+    if (settings.daysOnCampus && days > settings.daysOnCampus)
+      score += 9999 * days;
 
     return score;
   }
