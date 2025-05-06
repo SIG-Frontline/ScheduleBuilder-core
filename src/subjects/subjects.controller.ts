@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import {
   ApiBody,
@@ -7,7 +15,6 @@ import {
   ApiParam,
   ApiResponse,
 } from '@nestjs/swagger';
-import { Types } from 'mongoose';
 import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
@@ -25,6 +32,7 @@ export class SubjectsController {
       'Returns a list of all the subjects for a given term. This endpoint is used in the search feature.<br>Example: (/subjects/202510)',
   })
   async getSubjects(@Param('term') term: string) {
+    Logger.log(`(SUBJECTS) GET: /subjects/${term}`);
     const subjects = await this.subjectsService.findSubjects(term, 0, 20);
     return subjects;
   }
@@ -41,6 +49,7 @@ export class SubjectsController {
       'Returns a list of all the terms the app currently supports. This endpoint does not have any query parameters.',
   })
   async getTerms() {
+    Logger.log(`(SUBJECTS) GET: /terms/`);
     const terms = await this.subjectsService.findTerms(0, 20);
     return terms;
   }
@@ -49,30 +58,42 @@ export class SubjectsController {
   @ApiOkResponse({ description: 'Subjects document was created successfully' })
   @ApiResponse({ status: 400, description: 'No subjects were received' })
   @ApiOperation({
-    summary: 'Used to create a subjects document for a given term',
+    summary: 'Used to upsert multiple subject documents that are sent to it',
     description:
-      'Creates a new subjects document in the database for the specified term. This is used to store all available course subjects for a given term.',
+      'Creates new subject documents based on the array of Subject documents it recieves. These are used to store all available course subjects for a given term.',
   })
-  @ApiBody({ type: Subjects })
-  async postSubjects(@Body() subjects: SubjectsInput) {
-    return this.subjectsService.createSubjects(subjects);
+  @ApiBody({ type: [Subjects] })
+  async postSubjects(@Body() subjectsArr: SubjectsInput[]) {
+    Logger.log(`(SUBJECTS) POST: /subjects/`);
+    try {
+      return this.subjectsService.bulkUpsertSubjects(subjectsArr);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 
-  @Delete('/subjects/:id')
+  @Delete('/subjects/:term')
   @ApiOkResponse({
     description: 'Subject document has been deleted successfully',
   })
   @ApiResponse({
     status: 404,
-    description: 'Could not find a subjects document with the given id',
+    description: 'Could not find a subjects document with the given term',
   })
   @ApiOperation({
-    summary: 'Used to delete a subjects document given a specific id',
+    summary: 'Used to delete a subjects document given a specific term',
     description:
-      'Deletes a subjects document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
+      'Deletes a subjects document in the database for the specified term. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
-  @ApiParam({ name: 'id', type: 'ObjectId' })
-  async deleteSubjectsById(@Param('id') id: Types.ObjectId) {
-    return this.subjectsService.deleteSubjects(id);
+  @ApiParam({ name: 'term', type: 'string' })
+  async deleteSubjectsById(@Param('term') term: string) {
+    Logger.log(`(SUBJECTS) DELETE: /subjects/${term}`);
+    try {
+      return this.subjectsService.deleteSubjects(term);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 }

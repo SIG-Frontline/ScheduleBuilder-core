@@ -1,4 +1,12 @@
-import { Controller, Get, Param, Post, Body, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Delete,
+  Logger,
+} from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
 import { CourseStatic } from 'schemas/courseStatic.schema';
 import {
@@ -33,13 +41,22 @@ export class CourseStaticController {
   })
   @ApiResponse({ status: 400, description: 'No courseStatic was received' })
   @ApiOperation({
-    summary: 'Used to create a course static document',
+    summary:
+      'Used to upsert multiple course static documents that are sent to it',
     description:
-      'Creates a new course static document in the table for a specified course.',
+      'Creates new course static documents based on the array of documents it receives.',
   })
-  @ApiBody({ type: CourseStatic })
-  async postCourseStatic(@Body() courseStatic: CourseStatic) {
-    return await this.courseStaticService.createCourseStatic(courseStatic);
+  @ApiBody({ type: [CourseStatic] })
+  async postCourseStatic(@Body() courseStaticArr: CourseStatic[]) {
+    Logger.log('(COURSE_STATIC) POST: /courseStatic/');
+    try {
+      return await this.courseStaticService.bulkUpsertCourseStatic(
+        courseStaticArr,
+      );
+    } catch (error) {
+      Logger.log(error);
+      throw error;
+    }
   }
 
   @Delete('/:id')
@@ -56,6 +73,12 @@ export class CourseStaticController {
       'Deletes a course static document in the database for the specified id. This is mainly used for the playwright tests, so that when POST is tested, we can then delete that',
   })
   async deleteCourseStaticByID(@Param('id') courseStaticID: string) {
-    return await this.courseStaticService.deleteCourseStatic(courseStaticID);
+    Logger.log(`(COURSE_STATIC) DELETE: /courseStatic/${courseStaticID}`);
+    try {
+      return await this.courseStaticService.deleteCourseStatic(courseStaticID);
+    } catch (error) {
+      Logger.log(error);
+      throw error;
+    }
   }
 }

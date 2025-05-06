@@ -93,7 +93,11 @@ export class Section {
 
   @Prop()
   @ApiProperty()
-  SUMMER_PERIOD: boolean;
+  SUMMER_PERIOD: number;
+
+  @Prop()
+  @ApiProperty()
+  UPDATED: number;
 }
 
 export const SectionSchema = SchemaFactory.createForClass(Section);

@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Controller,
   Get,
+  Logger,
   Param,
   Post,
   UseGuards,
@@ -37,6 +38,7 @@ export class UserSettingsController {
   @UseGuards(JWTAuthGuard)
   async getPrereqs(@User() user: Auth0User) {
     const userId = user.sub;
+    Logger.log(`(USER_SETTINGS) GET: /course/${userId}`);
     return await this.userSettingsService.getTakenCourses(userId);
   }
 
@@ -62,6 +64,7 @@ export class UserSettingsController {
       throw new BadRequestException('Missing encrypted string');
 
     const userId = user.sub;
+    Logger.log(`(USER_SETTINGS) POST: /course/${userId}`);
     await this.userSettingsService.setTakenCourses(userId, decodedString);
   }
 }

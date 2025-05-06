@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { RecommenderService } from './recommender.service';
 import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
@@ -29,13 +29,18 @@ export class RecommenderController {
     },
   ) {
     const { degree, major, year, takenCourses } = params;
-    const recommendedClasses =
-      await this.recommenderService.getRecommendedClasses(
+    Logger.log(`(RECOMMENDER) POST: /recommender/${degree}/${major}/${year}`);
+
+    try {
+      return await this.recommenderService.getRecommendedClasses(
         degree,
         major,
         year,
         takenCourses,
       );
-    return recommendedClasses;
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 }
