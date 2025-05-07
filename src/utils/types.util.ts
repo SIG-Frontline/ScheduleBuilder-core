@@ -140,7 +140,7 @@ export interface PlanData {
   selected: boolean;
   courses: PlanDataCourses[];
   events: Events[];
-  organizerSettings?: organizerSettings;
+  organizerSettings: organizerSettings;
 }
 
 export interface PlanDataCourses {

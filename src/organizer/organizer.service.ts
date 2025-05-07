@@ -31,11 +31,23 @@ export class OrganizerService {
     // Filters all the sections in the current plan in place
     this.filterSectionsInPlan(copyPlan);
 
+    // Checks if filters are too restrictive (filter out all sections of one course)
+    const tooRestrictive = copyPlan.courses?.some(
+      (c) => c.sections.length == 0,
+    );
+
+    if (tooRestrictive)
+      throw new NotFoundException(
+        'Filters are too restrictive. No schedules could be made from those filters, please reduce your preferences.',
+      );
+
     // Generate all possible schedule combinations as plans
     const allPossibleSectionCombos = this.generateCombos(copyPlan);
 
     if (allPossibleSectionCombos.length == 0)
-      throw new NotFoundException('No valid schedules can be made');
+      throw new NotFoundException(
+        'Courses are not compatible. One or more courses have all sections overlapping with another course, please reduced your locked courses or remove the conflicting courses.',
+      );
 
     // Rank the plans using rateSections()
     const bestSections = this.findBestSections(
@@ -61,7 +73,7 @@ export class OrganizerService {
         )),
     );
 
-    const courseFilters = plan.organizerSettings?.courseFilters;
+    const courseFilters = plan.organizerSettings.courseFilters;
     const locked = [] as string[];
 
     // Perform all the filters for the courses
@@ -135,7 +147,7 @@ export class OrganizerService {
     });
 
     // Filter out sections that overlap with events
-    if (plan.organizerSettings?.eventPriority) {
+    if (plan.organizerSettings.eventPriority) {
       plan.courses?.forEach((course) => {
         course.sections = course.sections.filter((section) => {
           // Skip courses that are locked
@@ -183,7 +195,9 @@ export class OrganizerService {
     const courses = plan.courses;
 
     if (!courses || courses.length == 0)
-      throw new BadRequestException('No courses selected');
+      throw new BadRequestException(
+        'No courses selected. Please add a course to organize a schedule.',
+      );
 
     for (const course of courses) {
       rollingProduct.push(total);
@@ -316,8 +330,6 @@ export class OrganizerService {
     plan: PlanData,
   ): number {
     const settings = plan.organizerSettings;
-
-    if (!settings) throw new BadRequestException('No settings provided!');
 
     const earliestStart = [1440, 1440, 1440, 1440, 1440, 1440, 1440]; // 60 minutes * 24 hours = 1440 minutes
     const latestEnd = [0, 0, 0, 0, 0, 0, 0];
