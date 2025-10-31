@@ -10,15 +10,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserPlansService } from './userPlans.service';
-import { PlanData } from 'src/utils/types.util';
+import { PlanData } from '../utils/types.util';
 import {
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { JWTAuthGuard } from 'src/authz/local-auth.guard';
-import { Auth0User, User } from 'src/authz/user.decorator';
+import { JWTAuthGuard } from '../authz/local-auth.guard';
+import { Auth0User, User } from '../authz/user.decorator';
 @Controller('')
 export class UserPlansController {
   constructor(private readonly userPlansService: UserPlansService) {}

@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
-import { CourseStaticService } from 'src/courseStatic/courseStatic.service';
-import { CurriculaService } from 'src/curricula/curricula.service';
+import { CourseStaticService } from '../courseStatic/courseStatic.service';
+import { CurriculaService } from '../curricula/curricula.service';
 import {
   ClassRecommendation,
   ClassRec,
@@ -8,7 +8,7 @@ import {
   ClassBranch,
   ClassRecType,
   TreeNode,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class RecommenderService {

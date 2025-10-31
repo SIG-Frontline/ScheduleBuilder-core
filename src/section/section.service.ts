@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Section, SectionDocument } from 'schemas/sections.schema';
+import { Section, SectionDocument } from '../../schemas/sections.schema';
 import { sanitizeFilters } from '../utils/functions.utils';
 import {
   CourseStatic,
@@ -12,7 +12,7 @@ import {
   CourseResponse,
   CourseSearchDBResult,
   DataNotFoundException,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class SectionService {

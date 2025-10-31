@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
+import { Curricula, CurriculaDocument } from '../../schemas/curricula.schema';
 import { sanitizeFilters } from '../utils/functions.utils';
 import {
   queryFiltersBase,
   TreeNode,
   DataNotFoundException,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 @Injectable()
 export class CurriculaService {
   constructor(

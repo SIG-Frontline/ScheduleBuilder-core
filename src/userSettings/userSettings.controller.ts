@@ -14,8 +14,8 @@ import {
   ApiOperation,
   ApiResponse,
 } from '@nestjs/swagger';
-import { JWTAuthGuard } from 'src/authz/local-auth.guard';
-import { Auth0User, User } from 'src/authz/user.decorator';
+import { JWTAuthGuard } from '../authz/local-auth.guard';
+import { Auth0User, User } from '../authz/user.decorator';
 @Controller('settings/')
 export class UserSettingsController {
   constructor(private readonly userSettingsService: UserSettingsService) {}

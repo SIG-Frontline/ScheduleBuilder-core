@@ -17,7 +17,7 @@ import {
   ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
-import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
+import { Subjects, SubjectsInput } from '../../schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}

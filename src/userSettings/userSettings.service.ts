@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { UserSettings } from 'schemas/userSettings.schema';
-import { DataNotFoundException } from 'src/utils/types.util';
+import { UserSettings } from '../../schemas/userSettings.schema';
+import { DataNotFoundException } from '../utils/types.util';
 
 @Injectable()
 export class UserSettingsService {

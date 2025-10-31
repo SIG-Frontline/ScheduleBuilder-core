@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
+import { Subjects, SubjectsInput } from '../../schemas/subjects.schema';
 import {
   DataNotFoundException,
   SubjectsResponse,
   TermsResponse,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class SubjectsService {

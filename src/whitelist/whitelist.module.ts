@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserWhitelist, UserWhitelistSchema } from 'schemas/userWhitelist';
+import {
+  UserWhitelist,
+  UserWhitelistSchema,
+} from '../../schemas/userWhitelist';
 import { WhitelistService } from './whitelist.service';
 import { WhitelistController } from './whitelist.controller';
 
