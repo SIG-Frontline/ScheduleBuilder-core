@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { HydratedDocument } from 'mongoose';
-import { TreeNode } from 'src/utils/types.util';
+import { TreeNode } from '../src/utils/types.util';
 
 export type CurriculaDocument = HydratedDocument<Curricula>;
 

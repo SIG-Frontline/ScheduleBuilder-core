@@ -3,7 +3,10 @@ import { Section, SectionSchema } from '../../schemas/sections.schema';
 import { Module } from '@nestjs/common';
 import { SectionService } from './section.service';
 import { SectionController } from './section.controller';
-import { CourseStatic, CourseStaticSchema } from 'schemas/courseStatic.schema';
+import {
+  CourseStatic,
+  CourseStaticSchema,
+} from '../../schemas/courseStatic.schema';
 
 @Module({
   imports: [

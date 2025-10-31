@@ -8,7 +8,7 @@ import {
   PlanDataMeetingTime,
   PlanData,
   PlanDataSection,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class OrganizerService {

@@ -1,6 +1,6 @@
 import { Body, Controller, Param, Get, Query } from '@nestjs/common';
 import { BulkCrnsService } from './bulkCRNs.service';
-import { Section } from 'schemas/sections.schema';
+import { Section } from '../../schemas/sections.schema';
 // import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 @Controller('bulk-crns')
 export class BulkCrnsController {

@@ -7,9 +7,9 @@ import {
   Delete,
   Logger,
 } from '@nestjs/common';
-import { curriculaFilters } from 'src/utils/types.util';
+import { curriculaFilters } from '../utils/types.util';
 import { CurriculaService } from './curricula.service';
-import { Curricula } from 'schemas/curricula.schema';
+import { Curricula } from '../../schemas/curricula.schema';
 import {
   ApiBody,
   ApiOkResponse,

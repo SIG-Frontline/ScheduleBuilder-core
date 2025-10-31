@@ -1,4 +1,4 @@
-import { UserPlans, UserPlansSchema } from 'schemas/userPlans.schema';
+import { UserPlans, UserPlansSchema } from '../../schemas/userPlans.schema';
 import { UserPlansController } from './userPlans.controller';
 import { UserPlansService } from './userPlans.service';
 import { MongooseModule } from '@nestjs/mongoose';

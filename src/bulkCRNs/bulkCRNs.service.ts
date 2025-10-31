@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, PipelineStage } from 'mongoose';
-import { Section } from 'schemas/sections.schema';
+import { Section } from '../../schemas/sections.schema';
 
 @Injectable()
 export class BulkCrnsService {

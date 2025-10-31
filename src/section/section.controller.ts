@@ -11,9 +11,9 @@ import {
   Req,
 } from '@nestjs/common';
 import { SectionService } from './section.service';
-import { Section } from 'schemas/sections.schema';
-import { courseQueryFilters } from 'src/utils/types.util';
-import { addRegexSearch } from 'src/utils/functions.utils';
+import { Section } from '../../schemas/sections.schema';
+import { courseQueryFilters } from '../utils/types.util';
+import { addRegexSearch } from '../utils/functions.utils';
 import {
   ApiBadRequestResponse,
   ApiBody,

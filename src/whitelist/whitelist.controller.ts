@@ -1,7 +1,7 @@
 import { Body, Controller, Logger, Post, UseGuards } from '@nestjs/common';
 import { WhitelistService } from './whitelist.service';
 import { ApiOkResponse, ApiOperation } from '@nestjs/swagger';
-import { ApiTokenGuard } from 'src/authz/local-auth.guard';
+import { ApiTokenGuard } from '../authz/local-auth.guard';
 
 @Controller('whitelist')
 export class WhitelistController {

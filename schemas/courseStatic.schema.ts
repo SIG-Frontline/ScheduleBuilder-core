@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { CourseStaticNode } from 'src/utils/types.util';
+import { CourseStaticNode } from '../src/utils/types.util';
 import { ApiProperty } from '@nestjs/swagger';
 
 export type CourseStaticDocument = HydratedDocument<CourseStatic>;

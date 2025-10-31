@@ -6,7 +6,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { OrganizerService } from './organizer.service';
-import { PlanData } from 'src/utils/types.util';
+import { PlanData } from '../utils/types.util';
 import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('')
