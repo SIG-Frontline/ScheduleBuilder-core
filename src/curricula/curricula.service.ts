@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Curricula, CurriculaDocument } from 'schemas/curricula.schema';
-import { sanitizeFilters } from 'src/utils/functions.utils';
+import { sanitizeFilters } from '../utils/functions.utils';
 import {
   queryFiltersBase,
   TreeNode,
