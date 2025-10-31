@@ -6,7 +6,7 @@ import { sanitizeFilters } from '../utils/functions.utils';
 import {
   CourseStatic,
   CourseStaticDocument,
-} from 'schemas/courseStatic.schema';
+} from '../../schemas/courseStatic.schema';
 import {
   courseQueryFilters,
   CourseResponse,

@@ -4,8 +4,8 @@ import { Model } from 'mongoose';
 import {
   CourseStatic,
   CourseStaticDocument,
-} from 'schemas/courseStatic.schema';
-import { CourseStaticNode, DataNotFoundException } from 'src/utils/types.util';
+} from '../../schemas/courseStatic.schema';
+import { CourseStaticNode, DataNotFoundException } from '../utils/types.util';
 
 @Injectable()
 export class CourseStaticService {

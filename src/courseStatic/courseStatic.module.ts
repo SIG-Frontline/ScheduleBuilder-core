@@ -1,6 +1,9 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
-import { CourseStatic, CourseStaticSchema } from 'schemas/courseStatic.schema';
+import {
+  CourseStatic,
+  CourseStaticSchema,
+} from '../../schemas/courseStatic.schema';
 import { CourseStaticController } from './courseStatic.controller';
 import { CourseStaticService } from './courseStatic.service';
 

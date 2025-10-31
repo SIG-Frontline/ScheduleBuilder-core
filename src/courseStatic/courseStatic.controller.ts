@@ -8,7 +8,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { CourseStaticService } from './courseStatic.service';
-import { CourseStatic } from 'schemas/courseStatic.schema';
+import { CourseStatic } from '../../schemas/courseStatic.schema';
 import {
   ApiBody,
   ApiOkResponse,
