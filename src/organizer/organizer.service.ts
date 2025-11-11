@@ -71,12 +71,12 @@ export class OrganizerService {
       (c) =>
         (c.sections = c.sections.filter(
           (s) =>
-            s.status.toLowerCase() != 'cancelled' &&
-            !s.comments.toLowerCase().includes('cancelled'),
+            s.status?.toLowerCase() != 'cancelled' &&
+            !s.comments?.toLowerCase().includes('cancelled'),
         )),
     );
 
-    const courseFilters = plan.organizerSettings.courseFilters;
+    const courseFilters = plan.organizerSettings?.courseFilters;
     const locked = [] as string[];
 
     // Perform all the filters for the courses

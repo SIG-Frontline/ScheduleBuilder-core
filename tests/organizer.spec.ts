@@ -87,10 +87,10 @@ async function checkFilterPlan(
   const response = await request.post(endpoint, { data: plan });
 
   expect(response.status()).toBe(201);
-  const body = (await response.json()) as PlanData;
+  const body = (await response.json()) as PlanData[];
 
   // Determines if the correct courses were selected
-  const check = checkClasses(body, [`${section}`]);
+  const check = checkClasses(body[0], [`${section}`]);
   if (truthy) {
     expect(check).toBeTruthy();
   } else {
@@ -112,10 +112,10 @@ async function checkInstructorPlan(
   const response = await request.post(endpoint, { data: plan });
 
   expect(response.status()).toBe(201);
-  const body = (await response.json()) as PlanData;
+  const body = (await response.json()) as PlanData[];
 
   // Determines if the correct courses were selected
-  const check = checkClassesInstructor(body, section, instructor);
+  const check = checkClassesInstructor(body[0], section, instructor);
   if (truthy) {
     expect(check).toBeTruthy();
   } else {
@@ -133,8 +133,8 @@ test.describe('Organizer Endpoint', () => {
     const response = await request.post(endpoint, { data: plan });
 
     expect(response.status()).toBe(201);
-    const body = (await response.json()) as PlanData;
-    expect(body).toBeTruthy();
+    const body = (await response.json()) as PlanData[];
+    expect(body[0]).toBeTruthy();
   });
 
   test('POST /organizer should return a status code of 400 without any plan', async ({
@@ -146,7 +146,10 @@ test.describe('Organizer Endpoint', () => {
 
     expect(response.status()).toBe(400);
     const body = (await response.json()) as PlanData;
-    expect(body).toHaveProperty('message', 'No plan provided');
+    expect(body).toHaveProperty(
+      'message',
+      'No plan provided. Please create a plan to utilize the organizer.',
+    );
     expect(body).toHaveProperty('error', 'Bad Request');
   });
 
@@ -160,7 +163,10 @@ test.describe('Organizer Endpoint', () => {
 
     expect(response.status()).toBe(400);
     const body = (await response.json()) as PlanData;
-    expect(body).toHaveProperty('message', 'No courses selected');
+    expect(body).toHaveProperty(
+      'message',
+      'No courses selected. Please add a course to organize a schedule.',
+    );
     expect(body).toHaveProperty('error', 'Bad Request');
   });
 
@@ -173,9 +179,9 @@ test.describe('Organizer Endpoint', () => {
     const response = await request.post(endpoint, { data: plan });
 
     expect(response.status()).toBe(201);
-    const body = (await response.json()) as PlanData;
+    const body = (await response.json()) as PlanData[];
     expect(
-      checkClasses(body, [
+      checkClasses(body[0], [
         'CHE 260-002',
         'CHEM 236-002',
         'MATH 225-102',
@@ -194,7 +200,10 @@ test.describe('Organizer Endpoint', () => {
 
     expect(response.status()).toBe(404);
     const body = (await response.json()) as PlanData;
-    expect(body).toHaveProperty('message', 'No valid schedules can be made');
+    expect(body).toHaveProperty(
+      'message',
+      'Courses are not compatible. One or more courses have all sections overlapping with another course, please reduce your locked courses or remove the conflicting courses.',
+    );
     expect(body).toHaveProperty('error', 'Not Found');
   });
 
