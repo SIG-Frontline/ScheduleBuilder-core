@@ -1,6 +1,12 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Logger,
+  Post,
+} from '@nestjs/common';
 import { OrganizerService } from './organizer.service';
-import { PlanData } from 'src/utils/types.util';
+import { PlanData } from '../utils/types.util';
 import { ApiOkResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('')
@@ -30,6 +36,12 @@ export class OrganizerController {
         'No plan provided. Please create a plan to utilize the organizer.',
       );
 
-    return await this.organizerService.organizePlan(plan);
+    Logger.log('(ORGANIZER) POST: /organizer/');
+    try {
+      return await this.organizerService.organizePlan(plan);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 }

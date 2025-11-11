@@ -1,14 +1,23 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Logger,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { SubjectsService } from './subjects.service';
 import {
   ApiBody,
   ApiOkResponse,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiResponse,
 } from '@nestjs/swagger';
-import { Types } from 'mongoose';
-import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
+import { Subjects, SubjectsInput } from '../../schemas/subjects.schema';
 @Controller('')
 export class SubjectsController {
   constructor(private readonly subjectsService: SubjectsService) {}
@@ -25,6 +34,7 @@ export class SubjectsController {
       'Returns a list of all the subjects for a given term. This endpoint is used in the search feature.<br>Example: (/subjects/202510)',
   })
   async getSubjects(@Param('term') term: string) {
+    Logger.log(`(SUBJECTS) GET: /subjects/${term}`);
     const subjects = await this.subjectsService.findSubjects(term, 0, 20);
     return subjects;
   }
@@ -41,6 +51,7 @@ export class SubjectsController {
       'Returns a list of all the terms the app currently supports. This endpoint does not have any query parameters.',
   })
   async getTerms() {
+    Logger.log(`(SUBJECTS) GET: /terms/`);
     const terms = await this.subjectsService.findTerms(0, 20);
     return terms;
   }
@@ -55,7 +66,13 @@ export class SubjectsController {
   })
   @ApiBody({ type: [Subjects] })
   async postSubjects(@Body() subjectsArr: SubjectsInput[]) {
-    return this.subjectsService.bulkUpsertSubjects(subjectsArr);
+    Logger.log(`(SUBJECTS) POST: /subjects/`);
+    try {
+      return this.subjectsService.bulkUpsertSubjects(subjectsArr);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
   }
 
   @Delete('/subjects/:term')
@@ -73,6 +90,35 @@ export class SubjectsController {
   })
   @ApiParam({ name: 'term', type: 'string' })
   async deleteSubjectsById(@Param('term') term: string) {
-    return this.subjectsService.deleteSubjects(term);
+    Logger.log(`(SUBJECTS) DELETE: /subjects/${term}`);
+    try {
+      return this.subjectsService.deleteSubjects(term);
+    } catch (error) {
+      Logger.error(error);
+      throw error;
+    }
+  }
+
+  @Get('/timestamp')
+  @ApiOperation({
+    summary:
+      'Used to get a timestamp which is equivalent to when the sections collection was last ran for a specified term',
+    description:
+      'Returns the most recently updated timestamp, if term is not passed. If term is passed it will find the timestamp for the specified term',
+  })
+  @ApiOkResponse({
+    description: 'Timestamp was returned successfuly',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'No timestamp found for ${term}',
+  })
+  @ApiQuery({ name: 'term', type: 'string', required: false })
+  async getTimestamp(@Query('term') term?: string) {
+    Logger.log(`Request made to /timestamp/${term}`);
+    if (term) {
+      return this.subjectsService.findTimeStamp(term);
+    }
+    return this.subjectsService.findTimeStamp();
   }
 }

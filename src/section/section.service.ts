@@ -1,18 +1,18 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Section, SectionDocument } from 'schemas/sections.schema';
-import { sanitizeFilters } from 'src/utils/functions.utils';
+import { Section, SectionDocument } from '../../schemas/sections.schema';
+import { sanitizeFilters } from '../utils/functions.utils';
 import {
   CourseStatic,
   CourseStaticDocument,
-} from 'schemas/courseStatic.schema';
+} from '../../schemas/courseStatic.schema';
 import {
   courseQueryFilters,
   CourseResponse,
   CourseSearchDBResult,
   DataNotFoundException,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class SectionService {
@@ -69,7 +69,11 @@ export class SectionService {
     try {
       const query = sanitizeFilters(filters);
 
-      const sections = await this.sectionModel.find(query).lean().exec();
+      const sections = await this.sectionModel
+        .find(query)
+        .sort({ _id: 1 })
+        .lean()
+        .exec();
 
       if (sections.length === 0) {
         throw new DataNotFoundException(
@@ -135,5 +139,24 @@ export class SectionService {
       deleted: true,
       message: 'Section document has been deleted successfully',
     };
+  }
+
+  async findBulkSections(filters: courseQueryFilters): Promise<Section[]> {
+    try {
+      const query = sanitizeFilters(filters);
+
+      const sections = await this.sectionModel.find(query).lean().exec();
+
+      if (sections.length === 0) {
+        throw new DataNotFoundException(
+          'No sections found given the query parameters',
+        );
+      }
+
+      return sections;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

@@ -1,13 +1,14 @@
 import {
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 import {
   PlanDataMeetingTime,
   PlanData,
   PlanDataSection,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class OrganizerService {
@@ -25,7 +26,6 @@ export class OrganizerService {
       JSON.stringify(currentPlan),
     )) as PlanData;
 
-    console.log('\nStarting optimizer...');
     const start = Date.now();
 
     // Filters all the sections in the current plan in place
@@ -54,11 +54,12 @@ export class OrganizerService {
       allPossibleSectionCombos,
       copyPlan,
     );
+
     const bestPlans = [] as PlanData[];
     for (const bestSections of bestSectionsList) {
       bestPlans.push(this.convertSectionListToPlan(currentPlan, bestSections));
     }
-    console.log((Date.now() - start) / 1000, 's in total\n');
+    Logger.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
 
     // Return most optimal schedule
     return bestPlans;
@@ -208,7 +209,7 @@ export class OrganizerService {
       total *= course.sections.length;
     }
 
-    console.log(total, 'possible schedules');
+    Logger.log(`\t - ${total} combinations`);
 
     // Loops through the total amount of combinations
     for (let i = 0; i < total; i++) {

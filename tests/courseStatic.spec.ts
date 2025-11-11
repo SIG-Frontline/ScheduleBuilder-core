@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { CourseStatic } from 'schemas/courseStatic.schema';
+import { CourseStatic } from '../schemas/courseStatic.schema';
 
 const endpoint = '/courseStatic';
 

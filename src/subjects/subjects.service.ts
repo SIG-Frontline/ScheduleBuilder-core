@@ -1,12 +1,12 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
-import { Subjects, SubjectsInput } from 'schemas/subjects.schema';
+import { Model } from 'mongoose';
+import { Subjects, SubjectsInput } from '../../schemas/subjects.schema';
 import {
   DataNotFoundException,
   SubjectsResponse,
   TermsResponse,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class SubjectsService {
@@ -71,6 +71,31 @@ export class SubjectsService {
       let formattedTerms = [...new Set(terms.map((term) => term.TERM))];
       formattedTerms = formattedTerms.sort((a, b) => Number(b) - Number(a));
       return { terms: formattedTerms };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  async findTimeStamp(term?: string) {
+    try {
+      let latestUpdatedDoc: Subjects | null = null;
+      if (term) {
+        latestUpdatedDoc = await this.subjectsModel
+          .findOne({ TERM: term })
+          .exec();
+      } else {
+        latestUpdatedDoc = await this.subjectsModel
+          .findOne()
+          .sort({ UPDATED: -1 })
+          .exec();
+      }
+
+      if (!latestUpdatedDoc) {
+        throw new DataNotFoundException(`No timestamp found for ${term}`);
+      }
+      Logger.log(`Successful request to /timestamp/${term}`);
+      return { timestamp: latestUpdatedDoc.UPDATED };
     } catch (error) {
       console.error(error);
       throw error;

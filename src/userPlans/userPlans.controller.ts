@@ -3,21 +3,22 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
 import { UserPlansService } from './userPlans.service';
-import { PlanData } from 'src/utils/types.util';
+import { PlanData } from '../utils/types.util';
 import {
   ApiOkResponse,
   ApiOperation,
   ApiResponse,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { JWTAuthGuard } from 'src/authz/local-auth.guard';
-import { Auth0User, User } from 'src/authz/user.decorator';
+import { JWTAuthGuard } from '../authz/local-auth.guard';
+import { Auth0User, User } from '../authz/user.decorator';
 @Controller('')
 export class UserPlansController {
   constructor(private readonly userPlansService: UserPlansService) {}
@@ -38,6 +39,7 @@ export class UserPlansController {
   @Get('userPlans')
   async getUserPlan(@User() user: Auth0User) {
     const userId = user.sub;
+    Logger.log(`(USER_PLANS) GET: /userPlans/ UserID: ${userId}`);
     const userPlans = await this.userPlansService.findPlans(userId, 0, 20);
     return userPlans;
   }
@@ -61,6 +63,7 @@ export class UserPlansController {
     @Param('uuid') uuid: string,
   ) {
     const userId = user.sub;
+    Logger.log(`(USER_PLANS) GET: userPlans/${uuid} UserID: ${userId}`);
     const userPlan = await this.userPlansService.findPlan(userId, uuid);
     return userPlan;
   }
@@ -81,12 +84,13 @@ export class UserPlansController {
     @Body() planData: PlanData,
   ) {
     const userId = user.sub;
+    Logger.log(`(USER_PLANS) POST: userPlans/${uuid} UserID: ${userId}`);
     const userPlan = await this.userPlansService.createPlans(
       userId,
       uuid,
       planData,
     );
-    console.log(userPlan);
+    Logger.log(userPlan);
     return userPlan;
   }
 
@@ -111,6 +115,7 @@ export class UserPlansController {
     @Body() planData: PlanData,
   ) {
     const userId = user.sub;
+    Logger.log(`(USER_PLANS) PATCH: userPlans/${uuid} UserID: ${userId}`);
     return await this.userPlansService.updatePlan(userId, uuid, planData);
   }
 
@@ -131,6 +136,7 @@ export class UserPlansController {
   @Delete('userPlans/:uuid')
   async deleteUserPlan(@User() user: Auth0User, @Param('uuid') uuid: string) {
     const userId = user.sub;
+    Logger.log(`(USER_PLANS) PATCH: userPlans/${uuid} UserID: ${userId}`);
     return await this.userPlansService.deletePlan(userId, uuid);
   }
 }

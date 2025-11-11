@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { HydratedDocument } from 'mongoose';
-import { Days, MeetingTime } from 'src/utils/types.util';
+import { Days, MeetingTime } from '../src/utils/types.util';
 
 export type SectionDocument = HydratedDocument<Section>;
 

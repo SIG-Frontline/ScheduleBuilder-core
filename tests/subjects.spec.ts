@@ -38,25 +38,18 @@ test.describe('Subjects Endpoint', () => {
   }) => {
     const endpoint = '/subjects';
     const mockSubject = {
-      TERM: 'TEST',
+      TERM: 'TEST TERM',
       SUBJECTS: ['MATH', 'CS', 'PHYS'],
     };
     const response = await request.post(endpoint, { data: [mockSubject] });
-    const json = (await response.json()) as {
-      success: boolean;
-      message: string;
-    };
-
+    const json = (await response.json()) as SubjectsResponse;
     expect(response.status()).toBe(201);
-    expect(json).toHaveProperty('success');
-    expect(json.success).toBe(true);
-    expect(json).toHaveProperty('message');
-    expect(json.message).toBe('');
+    expect(json).toHaveProperty('success', true);
   });
-  test('DELETE /subjects/term should return status code 200 when given valid term', async ({
+  test('DELETE /subjects/:term should return status code 200 when given valid term', async ({
     request,
   }) => {
-    const endpoint = `/subjects/TEST`;
+    const endpoint = `/subjects/TEST TERM`;
     const response = await request.delete(endpoint);
     const json = (await response.json()) as {
       deleted: boolean;
@@ -68,5 +61,27 @@ test.describe('Subjects Endpoint', () => {
       'Subject document has been deleted successfully',
     );
     expect(json).toHaveProperty('deleted', true);
+  });
+  test('TIMESTAMP /timestamp/:term should return status code 200 when given valid term', async ({
+    request,
+  }) => {
+    const endpoint = '/timestamp?term=202510';
+    const response = await request.get(endpoint);
+    const json = (await response.json()) as {
+      timestamp: number;
+    };
+    expect(json).toHaveProperty('timestamp');
+    expect(response.status()).toBe(200);
+  });
+  test('TIMESTAMP /timestamp should return status code 200 when not given a term', async ({
+    request,
+  }) => {
+    const endpoint = '/timestamp';
+    const response = await request.get(endpoint);
+    const json = (await response.json()) as {
+      timestamp: number;
+    };
+    expect(json).toHaveProperty('timestamp');
+    expect(response.status()).toBe(200);
   });
 });

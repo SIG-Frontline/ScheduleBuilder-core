@@ -1,12 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { UserPlans, UserPlansDocument } from 'schemas/userPlans.schema';
+import { UserPlans, UserPlansDocument } from '../../schemas/userPlans.schema';
 import {
   DataNotFoundException,
   PlanData,
   UserPlanResponse,
-} from 'src/utils/types.util';
+} from '../utils/types.util';
 
 @Injectable()
 export class UserPlansService {
