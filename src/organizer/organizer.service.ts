@@ -19,7 +19,7 @@ export class OrganizerService {
    * @param currentPlan The currently selected plan to organize
    * @returns A Plan object with the most optimal schedule generated based on the 'rateSections' function, undefined if none can be generated with the given inputs
    */
-  async organizePlan(currentPlan: PlanData): Promise<PlanData> {
+  async organizePlan(currentPlan: PlanData): Promise<PlanData[]> {
     // Copy the plan so we can modify some values without changing the underlying data
     const copyPlan = (await JSON.parse(
       JSON.stringify(currentPlan),
@@ -46,19 +46,22 @@ export class OrganizerService {
 
     if (allPossibleSectionCombos.length == 0)
       throw new NotFoundException(
-        'Courses are not compatible. One or more courses have all sections overlapping with another course, please reduced your locked courses or remove the conflicting courses.',
+        'Courses are not compatible. One or more courses have all sections overlapping with another course, please reduce your locked courses or remove the conflicting courses.',
       );
 
     // Rank the plans using rateSections()
-    const bestSections = this.findBestSections(
+    const bestSectionsList = this.findBestSections(
       allPossibleSectionCombos,
       copyPlan,
     );
-    const bestPlan = this.convertSectionListToPlan(currentPlan, bestSections);
+    const bestPlans = [] as PlanData[];
+    for (const bestSections of bestSectionsList) {
+      bestPlans.push(this.convertSectionListToPlan(currentPlan, bestSections));
+    }
     console.log((Date.now() - start) / 1000, 's in total\n');
 
     // Return most optimal schedule
-    return bestPlan;
+    return bestPlans;
   }
 
   // Filters out sections that do not match the specified filters
@@ -114,17 +117,18 @@ export class OrganizerService {
       ),
     );
 
-    // TODO: add toggle
-    if (false) {
-      plan.courses?.forEach((c) => {
-        c.sections = c.sections.filter((s) => {
-          // Bypass for locked sections
-          if (locked.includes(`${c.code} ${s.sectionNumber}`)) return true;
-
-          return s.currentEnrollment < s.maxEnrollment;
-        });
-      });
-    }
+    // TODO: Add a toggle to take into account the enrollment of each section
+    // And to not recommend sections that are full
+    // if (false) {
+    //   plan.courses?.forEach((c) => {
+    //     c.sections = c.sections.filter((s) => {
+    //       // Bypass for locked sections
+    //       if (locked.includes(`${c.code} ${s.sectionNumber}`)) return true;
+    //
+    //       return s.currentEnrollment < s.maxEnrollment;
+    //     });
+    //   });
+    // }
 
     // Remove extra online sections while generating
     // If a course has 10 online sections, it might as well only have 1
@@ -279,28 +283,20 @@ export class OrganizerService {
   private findBestSections(
     allSectionLists: { [key: string]: string }[],
     plan: PlanData,
-  ): { [key: string]: string } {
-    let bestScore = 999999999;
-    let bestSectionList = {} as { [key: string]: string };
-    let count = 0;
-
-    // Ranks all plans to determine which has the smallest score
+  ): { [key: string]: string }[] {
+    // Scores all plans
     for (const sectionList of allSectionLists) {
-      const score = this.rateSections(sectionList, plan);
-      if (score == -1) continue;
-
-      if (score < bestScore) {
-        bestScore = score;
-        bestSectionList = sectionList;
-        count = 1;
-      }
-      if (score == bestScore) {
-        count++;
-      }
+      // @ts-expect-error Adding a temporary score value that will be removed later
+      sectionList['score'] = this.rateSections(sectionList, plan);
     }
 
-    console.log(count, 'similar schedules!');
-    return bestSectionList;
+    // Sorts all plans
+    // @ts-expect-error a['score'] is a number but the type doesn't say that
+    allSectionLists.sort((a, b) => a['score'] - b['score']);
+    console.log(allSectionLists.length, 'similar schedules');
+
+    // Only return at most the top 5
+    return allSectionLists.slice(0, 5);
   }
 
   // Converts the NJIT day scheme to an index (0 = Sunday)
