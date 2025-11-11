@@ -31,7 +31,10 @@ export class OrganizerController {
       "Returns an optimized plan based on the input plan and the user's selected filters/options<br>The entire plan must be passed in the body of the request",
   })
   async organizePlan(@Body() plan: PlanData) {
-    if (!plan) throw new BadRequestException('No plan provided');
+    if (!plan)
+      throw new BadRequestException(
+        'No plan provided. Please create a plan to utilize the organizer.',
+      );
 
     Logger.log('(ORGANIZER) POST: /organizer/');
     try {

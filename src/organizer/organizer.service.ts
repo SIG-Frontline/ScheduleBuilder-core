@@ -20,7 +20,7 @@ export class OrganizerService {
    * @param currentPlan The currently selected plan to organize
    * @returns A Plan object with the most optimal schedule generated based on the 'rateSections' function, undefined if none can be generated with the given inputs
    */
-  async organizePlan(currentPlan: PlanData): Promise<PlanData> {
+  async organizePlan(currentPlan: PlanData): Promise<PlanData[]> {
     // Copy the plan so we can modify some values without changing the underlying data
     const copyPlan = (await JSON.parse(
       JSON.stringify(currentPlan),
@@ -31,30 +31,54 @@ export class OrganizerService {
     // Filters all the sections in the current plan in place
     this.filterSectionsInPlan(copyPlan);
 
+    // Checks if filters are too restrictive (filter out all sections of one course)
+    const tooRestrictive = copyPlan.courses?.some(
+      (c) => c.sections.length == 0,
+    );
+
+    if (tooRestrictive)
+      throw new NotFoundException(
+        'Filters are too restrictive. No schedules could be made from those filters, please reduce your preferences.',
+      );
+
     // Generate all possible schedule combinations as plans
     const allPossibleSectionCombos = this.generateCombos(copyPlan);
 
     if (allPossibleSectionCombos.length == 0)
-      throw new NotFoundException('No valid schedules can be made');
+      throw new NotFoundException(
+        'Courses are not compatible. One or more courses have all sections overlapping with another course, please reduce your locked courses or remove the conflicting courses.',
+      );
 
     // Rank the plans using rateSections()
-    const bestSections = this.findBestSections(
+    const bestSectionsList = this.findBestSections(
       allPossibleSectionCombos,
       copyPlan,
     );
-    const bestPlan = this.convertSectionListToPlan(currentPlan, bestSections);
+
+    const bestPlans = [] as PlanData[];
+    for (const bestSections of bestSectionsList) {
+      bestPlans.push(this.convertSectionListToPlan(currentPlan, bestSections));
+    }
     Logger.log(`\t - Total time: ${(Date.now() - start) / 1000}s`);
 
     // Return most optimal schedule
-    return bestPlan;
+    return bestPlans;
   }
 
   // Filters out sections that do not match the specified filters
   private filterSectionsInPlan(plan: PlanData): void {
-    // TODO: filter sections that interfere with events
-    // TODO: filter sections that have a full seat count
+    // Filter out cancelled sections
+    plan.courses?.forEach(
+      (c) =>
+        (c.sections = c.sections.filter(
+          (s) =>
+            s.status?.toLowerCase() != 'cancelled' &&
+            !s.comments?.toLowerCase().includes('cancelled'),
+        )),
+    );
 
     const courseFilters = plan.organizerSettings?.courseFilters;
+    const locked = [] as string[];
 
     // Perform all the filters for the courses
     if (courseFilters) {
@@ -68,10 +92,13 @@ export class OrganizerService {
                 s.instructor == filter.instructor) &&
               (filter.honors == null || s.is_honors == filter.honors) &&
               (filter.online == null ||
-                s.instruction_type.toLowerCase().includes(filter.online)) &&
+                s.instructionType.toLowerCase().includes(filter.online)) &&
               (filter.section == null || s.sectionNumber == filter.section),
           );
         });
+        // Remember the locked courses
+        if (filter.section != null)
+          locked.push(`${filter.courseCode} ${filter.section}`);
       }
     }
 
@@ -79,21 +106,33 @@ export class OrganizerService {
     plan.courses?.forEach((c) =>
       c.sections.forEach((s) =>
         s.meetingTimes.forEach((m) => {
-          // @ts-expect-error Changing ISO string to a number
+          // @ts-expect-error Changing ISO string to a number (ignoring timezone)
           m.startTime =
-            new Date(m.startTime).getHours() * 60 +
-            new Date(m.startTime).getMinutes();
-          // @ts-expect-error Changing ISO string to a number
+            Number(m.startTime.split(/T|:/)[1]) * 60 +
+            Number(m.startTime.split(/T|:/)[2]);
+          // @ts-expect-error Changing ISO string to a number (ignoring timezone)
           m.endTime =
-            new Date(m.endTime).getHours() * 60 +
-            new Date(m.endTime).getMinutes();
+            Number(m.endTime.split(/T|:/)[1]) * 60 +
+            Number(m.endTime.split(/T|:/)[2]);
         }),
       ),
     );
 
+    // TODO: Add a toggle to take into account the enrollment of each section
+    // And to not recommend sections that are full
+    // if (false) {
+    //   plan.courses?.forEach((c) => {
+    //     c.sections = c.sections.filter((s) => {
+    //       // Bypass for locked sections
+    //       if (locked.includes(`${c.code} ${s.sectionNumber}`)) return true;
+    //
+    //       return s.currentEnrollment < s.maxEnrollment;
+    //     });
+    //   });
+    // }
+
     // Remove extra online sections while generating
     // If a course has 10 online sections, it might as well only have 1
-    // NOTE: this optimization might be removed later
     const hasOnline: { [key: string]: boolean } = {};
 
     plan.courses?.forEach((course) => {
@@ -111,6 +150,43 @@ export class OrganizerService {
         }
       }
     });
+
+    // Filter out sections that overlap with events
+    if (plan.organizerSettings.eventPriority) {
+      plan.courses?.forEach((course) => {
+        course.sections = course.sections.filter((section) => {
+          // Skip courses that are locked
+          if (locked.includes(`${course.code} ${section.sectionNumber}`))
+            return true;
+          // Skip online courses
+          if (!section.meetingTimes) return true;
+
+          let keep = true;
+
+          section.meetingTimes?.forEach((meeting) => {
+            plan.events.forEach((e) => {
+              const eStart =
+                Number(e.startTime.split(':')[0]) * 60 +
+                Number(e.startTime.split(':')[1]);
+              const eEnd =
+                Number(e.endTime.split(':')[0]) * 60 +
+                Number(e.endTime.split(':')[1]);
+
+              e.daysOfWeek.forEach((day) => {
+                if (day != this.convertDayToIndex(meeting.day)) return;
+
+                const mStart = Number(meeting.startTime);
+                const mEnd = Number(meeting.endTime);
+
+                if (mStart < eEnd && mEnd > eStart) keep = false;
+              });
+            });
+          });
+
+          return keep;
+        });
+      });
+    }
   }
 
   // Creates every possible combination of plans
@@ -124,7 +200,9 @@ export class OrganizerService {
     const courses = plan.courses;
 
     if (!courses || courses.length == 0)
-      throw new BadRequestException('No courses selected');
+      throw new BadRequestException(
+        'No courses selected. Please add a course to organize a schedule.',
+      );
 
     for (const course of courses) {
       rollingProduct.push(total);
@@ -206,28 +284,20 @@ export class OrganizerService {
   private findBestSections(
     allSectionLists: { [key: string]: string }[],
     plan: PlanData,
-  ): { [key: string]: string } {
-    let bestScore = 999999999;
-    let bestSectionList = {} as { [key: string]: string };
-    let count = 0;
-
-    // Ranks all plans to determine which has the smallest score
+  ): { [key: string]: string }[] {
+    // Scores all plans
     for (const sectionList of allSectionLists) {
-      const score = this.rateSections(sectionList, plan);
-      if (score == -1) continue;
-
-      if (score < bestScore) {
-        bestScore = score;
-        bestSectionList = sectionList;
-        count = 1;
-      }
-      if (score == bestScore) {
-        count++;
-      }
+      // @ts-expect-error Adding a temporary score value that will be removed later
+      sectionList['score'] = this.rateSections(sectionList, plan);
     }
 
-    Logger.log(`\t - ${count} schedules with the same score`);
-    return bestSectionList;
+    // Sorts all plans
+    // @ts-expect-error a['score'] is a number but the type doesn't say that
+    allSectionLists.sort((a, b) => a['score'] - b['score']);
+    console.log(allSectionLists.length, 'similar schedules');
+
+    // Only return at most the top 5
+    return allSectionLists.slice(0, 5);
   }
 
   // Converts the NJIT day scheme to an index (0 = Sunday)
@@ -290,9 +360,11 @@ export class OrganizerService {
 
     // Calculate different metrics to rate the schedule
     let score = 0;
+    let days = 0;
 
     for (let dayOfWeekIndex = 0; dayOfWeekIndex < 7; dayOfWeekIndex++) {
       if (totalClassTime[dayOfWeekIndex] == 0) continue; // No classes on this day
+      days++;
 
       const totalTimeOnCampus =
         latestEnd[dayOfWeekIndex] - earliestStart[dayOfWeekIndex];
@@ -300,18 +372,20 @@ export class OrganizerService {
       // Penalize schedules which spend more time on campus
       score += totalTimeOnCampus;
 
-      // Compensate for commute time (which can reduce amount of days on campus)
-      if (settings?.isCommuter) score += settings.commuteTimeHours * 60;
-
       // Penalize schedules that spend more than 70% of their time on campus in class (to promote breaks), only if compactPlan is off
       // Penalizes schedules in proportion to how much they take up the on campus time
       if (
-        !settings?.compactPlan &&
+        !settings.compactPlan &&
         totalClassTime[dayOfWeekIndex] > 3 * 60 &&
         totalTimeOnCampus * 0.7 < totalClassTime[dayOfWeekIndex]
       )
         score += (1000 * totalClassTime[dayOfWeekIndex]) / totalTimeOnCampus;
     }
+
+    // Highly penalize schedules which go over the set amount of days on campus
+    // Scales with the amount of days, so lower days are still prioritized
+    if (settings.daysOnCampus && days > settings.daysOnCampus)
+      score += 9999 * days;
 
     return score;
   }

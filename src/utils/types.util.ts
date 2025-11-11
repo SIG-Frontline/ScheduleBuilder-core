@@ -140,7 +140,7 @@ export interface PlanData {
   selected: boolean;
   courses: PlanDataCourses[];
   events: Events[];
-  organizerSettings?: organizerSettings;
+  organizerSettings: organizerSettings;
 }
 
 export interface PlanDataCourses {
@@ -161,7 +161,7 @@ export interface PlanDataSection {
   status: string;
   is_honors: boolean;
   is_async: boolean;
-  instruction_type: string;
+  instructionType: string;
   sectionNumber: string;
   comments: string;
   selected: boolean;
@@ -190,11 +190,10 @@ export class DataNotFoundException extends HttpException {
   }
 }
 
-// Recommender
 export interface organizerSettings {
-  isCommuter: boolean;
-  commuteTimeHours: number;
+  daysOnCampus: number | undefined;
   compactPlan: boolean;
+  eventPriority: boolean;
   courseFilters: courseFilter[];
 }
 
@@ -212,6 +211,7 @@ export enum instructionType {
   ANY = 'any',
 }
 
+// Recommender
 export type ClassRecommendation = ClassRec | ClassBranch | ClassWild;
 
 export type ClassRec = {
