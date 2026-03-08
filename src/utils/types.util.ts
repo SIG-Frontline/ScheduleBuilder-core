@@ -69,15 +69,15 @@ export interface Section {
   IS_ASYNC: boolean;
   SUBJECT: string;
   COURSE_LEVEL: number;
-  SUMMER_PERIOD: string | null;
-  selected: boolean;
+  SUMMER_PERIOD: number | null;
+  selected?: boolean;
 }
 
 export interface Course {
   _id: string;
   title: string;
   credits: number;
-  description: string;
+  description: string | null;
   sections: Section[];
 }
 
