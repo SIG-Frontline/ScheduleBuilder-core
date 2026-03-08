@@ -35,7 +35,7 @@
           "maxEnrollment": 40,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11107",
           "comments": null,
           "meetingTimes": [
@@ -91,7 +91,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11440",
           "comments": null,
           "meetingTimes": [
@@ -154,7 +154,7 @@
           "maxEnrollment": 34,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "14049",
           "comments": null,
           "meetingTimes": [
@@ -203,7 +203,7 @@
           "maxEnrollment": 30,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "12990",
           "comments": null,
           "meetingTimes": [
@@ -229,6 +229,11 @@
       "code": "EVSC 416",
       "color": "rgba(\n                  238,\n                  138,\n                  206,0.9)"
     }
-  ]
+  ],
+  "organizerSettings": {
+    "isCommuter": false,
+    "commuteTimeHours": 2,
+    "compactPlan": false,
+    "courseFilters": []
+  }
 }
-
