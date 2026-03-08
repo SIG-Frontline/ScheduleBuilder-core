@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { SectionService } from './section.service';
 import { Section } from '../../schemas/sections.schema';
-import { courseQueryFilters } from '../utils/types.util';
+import { courseQueryFilters, SectionResponse } from '../utils/types.util';
 import { addRegexSearch } from '../utils/functions.utils';
 import {
   ApiBadRequestResponse,
@@ -141,7 +141,7 @@ export class SectionController {
     @Query('level') level?: string,
     @Query('summer') summer?: string,
     @Query('method') method?: string,
-  ) {
+  ): Promise<SectionResponse> {
     if (!term || !course) {
       throw new BadRequestException(
         'Term and course are required query parameters',

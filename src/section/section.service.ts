@@ -12,6 +12,7 @@ import {
   CourseResponse,
   CourseSearchDBResult,
   DataNotFoundException,
+  SectionResponse,
 } from '../utils/types.util';
 
 @Injectable()
@@ -65,7 +66,7 @@ export class SectionService {
    * @param filters - Filters include the course code (e.g., "CS332") and the academic term (e.g., "202510").
    * @returns A course object that contains an array of sections for the specified term.
    */
-  async findSections(filters: courseQueryFilters) {
+  async findSections(filters: courseQueryFilters): Promise<SectionResponse> {
     try {
       const query = sanitizeFilters(filters);
 
