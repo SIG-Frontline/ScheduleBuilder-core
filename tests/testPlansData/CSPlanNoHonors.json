@@ -35,7 +35,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11791",
           "comments": null,
           "meetingTimes": [
@@ -82,7 +82,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11792",
           "comments": null,
           "meetingTimes": [
@@ -129,7 +129,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11793",
           "comments": null,
           "meetingTimes": [
@@ -176,7 +176,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11794",
           "comments": null,
           "meetingTimes": [
@@ -223,7 +223,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11795",
           "comments": null,
           "meetingTimes": [
@@ -272,7 +272,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11824",
           "comments": null,
           "meetingTimes": [
@@ -319,7 +319,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11825",
           "comments": null,
           "meetingTimes": [
@@ -366,7 +366,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11826",
           "comments": null,
           "meetingTimes": [
@@ -413,7 +413,7 @@
           "maxEnrollment": 34,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11827",
           "comments": null,
           "meetingTimes": [
@@ -453,7 +453,7 @@
           "maxEnrollment": 30,
           "is_honors": true,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11828",
           "comments": "Cancelled 11/08/24",
           "meetingTimes": [
@@ -500,7 +500,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "16320",
           "comments": null,
           "meetingTimes": [
@@ -540,7 +540,7 @@
           "maxEnrollment": 30,
           "is_honors": true,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "16131",
           "comments": "Honors Course",
           "meetingTimes": [
@@ -596,7 +596,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11796",
           "comments": null,
           "meetingTimes": [
@@ -643,7 +643,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11797",
           "comments": null,
           "meetingTimes": [
@@ -690,7 +690,7 @@
           "maxEnrollment": 60,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11798",
           "comments": null,
           "meetingTimes": [
@@ -737,7 +737,7 @@
           "maxEnrollment": 20,
           "is_honors": true,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11799",
           "comments": "Honors Course",
           "meetingTimes": [
@@ -793,7 +793,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11805",
           "comments": null,
           "meetingTimes": [
@@ -840,7 +840,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11806",
           "comments": null,
           "meetingTimes": [
@@ -887,7 +887,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11807",
           "comments": null,
           "meetingTimes": [
@@ -934,7 +934,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11808",
           "comments": null,
           "meetingTimes": [
@@ -981,7 +981,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11809",
           "comments": null,
           "meetingTimes": [
@@ -1028,7 +1028,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11810",
           "comments": null,
           "meetingTimes": [
@@ -1068,7 +1068,7 @@
           "maxEnrollment": 25,
           "is_honors": true,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11811",
           "comments": "Honors Course",
           "meetingTimes": [
@@ -1115,7 +1115,7 @@
           "maxEnrollment": 43,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "16448",
           "comments": null,
           "meetingTimes": [
@@ -1164,7 +1164,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11705",
           "comments": null,
           "meetingTimes": [
@@ -1211,7 +1211,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11706",
           "comments": null,
           "meetingTimes": [
@@ -1258,7 +1258,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11707",
           "comments": null,
           "meetingTimes": [
@@ -1305,7 +1305,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11708",
           "comments": null,
           "meetingTimes": [
@@ -1352,7 +1352,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11709",
           "comments": null,
           "meetingTimes": [
@@ -1399,7 +1399,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11710",
           "comments": null,
           "meetingTimes": [
@@ -1446,7 +1446,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11711",
           "comments": null,
           "meetingTimes": [
@@ -1493,7 +1493,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11712",
           "comments": null,
           "meetingTimes": [
@@ -1540,7 +1540,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11713",
           "comments": null,
           "meetingTimes": [
@@ -1580,7 +1580,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11714",
           "comments": null,
           "meetingTimes": [
@@ -1620,7 +1620,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11715",
           "comments": null,
           "meetingTimes": [
@@ -1652,7 +1652,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": true,
-          "instruction_type": "Online Newark",
+          "instructionType": "Online Newark",
           "crn": "11716",
           "comments": "Online Course",
           "meetingTimes": [],
@@ -1676,7 +1676,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": true,
-          "instruction_type": "Online Newark",
+          "instructionType": "Online Newark",
           "crn": "11717",
           "comments": "Online Course",
           "meetingTimes": [],
@@ -1700,7 +1700,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": true,
-          "instruction_type": "Online Newark",
+          "instructionType": "Online Newark",
           "crn": "11718",
           "comments": "Online Course",
           "meetingTimes": [],
@@ -1724,7 +1724,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": true,
-          "instruction_type": "Online Newark",
+          "instructionType": "Online Newark",
           "crn": "11719",
           "comments": "Online Course",
           "meetingTimes": [],
@@ -1748,7 +1748,7 @@
           "maxEnrollment": 24,
           "is_honors": false,
           "is_async": true,
-          "instruction_type": "Online Newark",
+          "instructionType": "Online Newark",
           "crn": "11720",
           "comments": "Online Course",
           "meetingTimes": [],
@@ -1780,7 +1780,7 @@
           "maxEnrollment": 24,
           "is_honors": true,
           "is_async": false,
-          "instruction_type": "Face-to-Face",
+          "instructionType": "Face-to-Face",
           "crn": "11721",
           "comments": "Honors Course",
           "meetingTimes": [
