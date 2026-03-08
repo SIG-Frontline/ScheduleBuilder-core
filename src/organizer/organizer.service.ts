@@ -8,6 +8,7 @@ import {
   PlanDataMeetingTime,
   PlanData,
   PlanDataSection,
+  instructionType,
 } from '../utils/types.util';
 
 @Injectable()
@@ -92,6 +93,7 @@ export class OrganizerService {
                 s.instructor == filter.instructor) &&
               (filter.honors == null || s.is_honors == filter.honors) &&
               (filter.online == null ||
+                filter.online === instructionType.ANY ||
                 s.instructionType.toLowerCase().includes(filter.online)) &&
               (filter.section == null || s.sectionNumber == filter.section),
           );
@@ -152,7 +154,7 @@ export class OrganizerService {
     });
 
     // Filter out sections that overlap with events
-    if (plan.organizerSettings.eventPriority) {
+    if (plan.organizerSettings?.eventPriority) {
       plan.courses?.forEach((course) => {
         course.sections = course.sections.filter((section) => {
           // Skip courses that are locked
@@ -164,7 +166,7 @@ export class OrganizerService {
           let keep = true;
 
           section.meetingTimes?.forEach((meeting) => {
-            plan.events.forEach((e) => {
+            plan.events?.forEach((e) => {
               const eStart =
                 Number(e.startTime.split(':')[0]) * 60 +
                 Number(e.startTime.split(':')[1]);
