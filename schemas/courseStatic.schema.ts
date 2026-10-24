@@ -27,7 +27,7 @@ export class CourseStatic {
   @ApiProperty()
   subject: string;
 
-  @Prop()
+  @Prop({ type: Object })
   @ApiProperty()
   tree: CourseStaticNode;
 
