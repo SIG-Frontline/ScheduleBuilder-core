@@ -48,7 +48,8 @@ export class CurriculaService {
         major: curricula?.MAJOR,
         year: curricula?.YEAR,
         updated: curricula?.UPDATED,
-        // @ts-expect-error Typescript thinks this type is infinitly recursive, so ignore as we know it's not
+        // The recursive TreeNode union exceeds the compiler's instantiation depth here.
+        // @ts-ignore
         classes: curricula?.CLASSES as TreeNode[],
       };
 
